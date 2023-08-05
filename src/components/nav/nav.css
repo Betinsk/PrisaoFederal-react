@@ -1,0 +1,104 @@
+
+
+.container-nav {
+    width: 80%; 
+    margin: auto;
+    margin-bottom: 35px;
+    margin-top: 15px;
+    background-color: white;
+    padding: 7px;
+    box-shadow: 3px 3px 3px rgb(184, 180, 180);
+}
+
+
+.menu-container {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+   
+}
+
+ .federal a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+}
+
+.menu-button {
+    cursor: pointer;
+    margin-left: 100px;
+
+}
+
+.menu-button img{ 
+    width: 30px;
+    height: 30px;
+
+}
+
+
+.menu {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    display: flex;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .menu li {
+    padding: 15px;
+  }
+  
+  .menu li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+
+
+  /* Estilos para telas menores */
+  @media (max-width: 900px) {
+    .menu ul {
+      display: block;
+      flex-direction: column;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .menu.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .menu {
+        opacity: 0;
+    }
+    
+  
+    .menu li {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid rgb(212, 210, 210);
+    }
+  
+    .menu li a {
+      display: block;
+      color: rgb(0, 0, 0);
+
+    }
+
+  
+  }
+
+
+  
+ 
