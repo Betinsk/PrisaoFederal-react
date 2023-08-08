@@ -1,11 +1,14 @@
 
 import './home.css'
-
- const Home = () => {
+import Imates from '../imate/imates'
+import ImateData from '../imate/imateData'
+const Home = () => {
 
     return(
         <div className='container'>
-            oi
+            <ImateData>
+             <Imates />
+             </ImateData>
         </div>
     )
 
