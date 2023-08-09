@@ -1,15 +1,14 @@
 
 import './nav.css'
+
 import { useEffect, useRef, useState } from 'react';
 import img from './ham.jpg';
-
+import img2 from './federal.png';
 const Nav = () => {
 
     const dropDownRef = useRef(null);
     const [isActive, setIsActive] = useState(false)
     const onClick = () => setIsActive(!isActive)
-
-
 
     const useOutsideClick = (el, initialState) => {
         const [isActive, setIsActive] = useState(initialState)
@@ -37,6 +36,7 @@ const Nav = () => {
     return (
 
         <div className='container-nav'>
+            <img className='logo' src={img2}></img>
             <div className="menu-container">
             <span className='federal'><a href='#'><b>Federal Prision</b></a></span>
         
