@@ -8,7 +8,17 @@
     background-color: white;
     padding: 7px;
     box-shadow: 0px 0px 3px rgb(184, 180, 180);
+    font-family: 'Raleway';
 }
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('../../assets/fonts/Raleway/static/Raleway-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 
 .menu-container {
@@ -19,15 +29,16 @@
    
 }
 
+.logo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
  .federal a {
     color: rgb(0, 0, 0);
     text-decoration: none;
     margin: 0 10px 0 10px;
-}
-
-.menu a:hover {
-  transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Muda a sombra ao passar o mouse */
 }
 
 .menu-button {

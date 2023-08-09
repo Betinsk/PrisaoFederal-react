@@ -52,15 +52,16 @@
 }
 
 .card-button {
-  margin-top: 25px;
-  display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
+  margin: 5px 0px 35px 0px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 35px;
 }
 
 /* CSS */
 .button-38 {
-  background-color: #FFFFFF;
+  background-color: #eeeeee;
   border: 0;
   border-radius: .5rem;
   box-sizing: border-box;

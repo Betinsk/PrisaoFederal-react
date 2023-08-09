@@ -29,6 +29,7 @@ const Imates = () => {
 	};
 
   return (
+    <>
     <div className='card-container'>
       {getImatesPaginados().map((imate, index) => (
       <div className='imate-card' key={imate.id.value}>
@@ -45,19 +46,20 @@ const Imates = () => {
           </div>
         </div>
       ))}
-         <div className='card-button'>
-          <button className='button-38' onClick={paginaAnterior} disabled={atualPage === 1}>
-            Next Page
-            </button>
-              
-            <button className='button-38' 
-                onClick={nextPage}
-                disabled={atualPage === Math.ceil(dadosJson.length / itensPerPage)}
-              >   Próxima página
-             </button>
-				</div>
+      
     </div>
-    
+       <div className='card-button'>
+       <button className='button-38' onClick={paginaAnterior} disabled={atualPage === 1}>
+         Next Page
+         </button>
+           
+         <button className='button-38' 
+             onClick={nextPage}
+             disabled={atualPage === Math.ceil(dadosJson.length / itensPerPage)}
+           >   Previous 
+          </button>
+     </div>
+     </>
   );
 
 }
