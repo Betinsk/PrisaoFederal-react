@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
 
-
 export const Context = createContext();
 
 function ImateData ({ children }) {
@@ -9,7 +8,7 @@ function ImateData ({ children }) {
   useEffect(() => {
     async function fetchDataFromAPI() {
       try {
-        const resposta = await fetch('https://randomuser.me/api/?results=4');
+        const resposta = await fetch('https://randomuser.me/api/?results=25');
         const dadosJson = await resposta.json();
         setData(dadosJson.results);
         console.log(dadosJson.results)
@@ -18,7 +17,7 @@ function ImateData ({ children }) {
       }
     }
 
-      fetchDataFromAPI();
+    fetchDataFromAPI();
     }, []);
     
 
