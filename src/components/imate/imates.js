@@ -1,67 +1,76 @@
 import React, { useContext, useState } from 'react';
 import { Context } from './imateData';
 import './imate.css'
+import ImateCard from './imateCard';
 const Imates = () => {
 
   const dadosJson = useContext(Context);
 
   const [atualPage, setPaginaAtual] = useState(1);
-	const [itensPerPage, setPorPagina] = useState(4);
+  const [itensPerPage, setPorPagina] = useState(4);
 
+  const [searchValue, setSearchValue] = useState('');
 
-	// Função para obter os imates da página atual
-	const  getImatesPaginados = () => {
-		const indiceUltimoImovel = atualPage * itensPerPage;
-		const indicePrimeiroImovel = indiceUltimoImovel - itensPerPage;
-		return dadosJson.slice(indicePrimeiroImovel, indiceUltimoImovel);
-   
-	};
+  // Função para obter os imates da página atual
+  const getImatesPaginados = () => {
+    const indiceUltimoImovel = atualPage * itensPerPage;
+    const indicePrimeiroImovel = indiceUltimoImovel - itensPerPage;
+    return dadosJson.slice(indicePrimeiroImovel, indiceUltimoImovel);
 
+  };
 
-	// Função para ir para a próxima página
-	const nextPage = () => {
-		setPaginaAtual(atualPage + 1);
-	};
+  const filteredImate = !!searchValue ? dadosJson.filter(imates => {
+    return imates.name.first.toLowerCase().includes(
+      searchValue.toLowerCase())
+  })
+    : getImatesPaginados();
 
-	// Função para voltar para a página anterior
-	const paginaAnterior = () => {
-		setPaginaAtual(atualPage - 1);
-	};
+  console.log(filteredImate)
+
+  // Função para ir para a próxima página
+  const nextPage = () => {
+    setPaginaAtual(atualPage + 1);
+  };
+
+  // Função para voltar para a página anterior
+  const paginaAnterior = () => {
+    setPaginaAtual(atualPage - 1);
+  };
 
   return (
     <>
-    <div className='card-container'>
-      {getImatesPaginados().map((imate, index) => (
-      <div className='imate-card' key={imate.id.value}>
-   
-          <div className='card-img'>
-            <img src={imate.picture.large}></img><br />
-          
-          </div>
-          <p className='card-title'>{imate.name.first} {imate.name.last}</p>
-          <div className='card-information'>
-            <span>{imate.cell}</span>
-            <p>{imate.email}</p>
-            <p>{imate.gender}</p>
-          </div>
-        </div>
-      ))}
-      
-    </div>
-       <div className='card-button'>
-       <button className='button-38' onClick={paginaAnterior} disabled={atualPage === 1}>
-         Next Page
-         </button>
-           
-         <button className='button-38' 
-             onClick={nextPage}
-             disabled={atualPage === Math.ceil(dadosJson.length / itensPerPage)}
-           >   Previous 
-          </button>
-     </div>
-     </>
-  );
+      <div>
+        <input className='text-input'
+          type='search'
+          placeholder="Filtrar por nome"
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)} />
+      </div>
 
+      {filteredImate.length > 0 && (
+        <ImateCard imates={filteredImate} />)}
+
+      {filteredImate.length === 0 && (
+        <h1>Não existe imate com esse nome</h1>)}
+
+      {!searchValue && (
+        <>
+
+          <div className='card-button'>
+            <button className='button-38' onClick={paginaAnterior} disabled={atualPage === 1}>
+              Next Page
+            </button>
+
+            <button className='button-38'
+              onClick={nextPage}
+              disabled={atualPage === Math.ceil(dadosJson.length / itensPerPage)}
+            >   Previous
+            </button>
+          </div>
+        </>
+      )}
+    </>
+  );
 }
 
 export default Imates

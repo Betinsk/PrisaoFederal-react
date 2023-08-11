@@ -5,12 +5,11 @@
     font-style: normal;
   }
   
-
-
 .card-container {
     max-width: 1400px;
     margin: auto;
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 10px;
     padding: 30px;
@@ -76,7 +75,6 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   cursor: pointer;
 
-  
 }
 
 .button-38:hover {
@@ -90,4 +88,15 @@
 
 .button-38:focus-visible {
   box-shadow: none;
+}
+
+.button-38:disabled {
+  background-color: #ffffff;
+  cursor: not-allowed;
+}
+
+.text-input {
+  width: 100%;
+  font-size: 30px;
+  padding: 5px 10px;
 }

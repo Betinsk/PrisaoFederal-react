@@ -8,7 +8,7 @@ function ImateData ({ children }) {
   useEffect(() => {
     async function fetchDataFromAPI() {
       try {
-        const resposta = await fetch('https://randomuser.me/api/?results=25');
+        const resposta = await fetch('https://randomuser.me/api/?results=75');
         const dadosJson = await resposta.json();
         setData(dadosJson.results);
         console.log(dadosJson.results)
