@@ -18,9 +18,6 @@
   font-style: normal;
 }
 
-
-
-
 .menu-container {
     position: relative;
     display: flex;
@@ -52,7 +49,6 @@
     height: 30px;
 
 }
-
 
 .menu {
     background-color: #ffffff;
@@ -90,16 +86,6 @@
       color: #ffffff;
     }
 
-    .menu.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .menu {
-        opacity: 0;
-    }
-    
-  
     .menu li {
       padding: 10px;
       text-align: center;
