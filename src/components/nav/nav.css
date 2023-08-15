@@ -41,13 +41,15 @@
 .menu-button {
     cursor: pointer;
     margin-left: 100px;
+    position: absolute;
+    right: 25px; /* Adjust the positioning as needed */
+    top: -10px;
 
 }
 
 .menu-button img{ 
     width: 30px;
     height: 30px;
-
 }
 
 .menu {
