@@ -3,16 +3,15 @@ import './nav.css'
 import img from './ham.jpg';
 import { useState } from 'react';
 import img2 from './federal.png';
+
 const Nav = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
- 
     useEffect(() => {
         const handleResize = () => {
           if (window.innerWidth <= 900) { // Defina o ponto de ruptura responsiva desejado
@@ -23,10 +22,9 @@ const Nav = () => {
         };
     
         handleResize(); // Para definir o estado inicial com base no tamanho da janela
-    
         window.addEventListener('resize', handleResize);
         return () => {
-          window.removeEventListener('resize', handleResize);
+        window.removeEventListener('resize', handleResize);
         };
       }, []);
 
@@ -35,10 +33,11 @@ const Nav = () => {
 
         <div className='container-nav'>
             <img className='logo' src={img2}></img>
-            <div className="menu-container">
-                <span className='federal'><a href='#'><b>Federal Prision</b></a></span>
 
-                <div className={`menu ${isOpen ? 'open' : ''}`}>
+        <div className="menu-container">
+            <span className='federal'><a href='#'><b>Federal Prision</b></a></span>
+            <div className='menu-links'>
+                <div className={`menu ${isOpen ? 'open' : 'open'}`}>
                 {window.innerWidth <= 900 && ( // Renderizar o botão apenas quando a largura da janela for menor ou igual a 900 pixels
 
                     <div className="menu-button" onClick={toggleMenu}>
@@ -54,6 +53,7 @@ const Nav = () => {
                             {/* ... more menu items */}
                         </ul>
                     )}
+                    </div>
                 </div>
             </div>
 
