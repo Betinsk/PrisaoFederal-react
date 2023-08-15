@@ -48,7 +48,7 @@ const Nav = () => {
                         <ul className="">
                             <li><a href='#'>Sign In</a></li>
                             <li><a href='#'>Person Register</a></li>
-                            <li><a href='#'>Imates</a></li>
+                            <li><a  href=''>Imates</a></li>
                             <li><a href='#'>Services</a></li>
                             {/* ... more menu items */}
                         </ul>

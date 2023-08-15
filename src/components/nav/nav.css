@@ -87,6 +87,7 @@
       width: 100%;
       background-color: #ffffff;
       color: #ffffff;
+      z-index:1000;
     }
 
     .menu li {
