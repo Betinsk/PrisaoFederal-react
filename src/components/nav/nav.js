@@ -3,6 +3,7 @@ import './nav.css'
 import img from './ham.jpg';
 import { useState } from 'react';
 import img2 from './federal.png';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
 
@@ -32,23 +33,23 @@ const Nav = () => {
     return (
 
         <div className='container-nav'>
-            <img className='logo' src={img2}></img>
+            <img className='logo' src={img2} alt=''></img>
 
         <div className="menu-container">
-            <span className='federal'><a href='#'><b>Federal Prision</b></a></span>
+            <span className='federal'><Link to='/'><b>Federal Prision</b></Link></span>
             <div className='menu-links'>
                 <div className={`menu ${isOpen ? 'open' : 'open'}`}>
                 {window.innerWidth <= 900 && ( // Renderizar o botão apenas quando a largura da janela for menor ou igual a 900 pixels
 
                     <div className="menu-button" onClick={toggleMenu}>
-                        <img src={img}></img>
+                        <img src={img} alt=''></img>
                     </div>
                 )}
                     {isOpen && (
                         <ul className="">
                             <li><a href='#'>Sign In</a></li>
                             <li><a href='#'>Person Register</a></li>
-                            <li><a  href=''>Imates</a></li>
+                            <li><Link to='/imate'>Imates</Link></li>
                             <li><a href='#'>Services</a></li>
                             {/* ... more menu items */}
                         </ul>

@@ -6,7 +6,7 @@ export const ImateCard = ({ imates }) => (
 {imates.map((imate, index) => (
 <div className='imate-card'key={index} >
     <div className='card-img'>
-      <img src={imate.picture.large}></img><br />
+      <img src={imate.picture.large} alt=''></img><br />
     </div>
     <p className='card-title'>{imate.name.first} {imate.name.last}</p>
     <div className='card-information'>

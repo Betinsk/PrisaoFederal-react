@@ -7,6 +7,7 @@ const Imates = () => {
   const dadosJson = useContext(Context);
 
   const [atualPage, setPaginaAtual] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [itensPerPage, setPorPagina] = useState(4);
 
   const [searchValue, setSearchValue] = useState('');

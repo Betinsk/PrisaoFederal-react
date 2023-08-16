@@ -8,11 +8,12 @@ const Home = () => {
     return(
         <div className='container'>
             <Hiring/>
-            <ImateData>
-             <Imates />
-             </ImateData>
         </div>
     )
 
 }
 export default Home
+
+/*<ImateData>
+<Imates />
+</ImateData>*/
