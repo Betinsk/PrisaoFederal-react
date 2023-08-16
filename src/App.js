@@ -1,15 +1,11 @@
-import { Route, Switch, Router } from 'react-router-dom';
 import './App.css';
-import Home from './components/home/home'
 import Nav from './components/nav/nav';
-import Imates from './components/imate/imates';
+import Routess from './routes/routes';
 function App() {
   return (
     <>
-   
-    <Nav /> 
-      <Home />
-  
+      <Nav /> 
+      <Routess/>
     </>
 
     
