@@ -36,7 +36,7 @@ const Nav = () => {
             <img className='logo' src={img2} alt=''></img>
 
         <div className="menu-container">
-            <span className='federal'><Link to='/'><b>Federal Prision</b></Link></span>
+            <span className='federal'><Link to='/'  onClick={() => setIsOpen(false)}><b>Federal Prision</b></Link></span>
             <div className='menu-links'>
                 <div className={`menu ${isOpen ? 'open' : 'open'}`}>
                 {window.innerWidth <= 900 && ( // Renderizar o botão apenas quando a largura da janela for menor ou igual a 900 pixels
@@ -49,7 +49,9 @@ const Nav = () => {
                         <ul className="">
                             <li><a href='#'>Sign In</a></li>
                             <li><a href='#'>Person Register</a></li>
-                            <li><Link to='/imate'>Imates</Link></li>
+                            <li><Link to='/imate'
+                            onClick={() => setIsOpen(false)}
+                            >Imates</Link></li>
                             <li><a href='#'>Services</a></li>
                             {/* ... more menu items */}
                         </ul>
