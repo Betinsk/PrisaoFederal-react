@@ -11,6 +11,12 @@
   margin: auto;
   box-shadow: 0px 0px 3px rgb(184, 180, 180);
 }
+
+
+.imate-information {
+  font-family: 'Raleway';
+}
+  
   
 .card-container {
     max-width: 1400px;
@@ -21,6 +27,7 @@
     gap: 10px;
     padding: 30px;
     text-align: center;
+
 }
 
 .imate-card {
@@ -48,7 +55,6 @@
 
   .imate-card p  {
     font-family: 'Raleway';
-
   }
 
 .card-information {

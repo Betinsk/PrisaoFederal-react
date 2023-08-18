@@ -9,6 +9,8 @@ const Imate = () => {
           <ImateData>
           <Imates/>
           </ImateData>
+
+    
         </div>
     )
 

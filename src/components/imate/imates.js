@@ -49,8 +49,8 @@ const Imates = () => {
       </div>
 
       {filteredImate.length > 0 && (
-        <ImateCard imates={filteredImate} />)}
-
+        <ImateCard imates={filteredImate} />
+        )}
       {filteredImate.length === 0 && (
         <h1>Não existe imate com esse nome</h1>)}
 
