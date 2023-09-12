@@ -4,6 +4,8 @@ import Home from "../components/home/home";
 import Imate from "../components/imate/imate";
 import ImatePersonData from "../components/imate/imatePersonData";
 import ImateData from "../components/imate/imateData";
+import '../components/imate/imate.css';
+
 const Routess = () => {
    return(
     

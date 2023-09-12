@@ -2,7 +2,7 @@ import { Context } from "./imateData";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { useEffect, useState} from "react";
-import './imate.css'
+import './imate.css';
 
  const ImatePersonData = () => {
 

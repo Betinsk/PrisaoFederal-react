@@ -5,9 +5,9 @@ export const ImateCard = ({ imates }) => (
 
 <div className='card-container'>
 {imates.map((imate, index) => (
-	<Link to={`/imatePerson/${index}`} key={index}	>
+	<Link to={`/imatePerson/${index}`} key={index} 	className="link-with-underline">
 
-  <div className='imate-card'key={index} >
+  <div className='imate-card' key={index} >
     <div className='card-img'>
       <img src={imate.picture.large} alt=''></img><br />
     </div>

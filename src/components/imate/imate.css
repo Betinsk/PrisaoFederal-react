@@ -32,8 +32,10 @@
 
 .imate-card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
-    
-}   
+  }   
+
+
+
 
 .imate-card:hover {
     transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
@@ -51,17 +53,25 @@
     color: #333;
     margin: 5px 0 25px 0;
     border-bottom: 1px solid rgb(216, 214, 214);
+
   }
 
-  .imate-card p  {
+  .link-with-underline {
+    text-decoration: none;
+    color: #333;
     font-family: 'Raleway';
+
   }
 
-.card-information {
+  .card-information  {
     text-align: left;
     padding-left: 10px;
-
 }
+
+.imate-information p {
+  text-decoration: none;
+}
+
 
 .card-button {
   margin: 5px 0px 35px 0px;
