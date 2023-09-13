@@ -7,6 +7,7 @@
 
 
   .banner-container{
+    width: 100%;
     align-items: center;
     margin: auto;
     padding: 5px;
@@ -35,6 +36,7 @@
 }
 
 .hiring-text p {
+    width: 100%;
     font-weight: 600;
     line-height: 0.9rem;
     font-size: 0.8rem;
@@ -64,13 +66,29 @@
     .hiring-text {
         width: 45%;
         position: absolute;
-        top: 10%;
+        top: 5%;
         right: 25%;
         text-align: center;
         margin: 0;
-        font-weight: bold; /* Define o peso da fonte (opcional) */
         background-color: rgba(0, 0, 0, 0.5); /* Define um fundo semi-transparente para melhor legibilidade (opcional) */
-        padding: 10px 20px; /* Define o espaçamento interno (opcional) */
-
+        padding: 10px 10px; /* Define o espaçamento interno (opcional) */
     }
 }
+
+@media screen and (max-width: 442px) {
+    .hiring-text p{
+            width: 100%;
+            font-weight: 600;
+            line-height: 0.9rem;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        
+    .hiring-text {
+        padding: 5px 5px; /* Define o espaçamento interno (opcional) */
+    }
+        
+    }
+
+
