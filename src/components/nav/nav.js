@@ -3,6 +3,8 @@ import './nav.css'
 import img from './ham.jpg';
 import { useState } from 'react';
 import img2 from './federal.png';
+import img3 from './bop_logo.png';
+
 import { Link } from 'react-router-dom';
 
 const Nav = () => {
@@ -41,7 +43,7 @@ const Nav = () => {
     return (
 
         <div className='container-nav'>
-            <img className='logo' src={img2} alt=''></img>
+            <img className='logo' src={img3} alt=''></img>
 
         <div className="menu-container">
             <span className='federal'><Link to='/'  onClick={handleResize}
