@@ -8,7 +8,7 @@ const Imates = () => {
 
   const [atualPage, setPaginaAtual] = useState(1);
   // eslint-disable-next-line no-unused-vars
-  const [itensPerPage, setPorPagina] = useState(4);
+  const [itensPerPage, setPorPagina] = useState(8);
 
   const [searchValue, setSearchValue] = useState('');
 
