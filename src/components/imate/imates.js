@@ -17,7 +17,6 @@ const Imates = () => {
     const indiceUltimoImovel = atualPage * itensPerPage;
     const indicePrimeiroImovel = indiceUltimoImovel - itensPerPage;
     return dadosJson.slice(indicePrimeiroImovel, indiceUltimoImovel);
-
   };
 
   const filteredImate = !!searchValue ? dadosJson.filter(imates => {
