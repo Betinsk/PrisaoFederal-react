@@ -35,8 +35,6 @@
   }   
 
 
-
-
 .imate-card:hover {
     transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Muda a sombra ao passar o mouse */
