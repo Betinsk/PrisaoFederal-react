@@ -97,9 +97,8 @@
     padding: 15px;
 }
 
-.hiring-video iframe {
-    width: 70%;
-    height: 600px;
+.hiring-video video {
+    width: 100%;
 }
 
 .hiring-information {
@@ -148,7 +147,7 @@
 
 @media screen and (max-width: 768px) {
 
-    .hiring-video iframe {
+    .hiring-video video {
         width: 100%;
         height: 250px;
     }

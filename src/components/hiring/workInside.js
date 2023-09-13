@@ -3,22 +3,18 @@ import './hiring.css'
 import img1 from './img/section_m_1.jpg'
 import img2 from './img/section_m_2.jpg'
 import img3 from './img/section_m_3.jpg'
+import vid from './fed.mp4'
 
 const WorkInside = () => {
-
-    const videoId = 'QFz0cUfEYVo'; // Substitua pelo ID do vídeo do YouTube que você deseja incorporar
 
     return (
 
         <div className="container">
 
             <div className="hiring-video">
-                <iframe
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    title="YouTube Video"
-                    frameborder="0"
-                    allowfullscreen
-                ></iframe>
+                <video controls>
+                     <source src={vid} type="video/mp4" />
+                </video>
             </div>
 
 
