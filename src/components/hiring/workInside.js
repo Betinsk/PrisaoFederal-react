@@ -37,7 +37,13 @@ const WorkInside = () => {
 
                         <p className='title'> New Openings </p>
                         <p>  Explore immediate job openings and careers in: Arizona, California, Colorado, Illinois, Kansas, Missouri, and Oregon..   </p>
+                   
+                    <a href='#'>View Opportunities</a>
+                   
                     </div>
+
+
+
                 </div>
 
                 <div className='hiring-card'>
@@ -54,6 +60,9 @@ const WorkInside = () => {
                         <p>
                             Working here isn't exactly what you think. Federal prisons are clean, secure, and professionally run at every level. See why more than 37,000 people have joined our team.
                         </p>
+
+                        <a href='#'>Explore Openings</a>
+
                     </div>
                 </div>
 
@@ -71,6 +80,9 @@ const WorkInside = () => {
                         <p>
                             Discover our wide range of positions, student programs, and different ways you can volunteer at the Federal Bureau of Prisons
                         </p>
+
+                        <a href='#'>See what it's like</a>
+
 
                     </div>
 
