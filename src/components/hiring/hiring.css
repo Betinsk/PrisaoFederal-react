@@ -20,7 +20,6 @@
 
 .hiring-text {
     width: 50%;
-    height: 90%;
     position: absolute;
     top: 15px;
     right: 25px;
@@ -47,4 +46,31 @@
     font-size: 1.4rem;
     margin-top: 10px;
     color: #ffdd8d;
+}
+
+@media screen and (max-width: 768px) {
+
+    .banner-container  {
+        width: 100%;
+    }
+
+    .banner-container img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover; /* Redimensiona para cobrir o espaço mantendo a proporção */
+        object-position: left;
+    }
+
+    .hiring-text {
+        width: 45%;
+        position: absolute;
+        top: 10%;
+        right: 25%;
+        text-align: center;
+        margin: 0;
+        font-weight: bold; /* Define o peso da fonte (opcional) */
+        background-color: rgba(0, 0, 0, 0.5); /* Define um fundo semi-transparente para melhor legibilidade (opcional) */
+        padding: 10px 20px; /* Define o espaçamento interno (opcional) */
+
+    }
 }
