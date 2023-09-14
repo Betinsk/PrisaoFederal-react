@@ -44,7 +44,7 @@
     margin: 2px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 500px) {
     .locate-container {
         display: flex;
         flex-direction: column;
@@ -52,7 +52,7 @@
 
     }
     .locate-prision, .locate-imate {
-        width: 100%;
+        width: 60%;
     }
   }
 

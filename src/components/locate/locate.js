@@ -11,7 +11,7 @@ export const Locate = () => {
                 <h2>Locate a Federal Prison</h2>
 
                 <select name="state" id="prison_loc_box">
-                    <option value="all" selected="selected">All Locations</option>
+                    <option value="all">All Locations</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
