@@ -1,0 +1,85 @@
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../../assets/fonts/Raleway/static/Raleway-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.locate-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 3px 10px 3px;
+
+}
+
+.locate-prision, .locate-imate {
+    width: 220px;
+    height: 250px;
+    margin: 7px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
+    font-family: 'Raleway';
+    text-align: center;
+}
+
+.locate-prision h2, .locate-imate h2 { 
+    font-size: 15px;
+}
+
+.locate-prision p, .locate-imate p { 
+    margin: 0;
+    font-size: 14px;
+}
+
+  select, input {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Raleway';
+  }
+
+  input {
+    width: 110px;
+    margin: 2px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .locate-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .locate-prision, .locate-imate {
+        width: 100%;
+    }
+  }
+
+  /* CSS */
+  .button-38 {
+    background-color: #eeeeee;
+    box-sizing: border-box;
+    color: #111827;
+    font-family: "Raleway",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    text-decoration: none #D1D5DB solid;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+  }
+  
+
+  .button-38:hover {
+    background-color: rgb(249,250,251);
+  }
+  
+  .button-38:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }

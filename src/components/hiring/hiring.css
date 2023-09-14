@@ -13,8 +13,8 @@
 }
 
 .banner-container img {
+  /*  box-sizing: border-box; */
     width: 100%;
-    box-sizing: border-box;
 }
 
 .hiring-text {

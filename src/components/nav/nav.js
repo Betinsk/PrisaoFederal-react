@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import './nav.css'
 import img from './ham.jpg';
 import { useState } from 'react';
-import img2 from './federal.png';
+// eslint-disable-next-line
+import img2 from './federal.png'; 
 import img3 from './bop_logo.png';
 
 import { Link } from 'react-router-dom';
@@ -59,11 +60,11 @@ const Nav = () => {
                 )}
                     {isOpen && (
                         <ul className="">
-                            <li><a href='#'>Sign In</a></li>
-                            <li><a href='#'>Person Register</a></li>
+                            <li><a href='/#'>Sign In</a></li>
+                            <li><a href='/#'>Person Register</a></li>
                             <li><Link to='/imate'
                             onClick={handleResize}>Imates</Link></li>
-                            <li><a href='#'>Services</a></li>
+                            <li><a href='/#'>Services</a></li>
                             {/* ... more menu items */}
                         </ul>
                     )}
