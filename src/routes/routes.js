@@ -5,7 +5,7 @@ import Imate from "../components/imate/imate";
 import ImatePersonData from "../components/imate/imatePersonData";
 import ImateData from "../components/imate/imateData";
 import '../components/imate/imate.css';
-import WorkInside from "../components/hiring/workInside";
+import WorkInside from "../components/home/hiring/workInside";
 
 const Routess = () => {
    return(
@@ -18,7 +18,9 @@ const Routess = () => {
                 </ImateData>
             } />
 
-           <Route path="/" element={<Home />} />
+           <Route path="/" element={  <ImateData>
+                <Home />
+                </ImateData>} />
            <Route path="/hiring" element={<WorkInside />} />
 
            </Routes>

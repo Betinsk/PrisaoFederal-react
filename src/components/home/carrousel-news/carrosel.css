@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('../../../assets/fonts/Raleway/static/Raleway-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.container-carrosel {
+    margin-top: 25px;
+}
+
+.item-carrosel{
+    margin: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
+}
+
+
+.item-carrosel img {
+    width: 100%;
+    margin: auto;
+    height: 400px;
+
+}
+
+.item-carrosel a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Raleway';
+}
+
+@media screen and (max-width:485px) {
+    .item-carrosel img {
+        height: 330px;
+    }
+
+    .item-carrosel a {
+        white-space: nowrap;
+        font-size: 12px;
+      
+        }
+}

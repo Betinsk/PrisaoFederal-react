@@ -5,3 +5,15 @@
     box-shadow: 0px 0px 3px rgb(184, 180, 180);
 
 }
+
+
+.imageDiv{
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: 2s ease;
+
+}
