@@ -35,22 +35,21 @@ import './imate.css';
         <div className="imate-information">
           <h2>Imate's identification: {foundImate.id.name}{foundImate.id.value} </h2>
           <img src={foundImate.picture.large} alt=''></img>
-          <p><strong>Date of birth:</strong> {foundImate.dob.date}</p>
-          <p>Date got arrested: {foundImate.registered.date}</p>
-          <p>Age: {foundImate.dob.age}</p>
-          <p>Gender: {foundImate.gender}</p>
-          <p>Name: {foundImate.name.first} {foundImate.name.last}</p>
-          <p>Email: {foundImate.email}</p>
-          <p>CellFone: {foundImate.cell}</p>
-          <p>Location: </p>
-          <p>City: {foundImate.location.city}</p>
-          <p>Coordinates: {foundImate.location.coordinates.latitude}   {foundImate.location.coordinates.longitude}</p>
-          <p>Nat: {foundImate.nat}</p> 
+          <p><strong>Date got arrested:</strong> {foundImate.registered.date}</p>
+          <p><strong>Age:</strong> {foundImate.dob.age}</p>
+          <p><strong>Gender:</strong> {foundImate.gender}</p>
+          <p><strong>Name:</strong> {foundImate.name.first} {foundImate.name.last}</p>
+          <p><strong>Email:</strong> {foundImate.email}</p>
+          <p><strong>CellFone:</strong> {foundImate.cell}</p>
+          <p><strong>Location:</strong> </p>
+          <p><strong>City:</strong> {foundImate.location.city}</p>
+          <p><strong>Coordinates:</strong> {foundImate.location.coordinates.latitude}   {foundImate.location.coordinates.longitude}</p>
+          <p><strong>Nat:</strong> {foundImate.nat}</p> 
 
-          <p>Contry: {foundImate.location.country}</p> 
-          <p>postcode: {foundImate.location.postcode}</p>
-          <p>state: {foundImate.location.state}</p>
-          <p>Street: {foundImate.location.street.name} {foundImate.location.street.number}</p>
+          <p><strong>Contry:</strong> {foundImate.location.country}</p> 
+          <p><strong>postcode:</strong> {foundImate.location.postcode}</p>
+          <p><strong>state: </strong>{foundImate.location.state}</p>
+          <p><strong>Street: </strong>{foundImate.location.street.name} {foundImate.location.street.number}</p>
         </div>
     </div>
     )

@@ -50,6 +50,7 @@
 .menu-button img{ 
     width: 30px;
     height: 30px;
+    border: 1px solid rgb(207, 205, 205);
 }
 
 .menu {

@@ -1,0 +1,43 @@
+/* Estilize o rodapé da prisão federal */
+.federal-prison-footer {
+    background-color: #f1efef;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 80%; 
+    margin: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
+
+  }
+  
+  /* Estilize o texto no rodapé */
+  .federal-prison-footer p {
+    margin: 5px 0;
+    font-family: 'Raleway';
+    color: black;
+    
+  }
+  
+  .footer-links{
+    margin-top: 15px;
+  }
+
+  /* Estilize os links no rodapé */
+  .federal-prison-footer .footer-links a {
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+
+  }
+  
+  /* Estilize os links quando o mouse passar sobre eles */
+  .federal-prison-footer .footer-links a:hover {
+    color: #ff9900;
+  }
+  
+  /* Estilize os links ativos no rodapé */
+  .federal-prison-footer .footer-links a.active {
+    font-weight: bold;
+  }
+  
