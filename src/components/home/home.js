@@ -3,8 +3,6 @@ import './home.css'
 import Hiring from '../home/hiring/hiring'
 import Locate from '../home/locate/locate'
 import NewsCarousel from './carrousel-news/carrosel-news'
-import { Context } from '../imate/imateData'
-import { useContext } from 'react'
 
 const newsDatas = [
     {

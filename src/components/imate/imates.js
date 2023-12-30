@@ -1,22 +1,29 @@
-import React, { useContext, useState } from 'react';
-import { Context } from './imateData';
+import React, { useContext, useState, useEffect } from 'react';
 import './imate.css'
 import ImateCard from './imateCard';
-const Imates = () => {
+import Context from '../../context/appContext';
+import fetchImates from '../../api/fetchImates';
+function Imates() {
 
-  const dadosJson = useContext(Context);
+  const {dadosJson, setData} = useContext(Context)
+  console.log(dadosJson)
 
   const [atualPage, setPaginaAtual] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [itensPerPage, setPorPagina] = useState(8);
-
+  const [itensPerPage] = useState(4);
   const [searchValue, setSearchValue] = useState('');
 
+  useEffect(() => {
+    fetchImates().then((response) => {
+      setData(response)
+    })
+
+    }, []);
+     
   // Função para obter os imates da página atual
-  const getImatesPaginados = () => {
-    const indiceUltimoImovel = atualPage * itensPerPage;
-    const indicePrimeiroImovel = indiceUltimoImovel - itensPerPage;
-    return dadosJson.slice(indicePrimeiroImovel, indiceUltimoImovel);
+   const getImatesPaginados = () => {
+    const indiceUltimoImate = atualPage * itensPerPage;
+    const indicePrimeiroImate = indiceUltimoImate - itensPerPage;
+    return dadosJson.slice(indicePrimeiroImate, indiceUltimoImate);
   };
 
   const filteredImate = !!searchValue ? dadosJson.filter(imates => {
@@ -24,8 +31,7 @@ const Imates = () => {
       searchValue.toLowerCase())
   })
     : getImatesPaginados();
-
-  console.log(filteredImate)
+    console.log(getImatesPaginados())
 
   // Função para ir para a próxima página
   const nextPage = () => {
@@ -47,12 +53,17 @@ const Imates = () => {
           onChange={e => setSearchValue(e.target.value)} />
       </div>
 
-      {filteredImate.length > 0 && (
-        <ImateCard imates={filteredImate} />
-        )}
+ 
+    
       {filteredImate.length === 0 && (
         <h1>Não existe imate com esse nome</h1>)}
 
+
+      {filteredImate.length > 0 && (
+        <ImateCard imates={filteredImate} /> 
+        ) 
+       }
+        
       {!searchValue && (
         <>
 
@@ -68,9 +79,11 @@ const Imates = () => {
             </button>
           </div>
         </>
+        
       )}
     </>
+
   );
-}
+      }
 
 export default Imates

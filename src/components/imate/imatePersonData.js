@@ -1,35 +1,42 @@
-import { Context } from "./imateData";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import './imate.css';
+import Context from "../../context/appContext";
 
  const ImatePersonData = () => {
 
-    const dadosJson = useContext(Context);
+    const {dadosJson} = useContext(Context);
     const [foundImate, setFoundImate] = useState('');
-    const [isLoading, setIsLoading] = useState(true); // Estado para rastrear carregamento
+    //const [isLoading, setIsLoading] = useState(true); // Estado para rastrear carregamento
 
-    const id = useParams();
+    //recebendo o paramentro da url
+    const id = useParams()
+    //const [idInt, setFoundImate] = useState('');
+
+    //convertendo de string para int fazendo a desestruturação
+    const idInt = Number.parseInt(id.index)
+    console.log(idInt)
 
     useEffect(() => {
-      const foundItem = dadosJson.find(imate => imate[id] === parseInt[id]);
-      if (foundItem) {
-        // Marca o carregamento como concluído
-        setFoundImate(foundItem);
-        console.log('Carregamento conluido')
-        setIsLoading(false); 
-      }
+      const foundItem = dadosJson[idInt]
+        setTimeout(() => {
+          setFoundImate(foundItem);
+        }, 1000);
+              // Marca o carregamento como concluído
+         //    console.log('Carregamento conluido')
+        
+    }, []);
 
-    }, [id, dadosJson]);
-
-    
     console.log(foundImate)
 
-    if (isLoading) {
-      return <p>Carregando...</p>;
+    if(!foundImate) {
+      return( 
+        <p>Carregando ...</p> 
+      )
     }
-
+      else {
     return( 
       <div className="container">
         <div className="imate-information">
@@ -53,7 +60,7 @@ import './imate.css';
         </div>
     </div>
     )
-    
+  }
 }
 
 export default ImatePersonData
