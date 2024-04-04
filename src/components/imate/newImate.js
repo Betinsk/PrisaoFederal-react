@@ -24,7 +24,13 @@ function NewImate() {
 
         return (
             <div>
-                
+                  {jsonData.map((imate, index) => (
+                    <div key={imate.id}>
+                    <p>{imate.age}</p>
+                    <p>{imate.gender}</p>
+                    <p>{imate.name}</p>
+                    </div>
+                  ))}
             
             </div>
         )
