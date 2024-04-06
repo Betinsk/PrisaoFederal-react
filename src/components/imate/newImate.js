@@ -62,37 +62,40 @@ function NewImate() {
 
 
         return (
+          
           <>
-            <div>
+                <div className='card-container'>
                   {jsonData.map((imate, index) => (
-                    <div key={imate.id}>
-                    <p>{imate.age}</p>
-                    <p>{imate.gender}</p>
-                    <p>{imate.name}</p>
+                    <div className='imate-card' key={index} >
+                      <div className='card-img'>
+                      </div>
+                      <p className='card-title'>{imate.name}</p>
+                      <div className='card-information'>
+                        <span>Imate's id: {imate.id} </span>
+                          <p>Age: {imate.age}</p>
+                        <p>{imate.gender}</p>
+                      </div>
                     </div>
                   ))}
-            
-            </div>
+              </div>
 
                     <div>
                       Criando imate
                     <form onSubmit={handleSubmit}>
-                    Age:
-                    <input type="text" name="age" value={imate.age} onChange={handleChange} />
+                        Age:
+                        <input type="text" name="age" value={imate.age} onChange={handleChange} />
 
-                    Gender:
-                    <input type="text" name="gender" value={imate.gender} onChange={handleChange} />
-  
-                    Name:
-                    <input type="text" name="name" value={imate.name} onChange={handleChange} />
+                        Gender:
+                        <input type="text" name="gender" value={imate.gender} onChange={handleChange} />
+      
+                        Name:
+                        <input type="text" name="name" value={imate.name} onChange={handleChange} />
 
-                    <button type="submit">Submit</button>
+                        <button type="submit">Submit</button>
 
                       </form>
-
-                    </div>
-                    </>
-
+                      </div>
+               </>
         )
     }
     export default NewImate
