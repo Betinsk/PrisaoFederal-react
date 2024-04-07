@@ -1,4 +1,5 @@
 import { useState, useEffect} from "react";
+import DeletImate from "../controller/delete";
 
 function NewImate() {
 
@@ -9,6 +10,8 @@ function NewImate() {
       gender: '',
       name: ''
     });
+
+    
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,9 +38,9 @@ function NewImate() {
       [name]: value
     }));
   };
+  
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     fetch('http://localhost:8080/imates', {
       method: 'POST',
       headers: {
@@ -75,6 +78,9 @@ function NewImate() {
                           <p>Age: {imate.age}</p>
                         <p>{imate.gender}</p>
                       </div>
+
+                    <DeletImate imateId={imate.id} />
+
                     </div>
                   ))}
               </div>
