@@ -53,6 +53,8 @@
     color: #333;
     margin: 5px 0 25px 0;
     border-bottom: 1px solid rgb(216, 214, 214);
+    font-family: 'Raleway';
+
 
   }
 
@@ -66,7 +68,15 @@
   .card-information  {
     text-align: left;
     padding-left: 10px;
-}
+    font-family: 'Raleway';
+  }
+
+    .card-information p {
+    line-height: 0.9rem;
+    padding: 0px;
+    margin: 0.5rem;
+  }
+
 
 .imate-information p {
   text-decoration: none;

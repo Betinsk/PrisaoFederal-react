@@ -1,5 +1,5 @@
 
-
+import '../imate/imate.css'
 
 function DeletImate ({imateId}) {
     console.log(imateId)
@@ -25,7 +25,7 @@ function DeletImate ({imateId}) {
 
     return (
 
-        <button onClick={handleDeleteImate}>Delete Imate</button>
+        <button className="button-38" onClick={handleDeleteImate}>Delete Imate</button>
 
     )
 

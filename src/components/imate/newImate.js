@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react";
 import DeletImate from "../controller/delete";
+import './imate.css'
 
 function NewImate() {
 
@@ -76,7 +77,9 @@ function NewImate() {
                       <div className='card-information'>
                         <span>Imate's id: {imate.id} </span>
                           <p>Age: {imate.age}</p>
-                        <p>{imate.gender}</p>
+                        <p> Gender: {imate.gender}</p>
+                        <p>Social Security: {imate.socialSecurity}</p>
+
                       </div>
 
                     <DeletImate imateId={imate.id} />
