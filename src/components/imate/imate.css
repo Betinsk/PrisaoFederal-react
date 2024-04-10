@@ -90,6 +90,15 @@
   display: flex;
   gap: 35px;
 }
+.divCreateImate {
+
+  border: 1px solid red;
+}
+
+.inputs {
+  text-align: center;
+}
+
 
 /* CSS */
 .button-38 {

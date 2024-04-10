@@ -61,7 +61,7 @@ const Nav = () => {
                     {isOpen && (
                         <ul className="">
                             <li><a href='/#'>Sign In</a></li>
-                            <li><a href='/#'>Person Register</a></li>
+                            <li><Link to='/personRegister'>Person Register</Link></li>
                             <li><Link to='/imate'
                             onClick={handleResize}>Imates</Link></li>
                             <li><a href='/#'>Services</a></li>

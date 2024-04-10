@@ -1,18 +1,19 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
-import Imates from "../components/imate/imates";
 import ImatePersonData from "../components/imate/imatePersonData";
 import '../components/imate/imate.css';
 import WorkInside from "../components/home/hiring/workInside";
 import Provider from "../context/provider";
 import NewImate from "../components/imate/newImate";
+import PersonRegister from "../components/person/personRegister";
 
 const Routess = () => {
    return(
     
            <Routes>
               <Route path="/" element={ <Home />} />
+              <Route path="/personRegister" element={ < PersonRegister/>} />
             <Route path="/imate" element={
                 <Provider>
                 <NewImate />

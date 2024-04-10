@@ -88,9 +88,10 @@ function NewImate() {
                   ))}
               </div>
 
-                    <div>
+                    <div className="divCreateImate">
                       Criando imate
                     <form onSubmit={handleSubmit}>
+                      <div className='inputs'>
                         Age:
                         <input type="text" name="age" value={imate.age} onChange={handleChange} />
 
@@ -100,8 +101,11 @@ function NewImate() {
                         Name:
                         <input type="text" name="name" value={imate.name} onChange={handleChange} />
 
-                        <button type="submit">Submit</button>
+                        Social Security:
+                        <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} />
 
+                          <button className='button-38' type="submit">Submit</button>
+                        </div>
                       </form>
                       </div>
                </>
