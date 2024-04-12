@@ -38,7 +38,11 @@ function PersonRegister() {
     // Construa o objeto com os dados da entidade a serem enviados para o backend
     const newImateVisitor = {
       name: nome,
-      imate: selectedOption
+      // O objeto espera o id incapsulado dentro de um objeto, caso contrario
+      // da o erro JSON parse error: Cannot construct instance of `com.example.demo.domain.Imate` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('5')]
+      imate: {
+        id: selectedOption
+      } 
       // Adicione outros campos aqui conforme necessário
     };
     console.log(newImateVisitor)
