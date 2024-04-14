@@ -7,6 +7,8 @@ import WorkInside from "../components/home/hiring/workInside";
 import Provider from "../context/provider";
 import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/person/personRegister";
+import AdminPanel from "../components/administration/adminPanel";
+import PersonConsult from "../components/person/personConsult";
 
 const Routess = () => {
    return(
@@ -14,6 +16,10 @@ const Routess = () => {
            <Routes>
               <Route path="/" element={ <Home />} />
               <Route path="/personRegister" element={ < PersonRegister/>} />
+              <Route path="/adminPanel" element={ < AdminPanel/>} />
+              <Route path="/personConsult" element={ < PersonConsult/>} />
+
+
             <Route path="/imate" element={
                 <Provider>
                 <NewImate />

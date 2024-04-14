@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 function PersonRegister() {
   const [nome, setNome] = useState('');
-  const [socialSecurity, setSocialSecurity] = useState('');
   const [imate, setData] = useState([''])
   // Adicione mais estados conforme necessário para outros campos do formulário
   const [selectedOption, setSelectedOption] = useState([]);
@@ -95,8 +94,7 @@ function PersonRegister() {
       <label>
         Name:
         <input type="text" value={nome} onChange={(event) => setNome(event.target.value)} />
-        {  console.log('nome para back', nome)
-}
+
       </label>
       <br/>
       {/* Adicione mais campos do formulário conforme necessário */}
