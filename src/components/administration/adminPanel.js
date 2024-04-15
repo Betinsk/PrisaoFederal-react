@@ -14,21 +14,22 @@ function AdminPanel() {
 
                         <div className="cardFunctions">
 
-                        <Link to="/personConsult ">Consult Persons</Link>
+                        <Link className='cardFunctionLink' to="/personConsult ">Consult Persons</Link>
 
                         </div>
 
                         
                         <div className="cardFunctions">
 
-                            Person register              
+        
+                        <Link className='cardFunctionLink' to="/personRegister ">Person Register</Link>          
 
                         </div>
 
                         
                         <div className="cardFunctions">
 
-                                Imate register               
+                        <Link className='cardFunctionLink' to="/imate ">Imate's register</Link>            
 
                         </div>
 

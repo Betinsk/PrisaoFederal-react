@@ -5,7 +5,6 @@
   }
 
   .painelGrid{
-    border: 1px solid red;
     margin: auto;
   }
 
@@ -17,11 +16,23 @@
     gap: 10px;
     padding: 30px;
     text-align: center;
+    border: 1px solid rgb(68, 0, 255);
 
   }
 
   .cardFunctions {
-    border: 1px solid red;
     width: 250px;
     height: 200px;
+    margin:auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
   }
+
+  .cardFunctions:hover{
+    transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Muda a sombra ao passar o mouse */
+}
+
+.cardFunctionLink{
+    text-decoration: none;
+    color: #024458;
+}

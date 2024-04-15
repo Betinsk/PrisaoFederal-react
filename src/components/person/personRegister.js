@@ -78,7 +78,7 @@ function PersonRegister() {
     
     <div>
 <select value={JSON.stringify(selectedOption)} onChange={handleSelectChange} >
-  <option value="">Selecione uma opção</option>
+  <option value={selectedOption}>Selecione uma opção</option>
   {/* Mapeia o array para gerar as opções */}
   {imate.map((option, index) => (
     <option key={index}value={option.id} >
