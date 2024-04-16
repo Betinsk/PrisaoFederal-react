@@ -1,10 +1,8 @@
-import { useState, useEffect} from "react";
-import DeletImate from "../controller/delete";
+import { useState} from "react";
 import './imate.css'
 
 function NewImate() {
 
-    const [jsonData, setData] = useState([]);
 
     const [imate, setImate] = useState({
       age: '',
@@ -13,25 +11,6 @@ function NewImate() {
     });
 
     
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/imates');
-        if (!response.ok) {
-          throw new Error('Erro ao buscar dados da API');
-        }
-        const jsonData = await response.json();
-        console.log(jsonData)
-        setData(jsonData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-   
-    fetchData();
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setImate(prevState => ({
@@ -66,28 +45,7 @@ function NewImate() {
 
 
         return (
-          
-          <>
-                <div className='card-container'>
-                  {jsonData.map((imate, index) => (
-                    <div className='imate-card' key={index} >
-                      <div className='card-img'>
-                      </div>
-                      <p className='card-title'>{imate.name}</p>
-                      <div className='card-information'>
-                        <span>Imate's id: {imate.id} </span>
-                          <p>Age: {imate.age}</p>
-                        <p> Gender: {imate.gender}</p>
-                        <p>Social Security: {imate.socialSecurity}</p>
-
-                      </div>
-
-                    <DeletImate imateId={imate.id} />
-
-                    </div>
-                  ))}
-              </div>
-
+        
                     <div className="divCreateImate">
                       Criando imate
                     <form onSubmit={handleSubmit}>
@@ -108,7 +66,7 @@ function NewImate() {
                         </div>
                       </form>
                       </div>
-               </>
+              
         )
     }
     export default NewImate

@@ -9,6 +9,7 @@ import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
 import PersonConsult from "../components/person/personConsult";
+import ImateConsult from "../components/imate/imatesList";
 
 const Routess = () => {
    return(
@@ -18,6 +19,7 @@ const Routess = () => {
               <Route path="/personRegister" element={ < PersonRegister/>} />
               <Route path="/adminPanel" element={ < AdminPanel/>} />
               <Route path="/personConsult" element={ < PersonConsult/>} />
+              <Route path="/imatesList" element={ < ImateConsult/>} />
 
 
             <Route path="/imate" element={

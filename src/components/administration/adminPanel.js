@@ -29,7 +29,7 @@ function AdminPanel() {
                         
                         <div className="cardFunctions">
 
-                        <Link className='cardFunctionLink' to="/imate ">Imate's register</Link>            
+                        <Link className='cardFunctionLink' to="/imatesList ">Imate Consult</Link>            
 
                         </div>
 
