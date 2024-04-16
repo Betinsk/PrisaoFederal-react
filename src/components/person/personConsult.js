@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import DeletPerson from "./deletPerson";
 
 function PersonConsult() {
 
@@ -58,6 +59,9 @@ function PersonConsult() {
                         <p>Social Security: {person.imate ? person.imate.socialSecurity : "Não disponível"}</p>
 
                       </div>
+
+                      <DeletPerson visitorId={person.id} />
+
                     </div>
                   ))}
                   </>
