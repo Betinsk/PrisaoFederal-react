@@ -4,7 +4,7 @@ function PersonRegister() {
   const [nome, setNome] = useState('');
   const [imate, setData] = useState([''])
   // Adicione mais estados conforme necessário para outros campos do formulário
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(['']);
 
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function PersonRegister() {
 
    
   const handleSelectChange = (event) => {
+
     setSelectedOption(event.target.value);
     console.log('id para back', event.target.value)
   };
@@ -77,17 +78,18 @@ function PersonRegister() {
     <>
     
     <div>
-<select value={JSON.stringify(selectedOption)} onChange={handleSelectChange} >
-  <option value={selectedOption}>Selecione uma opção</option>
+<select onChange={handleSelectChange} >
   {/* Mapeia o array para gerar as opções */}
-  {imate.map((option, index) => (
-    <option key={index}value={option.id} >
-      {option.name}
-
+  {imate.map((option, index) => (   
+    <option key={index} value={option.id} >
+        {/* Condicional esperando o array carregar,
+         enquanto isso ele exibe o nome carregando
+        */}
+        {option.name ? option.name: 'Carregando'}
     </option>
+
   ))}
 </select>
-<p>Opção selecionada: {selectedOption}</p>
 </div>
 
     <form onSubmit={handleSubmit}>
