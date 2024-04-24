@@ -14,7 +14,9 @@ function AdminPanel() {
 
                         <div className="cardFunctions">
 
-                        <Link className='cardFunctionLink' to="/personConsult ">Consult Persons</Link>
+                        <Link className='cardFunctionLink' to="/personConsult ">
+                            <p>Consult Persons</p>
+                        </Link>
 
                         </div>
 
@@ -22,14 +24,20 @@ function AdminPanel() {
                         <div className="cardFunctions">
 
         
-                        <Link className='cardFunctionLink' to="/personRegister ">Person Register</Link>          
+                        <Link className='cardFunctionLink' to="/personRegister ">
+                            <p>Person Register</p>
+                            </Link>          
 
                         </div>
 
                         
                         <div className="cardFunctions">
 
-                        <Link className='cardFunctionLink' to="/imatesList ">Imate Consult</Link>            
+                        <Link className='cardFunctionLink' to="/imatesList ">
+                            
+                            <p>Imate Consult</p>
+
+                            </Link>            
 
                         </div>
 

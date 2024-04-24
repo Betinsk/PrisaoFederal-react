@@ -1,11 +1,13 @@
 
 import { useEffect, useState } from "react";
-import DeletImate from "../controller/delete";
+import DeletImate from "../controller/deleteImate";
+import { Link } from "react-router-dom";
 
 function ImateList() {
 
     const [jsonData, setData] = useState(['']);
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +42,9 @@ function ImateList() {
                  ) : (
                     <>
                   {jsonData !== null && jsonData.map((imate, index) => (
-                    <div className='imate-card' key={index} >
+                   	<Link to={`/imateEdit/${index}`} key={index} 	className="link-with-underline">
+
+                   <div className='imate-card' key={index} >
                       <div className='card-img'>
                       </div>
                       <p className='card-title'>{imate.name ?? "Não disponível"}</p>
@@ -60,6 +64,7 @@ function ImateList() {
                       <DeletImate imateId={imate.id} />
 
                     </div>
+                    </Link>
                   ))}
                   </>
                 )}

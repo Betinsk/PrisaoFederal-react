@@ -2,10 +2,8 @@
 import '../imate/imate.css'
 
 function DeletImate ({imateId}) {
-    console.log(imateId)
 
     const handleDeleteImate = async () => {
-        console.log(imateId)
         try {
             const response = await fetch(`http://localhost:8080/imates/${imateId}`, {
                 method: 'DELETE'

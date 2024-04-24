@@ -10,6 +10,7 @@ import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
 import PersonConsult from "../components/person/personConsult";
 import ImateConsult from "../components/imate/imatesList";
+import EditeImate from "../components/controller/editImate";
 
 const Routess = () => {
    return(
@@ -27,9 +28,9 @@ const Routess = () => {
                 <NewImate />
                 </Provider>
             } />
-            <Route path="/imatePerson/:index" element={
+            <Route path="/imateEdit/:index" element={
                 <Provider>
-                <ImatePersonData />
+                <EditeImate />
                 </Provider>
             } />
 
