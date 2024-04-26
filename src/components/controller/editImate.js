@@ -41,8 +41,28 @@ function EditeImate () {
     return (
 
         <div>
-        <b>Fazer O component Card</b><br/>
-        {data.name}
+       
+        <div className="container">
+        <div className="imate-information">
+          <h2>Imate's identification: {data.name} </h2>
+          <p><strong>Date got arrested:</strong> </p>
+          <p><strong>Age:</strong> {data.age}</p>
+          <p><strong>Gender:</strong> {data.gender}</p>
+          <p><strong>Name:</strong> {data.name} </p>
+          <p><strong>Email:</strong> {data.email}</p>
+          <p><strong>CellFone:</strong> {data.cell}</p>
+          <p><strong>Location:</strong> </p>
+          <p><strong>City:</strong> {data.city}</p>
+          <p><strong>Coordinates:</strong> </p>
+          <p><strong>Nat:</strong></p> 
+
+          <p><strong>Contry:</strong> </p> 
+          <p><strong>postcode:</strong> </p>
+          <p><strong>state: </strong></p>
+          <p><strong>Street: </strong> </p>
+
+        </div>
+    </div>
        
         <button className="button-38">Edit Imate</button>
         </div>

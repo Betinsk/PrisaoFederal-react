@@ -59,13 +59,13 @@ const Nav = () => {
                     </div>
                 )}
                     {isOpen && (
-                        <ul className="">
+                        <ul className="" onClick={handleResize}>
                             <li><a href='/#'>Sign In</a></li>
                             <li><Link to='/personRegister'>Person Register</Link></li>
                             <li><Link to='/adminPanel'>Admin Panel</Link></li>
 
                             <li><Link to='/imate'
-                            onClick={handleResize}>Imates</Link></li>
+                            >Imates</Link></li>
                             <li><a href='/#'>Services</a></li>
                             {/* ... more menu items */}
                         </ul>

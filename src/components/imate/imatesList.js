@@ -42,7 +42,7 @@ function ImateList() {
                  ) : (
                     <>
                   {jsonData !== null && jsonData.map((imate, index) => (
-                   	<Link to={`/imateEdit/${index}`} key={index} 	className="link-with-underline">
+                   	<Link to={`/imateEdit/${imate.id}`} key={index} 	className="link-with-underline">
 
                    <div className='imate-card' key={index} >
                       <div className='card-img'>

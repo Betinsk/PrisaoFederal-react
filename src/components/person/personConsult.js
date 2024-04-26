@@ -34,9 +34,6 @@ function PersonConsult() {
     return (
         <div className="">
 
-            Person consult
-
-
             <div className='card-container'>
             {loading ? (
             <p>Carregando...</p>
@@ -52,7 +49,11 @@ function PersonConsult() {
                             antes do array carregar, então para corrigir esse erro é feito a verificação
                             se a parte do array person.imate não é nula, usando o ?
                         */}
-                      <p>Imate's id: {person.imate ? person.imate.id  : "Não disponível"}</p>
+                      <p>Person age: {person.age ? person.age  : "Não disponível"}</p>
+                      <p>Person cellfone: {person.cellfoneNumber ? person.cellfoneNumber  : "Não disponível"}</p>
+                      <p>Person socialSecurity: {person.socialSecure ? person.socialSecure  : "Não disponível"}</p>
+                      <hr></hr>
+                      <h1>Imate</h1>
                       <p>Imates's nome: {person.imate ? person.imate.name  : "Não disponível"}</p>
                       <p>Age: {person.imate ? person.imate.age : "Não disponível"}</p> 
                         <p> Gender: {person.imate ? person.imate.gender : "Não disponível"}</p>

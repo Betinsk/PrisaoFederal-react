@@ -6,7 +6,7 @@ function AdminPanel() {
 
     return (
         <div className="container">
-            Admin Panel
+           <h1>Admin Panel</h1> 
 
             <div className="painelGrid">
 

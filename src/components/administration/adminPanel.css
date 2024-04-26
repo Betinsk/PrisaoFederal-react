@@ -3,6 +3,7 @@
     margin: auto;
     box-shadow: 0px 0px 3px rgb(184, 180, 180);
     font-family: 'Raleway';
+    margin-bottom: 25px;
   }
 
   .painelGrid{
@@ -17,13 +18,12 @@
     gap: 10px;
     padding: 30px;
     text-align: center;
-    border: 1px solid rgb(68, 0, 255);
 
   }
 
   .cardFunctions {
     width: 150px;
-    height: 100px;
+    height: 80px;
     margin:auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
   }
@@ -40,5 +40,6 @@
 }
 
 .cardFunctionLink p{
-  margin-top: 40px;
+  margin-top: 30px;
+  font-weight: bold;
 }
