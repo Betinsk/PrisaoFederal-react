@@ -1,0 +1,59 @@
+.listaImates {
+    padding: 10px;
+}
+
+.listaImates p {
+    display: inline; /* Garante que o parágrafo não quebra linha */
+    margin-left: 5px;
+}
+
+.form{
+    padding: 5px;
+   
+}
+
+.form p {
+ padding: 2px;
+ margin: 3px;
+ background-color: #f2f2f2;   
+}
+
+
+ .form select, input {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Raleway';
+  }
+
+  input {
+    width: 150px;
+    margin: 3px;
+  }
+
+ .form button {
+    background-color: #f2f2f2;
+    border: 0;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #111827;
+    font-family: "Raleway",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    text-decoration: none #D1D5DB solid;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    margin: 5px;
+  
+  }
+  
+
+
+
+
+  
+ 
