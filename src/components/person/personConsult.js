@@ -30,6 +30,26 @@ function PersonConsult() {
         fetchData();
       }, []);
 
+      
+      const handleDeleteVisitor = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8080/visitor/${id}`, {
+                method: 'DELETE'
+            });
+            console.log(response)
+
+            if (response.ok) {
+                // Atualize o estado ou faça qualquer ação necessária após a exclusão bem-sucedida
+               setData(jsonData.filter(item => item.id !== id));
+
+                console.log('Visitor excluído com sucesso!');
+            } else {
+                console.error('Falha ao excluir visitor, ele não existe ou possui pendencias');
+            }
+        } catch (error) {
+            console.error('Erro ao processar solicitação de exclusão:', error);
+        }
+    };
 
     return (
         <div className="">
@@ -61,7 +81,7 @@ function PersonConsult() {
 
                       </div>
 
-                      <DeletPerson visitorId={person.id} />
+                          <button className='button-38' onClick={() => handleDeleteVisitor(person.id)}>Delete</button >
 
                     </div>
                   ))}
