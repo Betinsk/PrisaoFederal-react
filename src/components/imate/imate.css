@@ -5,20 +5,17 @@
     font-style: normal;
   }
 
-  
 .container {
   width: 80%;
   margin: auto;
   box-shadow: 0px 0px 3px rgb(184, 180, 180);
 }
 
-
 .imate-information {
   font-family: 'Raleway';
   padding: 15px;
   margin-bottom: 25px;
 }
-  
   
 .card-container {
     max-width: 1400px;
@@ -35,7 +32,6 @@
 .imate-card {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
   }   
-
 
 .imate-card:hover {
     transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
@@ -113,9 +109,6 @@
  
   
 
-
-
-
 /* CSS */
 .button-38 {
   background-color: #eeeeee;
@@ -157,4 +150,24 @@
   width: 100%;
   font-size: 30px;
   padding: 5px 10px;
+}
+
+.styled-textarea {
+  width: 500px;
+  height: 250px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.styled-textarea:focus {
+  border-color: #e4dddd;
+  box-shadow: 0 4px 12px rgba(221, 228, 236, 0.3);
+  outline: none;
 }

@@ -50,14 +50,16 @@ function NewImate() {
         Criando imate
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
-            <p> Age:</p>
+          <p>Name:</p>
+            <input type="text" name="name" value={imate.name} onChange={handleChange} />
+             <p> Age:</p>
               <input type="text" name="age" value={imate.age} onChange={handleChange} />
                  <p>Gender:</p>
                    <input type="text" name="gender" value={imate.gender} onChange={handleChange} />
-                   <p>Name:</p>
-                 <input type="text" name="name" value={imate.name} onChange={handleChange} />
                <p>Social Security:</p>
               <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} />
+              <p>Comitted Crime</p>
+              <textarea className="styled-textarea" type='text' ></textarea>
             <button className='button-38' type="submit">Create</button>
           </div>
         </form>

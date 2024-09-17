@@ -6,7 +6,10 @@ function AdminPanel() {
 
     return (
         <div className="container">
-           <h1>Admin Panel</h1> 
+            <div className='adminTitle'>
+            <h1>Admin Panel</h1> 
+            </div>
+         
 
             <div className="painelGrid">
 
@@ -16,6 +19,22 @@ function AdminPanel() {
 
                         <Link className='cardFunctionLink' to="/personConsult ">
                             <p>Consult Persons</p>
+                        </Link>
+
+                        </div>
+                        
+                         <div className="cardFunctions">
+
+                        <Link className='cardFunctionLink' to="/personConsult ">
+                            <p></p>
+                        </Link>
+
+                        </div>
+
+                         <div className="cardFunctions">
+
+                        <Link className='cardFunctionLink' to="/personConsult ">
+                            <p></p>
                         </Link>
 
                         </div>

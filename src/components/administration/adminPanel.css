@@ -6,6 +6,11 @@
     margin-bottom: 25px;
   }
 
+  .adminTitle {
+    text-align: center;
+    color: rgb(90, 84, 84);
+  }
+
   .painelGrid{
     margin: auto;
   }
@@ -35,11 +40,11 @@
 
 .cardFunctionLink{
     text-decoration: none;
-    color: #024458;
+    color: black;
     align-items: center;
 }
 
 .cardFunctionLink p{
   margin-top: 30px;
-  font-weight: bold;
+  font-size: 18px;
 }

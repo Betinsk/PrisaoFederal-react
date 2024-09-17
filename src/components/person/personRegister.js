@@ -48,7 +48,7 @@ function PersonRegister() {
       name: nome,
       age: age,
       socialSecure: socialSecure,
-      cellFoneNumber: cellFoneNumber,
+      cellfoneNumber: cellFoneNumber,
      
       // O objeto espera o id incapsulado dentro de um objeto, caso contrario
       // da o erro JSON parse error: Cannot construct instance of `com.example.demo.domain.Imate` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('5')]
