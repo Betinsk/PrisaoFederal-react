@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import DeletImate from "../controller/deleteImate";
 import { Link } from "react-router-dom";
+import ImateCard from "./imateCard";
 
 function ImateList() {
 
@@ -41,8 +42,9 @@ function ImateList() {
             <p>Carregando...</p>
                  ) : (
                     <>
-                  {jsonData !== null && jsonData.map((imate, index) => (
-                   	<Link to={`/imateEdit/${imate.id}`} key={index} 	className="link-with-underline">
+                    <ImateCard jsonData={jsonData}></ImateCard>
+               {/*   {jsonData !== null && jsonData.map((imate, index) => (
+                   	<Link to={`/imateEdit/${imate.id}`} skey={index} 	className="link-with-underline">
 
                    <div className='imate-card' key={index} >
                       <div className='card-img'>
@@ -52,20 +54,18 @@ function ImateList() {
                         {/* Aqui estava ocorrendo um erro, que parece que a página renderizava
                             antes do array carregar, então para corrigir esse erro é feito a verificação
                             se a parte do array person.imate não é nula, usando o ?
-                        */}
-                      <p>Imate's id: {imate ? imate.id  : "Não disponível"}</p>
-                      <p>Imates's nome: {imate ? imate.name  : "Não disponível"}</p>
-                      <p>Age: {imate ? imate.age : "Não disponível"}</p> 
-                        <p> Gender: {imate ? imate.gender : "Não disponível"}</p>
-                        <p>Social Security: {imate ? imate.socialSecurity : "Não disponível"}</p>
+                       
 
                       </div>
+
 
                       <DeletImate imateId={imate.id} />
 
                     </div>
                     </Link>
                   ))}
+
+                  */}
                   </>
                 )}
               </div>
