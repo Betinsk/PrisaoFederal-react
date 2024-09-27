@@ -74,10 +74,10 @@ function PersonConsult() {
                       <p>Person socialSecurity: {person.socialSecure ? person.socialSecure  : "Não disponível"}</p>
                       <hr></hr>
                       <h1>Imate</h1>
-                      <p>Imates's nome: {person.imate ? person.imate.name  : "Não disponível"}</p>
-                      <p>Age: {person.imate ? person.imate.age : "Não disponível"}</p> 
-                        <p> Gender: {person.imate ? person.imate.gender : "Não disponível"}</p>
-                        <p>Social Security: {person.imate ? person.imate.socialSecurity : "Não disponível"}</p>
+                      <p>Imates's nome: {person.imates[0] ? person.imates[0].name  : "Não disponível"}</p>
+                      <p>Age: {person.imates[0] ? person.imates[0].age : "Não disponível"}</p> 
+                        <p> Gender: {person.imates[0] ? person.imates[0].gender : "Não disponível"}</p>
+                        <p>Social Security: {person.imates[0] ? person.imates[0].socialSecurity : "Não disponível"}</p>
 
                       </div>
 

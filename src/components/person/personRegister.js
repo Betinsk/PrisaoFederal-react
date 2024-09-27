@@ -7,11 +7,19 @@ function PersonRegister() {
   const [socialSecure, setSocialSecure] = useState('')
   const [cellFoneNumber, setcellFoneNumber] = useState('')
 
-
-  
-  const [imate, setData] = useState([''])
+  const [imate, setData] = useState([])
   // Adicione mais estados conforme necessário para outros campos do formulário
   const [selectedOption, setSelectedOption] = useState(1); // Esse useState 1, significa que eu estou por padrão acessando o primeiro elemento da lista
+
+
+ 
+    const [visitor, setVisitor] = useState({
+      name: '',
+      age: '',
+      socialSecure: '',
+      cellfoneNumber: '',
+      imates: [] // Inicializa como um array vazio
+    });
 
 
   //Trás minha lista de presos
@@ -43,6 +51,8 @@ function PersonRegister() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+
+
     // Construa o objeto com os dados da entidade a serem enviados para o backend
     const newImateVisitor = {
       name: nome,
@@ -52,9 +62,10 @@ function PersonRegister() {
      
       // O objeto espera o id incapsulado dentro de um objeto, caso contrario
       // da o erro JSON parse error: Cannot construct instance of `com.example.demo.domain.Imate` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('5')]
-      imate: {
+      imates: [ {
         id: selectedOption
-      } 
+      }
+    ]
       // Adicione outros campos aqui conforme necessário
     };
     console.log(newImateVisitor)
