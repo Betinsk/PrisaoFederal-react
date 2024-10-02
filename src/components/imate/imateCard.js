@@ -19,10 +19,10 @@ export const ImateCard = ({jsonData}) => (
                       <p>Imates's nome: {imate ? imate.name  : "Não disponível"}</p>
                       <p>Age: {imate ? imate.age : "Não disponível"}</p> 
                         <p> Gender: {imate ? imate.gender : "Não disponível"}</p>
-                        <p>Street: {imate ? imate.addresses[0].street : "Não disponível"}</p>
-                        <p>Street number: {imate ? imate.addresses[0].number : "Não disponível"}</p>
-                        <p>City: {imate ? imate.addresses[0].city.city : "Não disponível"}</p>
-                        <p>State: {imate ? imate.addresses[0].city.state.state : "Não disponível"}</p>
+                        <p>Street: {imate ? imate.addresses?.[0]?.street : "Não disponível"}</p>
+                        <p>Street number: {imate ? imate.addresses?.[0]?.number : "Não disponível"}</p>
+                        <p>City: {imate ? imate.addresses?.[0]?.city.city : "Não disponível"}</p>
+                        <p>State: {imate ? imate.addresses?.[0]?.city.state.state : "Não disponível"}</p>
     </div>
   </div>
   </Link>
