@@ -7,7 +7,7 @@ export const ImateCard = ({jsonData}) => (
 <div className='card-container'>
 
 { jsonData && jsonData.length > 0 ? ( jsonData.map((imate, index) => (
-	<Link to={`/imatePerson/${index}`} key={index} 	className="link-with-underline">
+	<Link to={`/imatePerson/${index}`} 	className="link-with-underline">
     
   <div className='imate-card' key={index} >
     <div className='card-img'>
