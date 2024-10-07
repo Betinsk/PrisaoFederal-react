@@ -7,7 +7,7 @@ function NewImate() {
   const [imate, setImate] = useState({
     age: '',
     gender: '',
-    name: '',
+    imateName: '',
     socialSecurity: '',
     commitedCrime: '',
     addressDto: {
@@ -21,11 +21,24 @@ function NewImate() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Verifica se o campo pertence a addressDto
+  if (name in imate.addressDto) {
+    setImate(prevState => ({
+      ...prevState,
+      addressDto: {
+        ...prevState.addressDto,
+        [name]: value // Atualiza o campo dentro de addressDto
+      }
+    }));
+  } else {
+    // Atualiza outros campos do imate
     setImate(prevState => ({
       ...prevState,
       [name]: value
     }));
-  };
+  }
+};
+  
 
 
   const handleSubmit = (e) => {
@@ -33,13 +46,16 @@ function NewImate() {
       fetch('http://localhost:8080/imates', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(imate),
+
       })
         .then(response => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            return response.text().then(text => {
+              throw new Error(`Network response was not ok: ${text}`);
+          });
           }
           return response.json();
         })
@@ -48,7 +64,10 @@ function NewImate() {
           // Faça algo após o sucesso, como redirecionar para outra página
         })
         .catch(error => {
+          console.log(imate);
+
           console.error('Ocorreu um erro ao criar o Imate:', error);
+
         });
     };
 
@@ -60,7 +79,7 @@ function NewImate() {
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
           <p>Name:</p>
-            <input type="text" name="name" value={imate.name} onChange={handleChange} />
+            <input type="text" name="imateName" value={imate.imateName} onChange={handleChange} />
              <p> Age:</p>
               <input type="text" name="age" value={imate.age} onChange={handleChange} />
                  <p>Gender:</p>
@@ -73,20 +92,20 @@ function NewImate() {
 
                         {/* Endereço */}
               <h3>Endereço</h3>
-              <div>
+             
                 <label>Street:</label>
                 <input
                   type="text"
-                  name="address.street"
+                  name="street"
                   value={imate.addressDto.street}
                   onChange={handleChange}
                 />
-              </div>
+             
               <div>
                 <label>Number:</label>
                 <input
                   type="text"
-                  name="address.number"
+                  name="number"
                   value={imate.addressDto.number}
                   onChange={handleChange}
                 />
@@ -95,7 +114,7 @@ function NewImate() {
                 <label>City:</label>
                 <input
                   type="text"
-                  name="address.cityName"
+                  name="cityName"
                   value={imate.addressDto.cityName}
                   onChange={handleChange}
                 />
@@ -104,7 +123,7 @@ function NewImate() {
                 <label>State:</label>
                 <input
                   type="text"
-                  name="address.stateName"
+                  name="stateName"
                   value={imate.addressDto.stateName}
                   onChange={handleChange}
                 />
