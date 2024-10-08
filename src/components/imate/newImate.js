@@ -7,7 +7,7 @@ function NewImate() {
   const [imate, setImate] = useState({
     age: '',
     gender: '',
-    imateName: '',
+    name: '',
     socialSecurity: '',
     commitedCrime: '',
     addressDto: {
@@ -79,7 +79,7 @@ function NewImate() {
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
           <p>Name:</p>
-            <input type="text" name="imateName" value={imate.imateName} onChange={handleChange} />
+            <input type="text" name="name" value={imate.imateName} onChange={handleChange} />
              <p> Age:</p>
               <input type="text" name="age" value={imate.age} onChange={handleChange} />
                  <p>Gender:</p>
