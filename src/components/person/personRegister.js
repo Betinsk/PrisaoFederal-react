@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './person.css'
+import AddressForm from '../address/address';
 
 function PersonRegister() {
   const [imate, setData] = useState([])
   //const [selectedOption, setSelectedOption] = useState(1); // Esse useState 1, significa que eu estou por padrão acessando o primeiro elemento da lista
-  
+
     const [visitor, setVisitor] = useState({
       name: '',
       age: '',
       socialSecure: '',
+      gender:'',
       cellfoneNumber: '',
-      imates: [
-       
-      ]
+      imates: [],
+      addressDto: {
+        street: '',
+        number: '',
+        cityName: '',
+        stateName: ''
+      }
     });
 
     console.log(visitor)
@@ -22,7 +28,11 @@ function PersonRegister() {
 
     setVisitor(prevState => ({
       ...prevState,
-      [name]: value
+      [name]: value,
+      addressDto: {
+        ...prevState.addressDto,
+        [name]: value
+      }
     })  
     )}
 
@@ -34,8 +44,8 @@ function PersonRegister() {
       imates: [...prevState.imates, { id: selectedId }] // Adiciona um objeto com o ID selecionado ao array de imates
       }));
     };
-  
 
+  
   //Trás minha lista de presos
   useEffect(() => {
     const fetchData = async () => {
@@ -109,6 +119,8 @@ function PersonRegister() {
 
             <p> Age:</p> 
             <input type="text" name="age" value={visitor.age} onChange={handleChange} />
+            <p> Gender:</p> 
+            <input type="text" name="gender" value={visitor.gender} onChange={handleChange} />
 
                 <p>Cell fone number: </p> 
                 <input type="text" name="cellfoneNumber" value={visitor.cellfoneNumber} onChange={handleChange} />
@@ -116,9 +128,17 @@ function PersonRegister() {
                 <p>Social Secure</p>
                 <input type="text" name="socialSecure" value={visitor.socialSecure} onChange={handleChange} />
 
-          </label>
-        <br/>
+            </label>
+        
         {/* Adicione mais campos do formulário conforme necessário */}
+
+            {/* Renderiza o AddressForm e passa o método handleAddAddress como prop */}
+              <AddressForm 
+                      addressDto={visitor.addressDto}
+                      handleChange={handleChange}
+
+              />
+
       <button  type="submit">Create</button>
       </form>
       </div>

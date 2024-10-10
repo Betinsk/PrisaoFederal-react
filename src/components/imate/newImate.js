@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './imate.css'
+import AddressForm from "../address/address";
 
 function NewImate() {
 
@@ -61,7 +62,24 @@ function NewImate() {
         })
         .then(data => {
           console.log('Imate criado com sucesso:', data);
+
           // Faça algo após o sucesso, como redirecionar para outra página
+          //Reseta os campos do imate
+          setImate({
+            age: '',
+            gender: '',
+            name: '',
+            socialSecurity: '',
+            commitedCrime: '',
+            addressDto: {
+              street: '',
+              number: '',
+              cityName: '',
+              stateName: ''
+            }
+          });
+
+
         })
         .catch(error => {
           console.log(imate);
@@ -75,17 +93,14 @@ function NewImate() {
   return (
     <div className="container">
       <div className="divCreateImate">
-        Criando imate
+        <h3>Prisoner registration</h3>
+        
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
-          <p>Name:</p>
-            <input type="text" name="name" value={imate.imateName} onChange={handleChange} />
-             <p> Age:</p>
-              <input type="text" name="age" value={imate.age} onChange={handleChange} />
-                 <p>Gender:</p>
-                   <input type="text" name="gender" value={imate.gender} onChange={handleChange} />
-               <p>Social Security:</p>
-              <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} />
+            <input type="text" name="name" value={imate.imateName} onChange={handleChange}  placeholder="Name" />
+              <input type="text" name="age" value={imate.age} onChange={handleChange} placeholder="Age"/>
+                  <input type="text" name="gender" value={imate.gender} onChange={handleChange} placeholder="Gender" />
+              <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
               <p>Comitted Crime</p>
             
               <textarea className="styled-textarea" type='text' name="commitedCrime" value={imate.commitedCrime} onChange={handleChange}  ></textarea>
@@ -93,42 +108,7 @@ function NewImate() {
                         {/* Endereço */}
               <h3>Endereço</h3>
              
-                <label>Street:</label>
-                <input
-                  type="text"
-                  name="street"
-                  value={imate.addressDto.street}
-                  onChange={handleChange}
-                />
-             
-              <div>
-                <label>Number:</label>
-                <input
-                  type="text"
-                  name="number"
-                  value={imate.addressDto.number}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label>City:</label>
-                <input
-                  type="text"
-                  name="cityName"
-                  value={imate.addressDto.cityName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label>State:</label>
-                <input
-                  type="text"
-                  name="stateName"
-                  value={imate.addressDto.stateName}
-                  onChange={handleChange}
-                />
-              </div>
-
+                <AddressForm addressDto={imate.addressDto} handleChange={handleChange} ></AddressForm>
 
             <button className='button-38' type="submit">Create</button>
           </div>
