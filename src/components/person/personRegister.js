@@ -119,7 +119,12 @@ function PersonRegister() {
             <p> Age:</p> 
             <input type="text" name="age" value={visitor.age} onChange={handleChange} />
             <p> Gender:</p> 
-            <input type="text" name="gender" value={visitor.gender} onChange={handleChange} />
+            <select name="gender" value={visitor.gender} onChange={handleChange}>
+                <option value="">Select Gender</option> {/* Opção padrão */}
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
 
                 <p>Cell fone number: </p> 
                 <input type="text" name="cellfoneNumber" value={visitor.cellfoneNumber} onChange={handleChange} />

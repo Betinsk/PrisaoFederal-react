@@ -99,7 +99,12 @@ function NewImate() {
           <div className='inputs'>
             <input type="text" name="name" value={imate.imateName} onChange={handleChange}  placeholder="Name" />
               <input type="text" name="age" value={imate.age} onChange={handleChange} placeholder="Age"/>
-                  <input type="text" name="gender" value={imate.gender} onChange={handleChange} placeholder="Gender" />
+              <select name="gender" value={imate.gender} onChange={handleChange}>
+                <option value="">Select Gender</option> {/* Opção padrão */}
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
               <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
               <p>Comitted Crime</p>
             
