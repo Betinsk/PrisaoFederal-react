@@ -36,7 +36,6 @@ function PersonRegister() {
     })  
     )}
 
-
     const handleSelectChange = (e) => {
       const selectedId = e.target.value;
       setVisitor((prevState) => ({
@@ -45,7 +44,7 @@ function PersonRegister() {
       }));
     };
 
-  
+
   //Trás minha lista de presos
   useEffect(() => {
     const fetchData = async () => {
