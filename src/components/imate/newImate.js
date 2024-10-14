@@ -11,6 +11,7 @@ function NewImate() {
     name: '',
     socialSecurity: '',
     commitedCrime: '',
+    phone:[],
     addressDto: {
       street: '',
       number: '',
@@ -18,6 +19,9 @@ function NewImate() {
       stateName: ''
     }
   });
+  console.log(imate)
+
+  const [newPhone, setNewPhone] = useState(''); // State for the new phone number
 
 
   const handleChange = (e) => {
@@ -40,6 +44,15 @@ function NewImate() {
   }
 };
   
+const handleAddPhone = () => {
+  if (newPhone) {
+    setImate(prevState => ({
+      ...prevState,
+      phone: [...prevState.phone, { number: newPhone }] // Add new phone to the array
+    }));
+    setNewPhone(''); // Clear the input field
+  }
+};
 
 
   const handleSubmit = (e) => {
@@ -105,7 +118,15 @@ function NewImate() {
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
-              <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
+                      <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
+        {/* New phone input */}
+        <input
+                      type="text"
+                      value={newPhone}
+                      onChange={(e) => setNewPhone(e.target.value)}
+                      placeholder="Enter phone number"
+                    />
+                    <button type="button" onClick={handleAddPhone}>Add Phone</button>
               <p>Comitted Crime</p>
             
               <textarea className="styled-textarea" type='text' name="commitedCrime" value={imate.commitedCrime} onChange={handleChange}  ></textarea>

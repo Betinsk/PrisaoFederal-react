@@ -69,15 +69,15 @@ function PersonConsult() {
                             antes do array carregar, então para corrigir esse erro é feito a verificação
                             se a parte do array person.imate não é nula, usando o ?
                         */}
-                      <p>Person age: {person.age ? person.age  : "Não disponível"}</p>
-                      <p>Person cellfone: {person.cellfoneNumber ? person.cellfoneNumber  : "Não disponível"}</p>
-                      <p>Person socialSecurity: {person.socialSecure ? person.socialSecure  : "Não disponível"}</p>
+                      <p>Person age: {person.dateOfBirth ? person.dateOfBirth  : "Não disponível"}</p>
+                      {/* <p>Person cellfone: {person.cellfoneNumber ? person.cellfoneNumber  : "Não disponível"}</p> */}
+                      <p>Person socialSecurity: {person.socialSecurity ? person.socialSecurity  : "Não disponível"}</p>
                       <hr></hr>
                       <h1>Imate</h1>
-                      <p>Imates's nome: {person.imates[0] ? person.imates[0].name  : "Não disponível"}</p>
-                      <p>Age: {person.imates[0] ? person.imates[0].age : "Não disponível"}</p> 
-                        <p> Gender: {person.imates[0] ? person.imates[0].gender : "Não disponível"}</p>
-                        <p>Social Security: {person.imates[0] ? person.imates[0].socialSecurity : "Não disponível"}</p>
+                      <p>Imates's nome: {person.imates ? person.imates[0].name  : "Não disponível"}</p>
+                      <p>Age: {person.imates ? person.imates[0].dateOfBirth : "Não disponível"}</p> 
+                        <p> Gender: {person.imates ? person.imates[0].gender : "Não disponível"}</p>
+                        <p>Social Security: {person.imates ? person.imates[0].socialSecurity : "Não disponível"}</p>
 
                       </div>
 
