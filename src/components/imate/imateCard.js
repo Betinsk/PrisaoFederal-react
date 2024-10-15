@@ -1,6 +1,8 @@
 
 import './imate.css'
 import { Link } from 'react-router-dom'
+import calculateAge from '../Utils/calcBirth'
+
 export const ImateCard = ({jsonData}) => (
   console.log(jsonData),
 
@@ -17,7 +19,7 @@ export const ImateCard = ({jsonData}) => (
       
                      <p>Imate's id: {imate ? imate.id  : "Não disponível"}</p>
                       <p>Imates's nome: {imate ? imate.name  : "Não disponível"}</p>
-                      <p>Age: {imate ? imate.age : "Não disponível"}</p> 
+                      <p>Age: {imate ? calculateAge(imate.dateOfBirth) : "Não disponível"}</p> 
                         <p> Gender: {imate ? imate.gender : "Não disponível"}</p>
                         <p>Street: {imate ? imate.addresses?.[0]?.street : "Não disponível"}</p>
                         <p>Street number: {imate ? imate.addresses?.[0]?.number : "Não disponível"}</p>

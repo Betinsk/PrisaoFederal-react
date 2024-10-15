@@ -1,32 +1,37 @@
 
-const AddressForm = ({ addressDto, handleChange, handleSelectStateChange }) => {
- 
+const AddressForm = ({ addressDto, handleChange }) => {
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    handleChange(name, value); // Chama a função passada para atualizar o estado
+  };
+
   return (
     <div>
       <input
         type="text"
         name="street"
         value={addressDto.street}
-        onChange={handleChange}
+        onChange={handleInputChange}
         placeholder="Street"
       />
       <input
         type="text"
         name="number"
         value={addressDto.number}
-        onChange={handleChange}
+        onChange={handleInputChange}
         placeholder="Number"
       />
       <input
         type="text"
         name="cityName"
         value={addressDto.cityName}
-        onChange={handleChange}
+        onChange={handleInputChange}
         placeholder="City"
       />
 
         
-            <select name="stateName" id="prison_loc_box" onChange={handleChange}>
+            <select name="stateName" id="prison_loc_box" onChange={handleInputChange}>
            
                     <option value="State">State</option>
                     <option value="Alabama">Alabama</option>

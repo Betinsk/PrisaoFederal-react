@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './person.css'
 import AddressForm from '../address/address';
+import Person from '../person/person';
 
 function PersonRegister() {
   const [imate, setData] = useState([])
@@ -10,9 +11,9 @@ function PersonRegister() {
     const [visitor, setVisitor] = useState({
       name: '',
       dateOfBirth: '',
-      socialSecure: '',
+      socialSecurity: '',
       gender:'',
-        phone:[],
+      phone:[],
       imates: [],
       addressDto: {
         street: '',
@@ -24,8 +25,7 @@ function PersonRegister() {
 
     console.log(visitor)
 
- const handleChange = (e) => {
-    const { name, value } = e.target;
+ const handleChange = (name, value) => {
 
     setVisitor(prevState => ({
       ...prevState,
@@ -123,16 +123,9 @@ function PersonRegister() {
 
       <div className='form'>
         <form onSubmit={handleSubmit}>
-          <label>
-            <input type="text" name="name" value={visitor.name} onChange={handleChange} placeholder='Name' />
 
-            <input type="date" name="dateOfBirth" value={visitor.dateOfBirth} onChange={handleChange} placeholder='Date of birth' />
-            <select name="gender" value={visitor.gender} onChange={handleChange}>
-                <option value="">Select Gender</option> {/* Opção padrão */}
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
+        <Person attributes={imate} onChange={handleChange} />
+          
                     {/* New phone input */}
                     <input
                       type="text"
@@ -141,17 +134,10 @@ function PersonRegister() {
                       placeholder="Enter phone number"
                     />
                     <button className='button-38'  type="button" onClick={handleAddPhone}>Add Phone</button>
-                <input type="text" name="socialSecure" value={visitor.socialSecure} onChange={handleChange} placeholder='Social Security'/>
-
-            </label>
-        
-        {/* Adicione mais campos do formulário conforme necessário */}
 
             {/* Renderiza o AddressForm e passa o método handleAddAddress como prop */}
-              <AddressForm 
-                      addressDto={visitor.addressDto}
-                      handleChange={handleChange}
-
+              <AddressForm   addressDto={visitor.addressDto}    handleChange={handleChange}
+                    
               />
 
       <button  type="submit">Create</button>

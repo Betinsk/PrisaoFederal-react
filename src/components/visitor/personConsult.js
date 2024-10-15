@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import DeletPerson from "./deletPerson";
+import calculateAge from "../Utils/calcBirth";
 
 function PersonConsult() {
 
@@ -69,7 +70,7 @@ function PersonConsult() {
                             antes do array carregar, então para corrigir esse erro é feito a verificação
                             se a parte do array person.imate não é nula, usando o ?
                         */}
-                      <p>Person age: {person.dateOfBirth ? person.dateOfBirth  : "Não disponível"}</p>
+                      <p>Person age: {person.dateOfBirth ? calculateAge(person.dateOfBirth)  : "Não disponível"}</p>
                       {/* <p>Person cellfone: {person.cellfoneNumber ? person.cellfoneNumber  : "Não disponível"}</p> */}
                       <p>Person socialSecurity: {person.socialSecurity ? person.socialSecurity  : "Não disponível"}</p>
                       <hr></hr>

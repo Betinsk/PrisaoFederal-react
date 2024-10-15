@@ -7,58 +7,58 @@ function AdminPanel() {
     return (
         <div className="container">
             <div className='adminTitle'>
-            <h1>Admin Panel</h1> 
+                <h1>Admin Panel</h1>
             </div>
-         
+
 
             <div className="painelGrid">
 
                 <div className="painelFunctions">
 
-                        <div className="cardFunctions">
+                    <div className="cardFunctions">
 
                         <Link className='cardFunctionLink' to="/personConsult ">
                             <p>Consult Persons</p>
                         </Link>
 
-                        </div>
-                        
-                         <div className="cardFunctions">
+                    </div>
+
+                    <div className="cardFunctions">
 
                         <Link className='cardFunctionLink' to="/personConsult ">
                             <p></p>
                         </Link>
 
-                        </div>
+                    </div>
 
-                         <div className="cardFunctions">
+                    <div className="cardFunctions">
 
-                        <Link className='cardFunctionLink' to="/personConsult ">
-                            <p></p>
+                        <Link className='cardFunctionLink' to="/imate ">
+                            <p>Imate's registration</p>
                         </Link>
 
-                        </div>
+                    </div>
 
-                        
-                        <div className="cardFunctions">
 
-        
+                    <div className="cardFunctions">
+
+
                         <Link className='cardFunctionLink' to="/personRegister ">
                             <p>Person Register</p>
-                            </Link>          
+                        </Link>
 
-                        </div>
+                    </div>
 
-                        
-                        <div className="cardFunctions">
+
+                    <div className="cardFunctions">
 
                         <Link className='cardFunctionLink' to="/imatesList ">
-                            
+
                             <p>Imate Consult</p>
 
-                            </Link>            
+                        </Link>
 
-                        </div>
+                    </div>
 
                 </div>
 
@@ -69,6 +69,6 @@ function AdminPanel() {
     )
 
 
-    }   
+}
 
-    export default AdminPanel
+export default AdminPanel
