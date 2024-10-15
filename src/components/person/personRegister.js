@@ -5,13 +5,14 @@ import AddressForm from '../address/address';
 function PersonRegister() {
   const [imate, setData] = useState([])
   //const [selectedOption, setSelectedOption] = useState(1); // Esse useState 1, significa que eu estou por padrão acessando o primeiro elemento da lista
+  const [newPhone, setNewPhone] = useState(''); // State for the new phone number
 
     const [visitor, setVisitor] = useState({
       name: '',
-      age: '',
+      dateOfBirth: '',
       socialSecure: '',
       gender:'',
-      cellfoneNumber: '',
+        phone:[],
       imates: [],
       addressDto: {
         street: '',
@@ -42,6 +43,16 @@ function PersonRegister() {
         ...prevState,
       imates: [...prevState.imates, { id: selectedId }] // Adiciona um objeto com o ID selecionado ao array de imates
       }));
+    };
+
+    const handleAddPhone = () => {
+      if (newPhone) {
+        setVisitor(prevState => ({
+          ...prevState,
+          phone: [...prevState.phone, { number: newPhone }] // Add new phone to the array
+        }));
+        setNewPhone(''); // Clear the input field
+      }
     };
 
 
@@ -113,24 +124,24 @@ function PersonRegister() {
       <div className='form'>
         <form onSubmit={handleSubmit}>
           <label>
-          <p> Name:</p>
-            <input type="text" name="name" value={visitor.name} onChange={handleChange} />
+            <input type="text" name="name" value={visitor.name} onChange={handleChange} placeholder='Name' />
 
-            <p> Age:</p> 
-            <input type="text" name="age" value={visitor.age} onChange={handleChange} />
-            <p> Gender:</p> 
+            <input type="date" name="dateOfBirth" value={visitor.dateOfBirth} onChange={handleChange} placeholder='Date of birth' />
             <select name="gender" value={visitor.gender} onChange={handleChange}>
                 <option value="">Select Gender</option> {/* Opção padrão */}
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
-
-                <p>Cell fone number: </p> 
-                <input type="text" name="cellfoneNumber" value={visitor.cellfoneNumber} onChange={handleChange} />
-
-                <p>Social Secure</p>
-                <input type="text" name="socialSecure" value={visitor.socialSecure} onChange={handleChange} />
+                    {/* New phone input */}
+                    <input
+                      type="text"
+                      value={newPhone}
+                      onChange={(e) => setNewPhone(e.target.value)}
+                      placeholder="Enter phone number"
+                    />
+                    <button className='button-38'  type="button" onClick={handleAddPhone}>Add Phone</button>
+                <input type="text" name="socialSecure" value={visitor.socialSecure} onChange={handleChange} placeholder='Social Security'/>
 
             </label>
         

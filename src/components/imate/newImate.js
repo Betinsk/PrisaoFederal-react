@@ -6,7 +6,7 @@ function NewImate() {
 
 
   const [imate, setImate] = useState({
-    age: '',
+    dateOfBirth: '',
     gender: '',
     name: '',
     socialSecurity: '',
@@ -111,22 +111,22 @@ const handleAddPhone = () => {
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
             <input type="text" name="name" value={imate.imateName} onChange={handleChange}  placeholder="Name" />
-              <input type="text" name="age" value={imate.age} onChange={handleChange} placeholder="Age"/>
+              <input type="date" name="dateOfBirth" value={imate.dateOfBirth} onChange={handleChange} placeholder="dateOfBirth"/>
               <select name="gender" value={imate.gender} onChange={handleChange}>
                 <option value="">Select Gender</option> {/* Opção padrão */}
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
-                      <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
+           <input type="text" name="socialSecurity" value={imate.socialSecurity} onChange={handleChange} placeholder="Social Security" />
         {/* New phone input */}
-        <input
+                  <input
                       type="text"
                       value={newPhone}
                       onChange={(e) => setNewPhone(e.target.value)}
                       placeholder="Enter phone number"
                     />
-                    <button type="button" onClick={handleAddPhone}>Add Phone</button>
+                    <button className='button-38'  type="button" onClick={handleAddPhone}>Add Phone</button>
               <p>Comitted Crime</p>
             
               <textarea className="styled-textarea" type='text' name="commitedCrime" value={imate.commitedCrime} onChange={handleChange}  ></textarea>
