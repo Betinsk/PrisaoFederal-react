@@ -1,3 +1,4 @@
+import {ImateSearch} from '../../imate/imateSearch';
 import './locate.css';
 
 export const Locate = () => {
@@ -76,15 +77,10 @@ export const Locate = () => {
 
             <div className='locate-imate'>
 
-                <h2>Locate a Federal Inmate</h2>
 
-                <p>Security social number</p>
 
-                <input >
-
-                </input>
+                <ImateSearch />
                 
-                <button className='button-38'> Find </button>
 
 
             </div>
