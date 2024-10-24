@@ -28,7 +28,7 @@ export const Person = ({ attributes, onChange}) => {
 
             <input
                 type="text"
-                name="socialSecure"
+                name="socialSecurity"
                 value={attributes.socialSecurity}
                 onChange={handleChange}
                 placeholder="Social security"

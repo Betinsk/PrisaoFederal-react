@@ -12,16 +12,37 @@ function NewImate() {
     socialSecurity: '',
     commitedCrime: '',
     phone: [],
-    addressDto: {
-      street: '',
-      number: '',
-      cityName: '',
-      stateName: ''
-    }
+    addressDto:[]
   });
   console.log(imate)
 
   const [newPhone, setNewPhone] = useState(''); // State for the new phone number
+
+  
+  const [newAddress, setNewAddress] = useState({ 
+    street: '',
+    number: '',
+     cityName: '',
+     stateName: ''
+     });
+
+  // Função para atualizar o estado com base no input
+  const handleAddressChange = (name, value) => {
+    setNewAddress((prevAddress) => ({
+      ...prevAddress,
+      [name]: value,
+    }));
+  };
+  const handleAddAdress= () => {
+
+    if (newAddress) {
+      setImate(prevState => ({
+        ...prevState,
+        addressDto: [...prevState.addressDto,  newAddress] // Adiciona o novo endereço diretamente ao array
+      }));
+// Reset newAddress to empty object with initial structure
+setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
+  };
 
   const handleImateChange = (name, value) => {
     // Verifica se o campo pertence a addressDto
@@ -123,7 +144,8 @@ function NewImate() {
             {/* Endereço */}
             <h3>Endereço</h3>
 
-            <AddressForm addressDto={imate.addressDto} handleChange={handleImateChange} ></AddressForm>
+            <AddressForm address={newAddress} handleChange={handleImateChange} ></AddressForm>
+            <button className='button-38' onClick={handleAddressChange}>Adicionar Endereço</button>
 
             <button className='button-38' type="submit">Create</button>
           </div>

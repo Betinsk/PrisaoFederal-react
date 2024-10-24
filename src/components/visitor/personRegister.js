@@ -13,7 +13,7 @@ function PersonRegister() {
       dateOfBirth: '',
       socialSecurity: '',
       gender:'',
-      phone:[],
+      phones:[],
       imates: [],
       addressDto:[]
     });
@@ -43,7 +43,7 @@ function PersonRegister() {
     if (newAddress) {
       setVisitor(prevState => ({
         ...prevState,
-        addressDto: [...prevState.addressDto, {addressDto: newAddress}] // Adiciona o novo endereço diretamente ao array
+        addressDto: [...prevState.addressDto,  newAddress] // Adiciona o novo endereço diretamente ao array
       }));
 // Reset newAddress to empty object with initial structure
 setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
@@ -69,7 +69,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
       if (newPhone) {
         setVisitor(prevState => ({
           ...prevState,
-          phone: [...prevState.phone, { number: newPhone }] // Add new phone to the array
+          phones: [...prevState.phones, { number: newPhone }] // Add new phone to the array
         }));
         setNewPhone(''); // Clear the input field
       }
@@ -157,7 +157,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
 
             {/* Renderiza o AddressForm e passa o método handleAddAddress como prop */}
               <AddressForm   address={newAddress}    handleAddressChange={handleAddressChange} />
-              <button onClick={handleAddAdress}>Adicionar Endereço</button>
+              <button type="submit" onClick={handleAddAdress}>Adicionar Endereço</button>
 
 
       <button  type="submit">Create</button>
