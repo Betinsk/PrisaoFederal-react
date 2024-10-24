@@ -1,9 +1,9 @@
 
-const AddressForm = ({ addressDto, handleChange }) => {
+const AddressForm = ({ address, handleAddressChange }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    handleChange(name, value); // Chama a função passada para atualizar o estado
+    handleAddressChange(name, value); // Chama a função passada para atualizar o estado
   };
 
   return (
@@ -11,21 +11,21 @@ const AddressForm = ({ addressDto, handleChange }) => {
       <input
         type="text"
         name="street"
-        value={addressDto.street}
+        value={address.street}
         onChange={handleInputChange}
         placeholder="Street"
       />
       <input
         type="text"
         name="number"
-        value={addressDto.number}
+        value={address.number}
         onChange={handleInputChange}
         placeholder="Number"
       />
       <input
         type="text"
         name="cityName"
-        value={addressDto.cityName}
+        value={address.cityName}
         onChange={handleInputChange}
         placeholder="City"
       />
@@ -90,6 +90,7 @@ const AddressForm = ({ addressDto, handleChange }) => {
 
 
                 </select>
+
 
       {/* <input
         type="text"

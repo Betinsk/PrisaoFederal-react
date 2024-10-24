@@ -15,25 +15,45 @@ function PersonRegister() {
       gender:'',
       phone:[],
       imates: [],
-      addressDto: {
-        street: '',
-        number: '',
-        cityName: '',
-        stateName: ''
-      }
+      addressDto:[]
     });
 
+    const [newAddress, setNewAddress] = useState({ 
+      street: '',
+      number: '',
+       cityName: '',
+       stateName: ''
+       });
+
+
     console.log(visitor)
+    console.log(newAddress)
+
+  // Função para atualizar o estado com base no input
+  const handleAddressChange = (name, value) => {
+    setNewAddress((prevAddress) => ({
+      ...prevAddress,
+      [name]: value,
+    }));
+  };
+    
+
+  const handleAddAdress= () => {
+
+    if (newAddress) {
+      setVisitor(prevState => ({
+        ...prevState,
+        addressDto: [...prevState.addressDto, {addressDto: newAddress}] // Adiciona o novo endereço diretamente ao array
+      }));
+// Reset newAddress to empty object with initial structure
+setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
+  };
 
  const handleChange = (name, value) => {
 
     setVisitor(prevState => ({
       ...prevState,
       [name]: value,
-      addressDto: {
-        ...prevState.addressDto,
-        [name]: value
-      }
     })  
     )}
 
@@ -65,7 +85,7 @@ function PersonRegister() {
           throw new Error('Erro ao buscar dados da API');
         }
         const jsonData = await response.json();
-        console.log('Chegou os presos + ', jsonData)
+       // console.log('Chegou os presos + ', jsonData)
         setData(jsonData);
       } catch (error) {
         console.error(error);
@@ -136,9 +156,9 @@ function PersonRegister() {
                     <button className='button-38'  type="button" onClick={handleAddPhone}>Add Phone</button>
 
             {/* Renderiza o AddressForm e passa o método handleAddAddress como prop */}
-              <AddressForm   addressDto={visitor.addressDto}    handleChange={handleChange}
-                    
-              />
+              <AddressForm   address={newAddress}    handleAddressChange={handleAddressChange} />
+              <button onClick={handleAddAdress}>Adicionar Endereço</button>
+
 
       <button  type="submit">Create</button>
       </form>
