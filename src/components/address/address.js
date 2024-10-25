@@ -1,5 +1,5 @@
 
-const AddressForm = ({ address, handleAddressChange }) => {
+const AddressForm = ({ address, handleAddressChange, handleAddAdress }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,6 +91,7 @@ const AddressForm = ({ address, handleAddressChange }) => {
 
                 </select>
 
+                <button onClick={handleAddAdress}>Adicionar Endereço</button>
 
       {/* <input
         type="text"

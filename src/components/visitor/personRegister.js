@@ -156,8 +156,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
                     <button className='button-38'  type="button" onClick={handleAddPhone}>Add Phone</button>
 
             {/* Renderiza o AddressForm e passa o método handleAddAddress como prop */}
-              <AddressForm   address={newAddress}    handleAddressChange={handleAddressChange} />
-              <button type="submit" onClick={handleAddAdress}>Adicionar Endereço</button>
+              <AddressForm   address={newAddress}    handleAddressChange={handleAddressChange} handleAddAdress={handleAddAdress} />
 
 
       <button  type="submit">Create</button>
