@@ -33,6 +33,7 @@ function NewImate() {
       [name]: value,
     }));
   };
+  
   const handleAddAdress= () => {
 
     if (newAddress) {
@@ -144,8 +145,8 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
             {/* Endereço */}
             <h3>Endereço</h3>
 
-            <AddressForm address={newAddress} handleChange={handleImateChange} ></AddressForm>
-            <button className='button-38' onClick={handleAddressChange}>Adicionar Endereço</button>
+            <AddressForm   address={newAddress}    handleAddressChange={handleAddressChange} handleAddAdress={handleAddAdress} />
+
 
             <button className='button-38' type="submit">Create</button>
           </div>
