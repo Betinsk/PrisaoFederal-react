@@ -5,7 +5,41 @@ import { useEffect, useState } from 'react'
 
 function EditeImate () {
 
-    const [data, setData] = useState([''])
+  const  [data, setData] = useState({
+    id: null,
+    gender: '',
+    dateOfBirth: '',
+    name: '',
+    socialSecurity: null,
+    commitedCrime: '',
+    addresses: [
+        {
+            id: null,
+            street: '',
+            number: '',
+            city: {
+                id: null,
+                city: '',
+                state: {
+                    id: null,
+                    state: ''
+                }
+            },
+            person: null
+        },
+        {
+            id: null,
+            street: '',
+            number: '',
+            city:'',
+        }]
+      })
+
+   // const [data, setData] = useState([''])
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [nameInput, setNameInput] = useState('');
+
+    console.log(data)
     //recebendo o paramentro da url
     const id = useParams()
     //const [idInt, setFoundImate] = useState('');
@@ -25,7 +59,28 @@ function EditeImate () {
               }
               const jsonData = await response.json();
               console.log('Chegou os preso + ', jsonData);
-              setData(jsonData);
+              setData({
+                id: jsonData.id,
+                gender: jsonData.gender,
+                dateOfBirth: jsonData.dateOfBirth,
+                name: jsonData.name,
+                socialSecurity: jsonData.socialSecurity,
+                commitedCrime: jsonData.commitedCrime,
+                addresses: jsonData.addresses.map(address => ({
+                    id: address.id,
+                    street: address.street,
+                    number: address.number,
+                    city: {
+                        id: address.city.id,
+                        city: address.city.city,
+                        state: {
+                            id: address.city.state.id,
+                            state: address.city.state.state
+                        }
+                    },
+                    person: address.person
+                }))
+            });
 
           }
            catch (error) {
@@ -36,7 +91,16 @@ function EditeImate () {
         fetchData();
       }, []);
 
+      const handleEditClick = () => {
+        setIsEditingName(true);
+      };
 
+
+  const handleSaveClick = () => {
+    // Aqui, salve os dados atualizados na API ou estado global
+    setIsEditingName(false);
+    setData((prevData) => ({ ...prevData, name: data.name }));
+  };
 
     return (
 
@@ -44,16 +108,34 @@ function EditeImate () {
        
         <div className="container">
         <div className="imate-information">
+
+        <p>
+          <strong>Name:</strong>{' '}
+          {isEditingName ? (
+            <input
+              type="text"
+              value={data.name}
+              onChange={(e) => setNameInput(e.target.value)}
+              onBlur={handleSaveClick} // Salva ao sair do campo
+              autoFocus
+            />
+          ) : (
+            <span onClick={handleEditClick}>{data.name}</span>
+          )}
+        </p>
+
+        {/* Outros campos */}
+
           <h2>Imate's identification: {data.name} </h2>
           <p><strong>Date got arrested:</strong> </p>
-          <p><strong>Age:</strong> {data.age}</p>
+          <p><strong>Age:</strong> {data.dateOfBirth}</p>
           <p><strong>Gender:</strong> {data.gender}</p>
           <p><strong>Name:</strong> {data.name} </p>
-          <p><strong>Email:</strong> {data.email}</p>
+          <p><strong>Social Securyt:</strong> {data.socialSecurity}</p>
           <p><strong>CellFone:</strong> {data.cell}</p>
           <p><strong>Location:</strong> </p>
           <p><strong>City:</strong> {data.city}</p>
-          <p><strong>Coordinates:</strong> </p>
+          <p><strong>Comited Crime:</strong> {data.commitedCrime} </p>
           <p><strong>Nat:</strong></p> 
 
           <p><strong>Contry:</strong> </p> 
