@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 function EditeImate () {
 
-  const  [data, setData] = useState({
+  const [data, setData] = useState({
     id: null,
     gender: '',
     dateOfBirth: '',
@@ -24,16 +24,12 @@ function EditeImate () {
                     id: null,
                     state: ''
                 }
-            },
-            person: null
-        },
-        {
-            id: null,
-            street: '',
-            number: '',
-            city:'',
-        }]
-      })
+            }
+        }
+    ],
+    phones: []
+});
+
 
    // const [data, setData] = useState([''])
     const [isEditingName, setIsEditingName] = useState(false);
@@ -59,6 +55,7 @@ function EditeImate () {
               }
               const jsonData = await response.json();
               console.log('Chegou os preso + ', jsonData);
+
               setData({
                 id: jsonData.id,
                 gender: jsonData.gender,
@@ -77,9 +74,13 @@ function EditeImate () {
                             id: address.city.state.id,
                             state: address.city.state.state
                         }
-                    },
-                    person: address.person
+                    }
+                    
+                })), 
+                 phones: jsonData.phones.map(phone => ({
+                  phones: phone
                 }))
+                
             });
 
           }
@@ -132,8 +133,31 @@ function EditeImate () {
           <p><strong>Gender:</strong> {data.gender}</p>
           <p><strong>Name:</strong> {data.name} </p>
           <p><strong>Social Securyt:</strong> {data.socialSecurity}</p>
-          <p><strong>CellFone:</strong> {data.cell}</p>
-          <p><strong>Location:</strong> </p>
+         {/* Renderiza cada telefone no array phones */}
+        {data.phones.length > 0 ? (
+          data.phones.map(phone => (
+            <div key={phone.id}>
+              <p><strong>Phone Number:</strong> {phone.phones.number ? phone.phones.number : 'No number assigned'}</p>
+              <hr />
+            </div>
+          ))
+        ) : (
+          <p>No phones available</p>
+        )}
+          <p><strong>Addresses:</strong> </p>
+           {data.addresses.length > 0 ? (
+            data.addresses.map(address => (
+              <>
+              <p><strong>Street:</strong> {address.street}</p>
+              <p><strong>Number:</strong> {address.number}</p>
+
+              <p><strong>City:</strong> {address.city.city}</p>
+              <hr />
+              </>
+            ))
+           ) : (
+            <p>No addresses available</p>
+           )}
           <p><strong>City:</strong> {data.city}</p>
           <p><strong>Comited Crime:</strong> {data.commitedCrime} </p>
           <p><strong>Nat:</strong></p> 

@@ -11,7 +11,7 @@ function NewImate() {
     name: '',
     socialSecurity: '',
     commitedCrime: '',
-    phone: [],
+    phones: [],
     addressDto:[]
   });
   console.log(imate)
@@ -47,28 +47,28 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
 
   const handleImateChange = (name, value) => {
     // Verifica se o campo pertence a addressDto
-    if (name in imate.addressDto) {
-      setImate(prevState => ({
-        ...prevState,
-        addressDto: {
-          ...prevState.addressDto,
-          [name]: value // Atualiza o campo dentro de addressDto
-        }
-      }));
-    } else {
+    // if (name in imate.addressDto) {
+    //   setImate(prevState => ({
+    //     ...prevState,
+    //     addressDto: {
+    //       ...prevState.addressDto,
+    //       [name]: value // Atualiza o campo dentro de addressDto
+    //     }
+    //   }));
+    // } else {
       // Atualiza outros campos do imate
       setImate(prevState => ({
         ...prevState,
         [name]: value
       }));
     }
-  };
+
 
   const handleAddPhone = () => {
     if (newPhone) {
       setImate(prevState => ({
         ...prevState,
-        phone: [...prevState.phone, { number: newPhone }] // Add new phone to the array
+        phones: [...prevState.phones, { number: newPhone }] // Add new phone to the array
       }));
       setNewPhone(''); // Clear the input field
     }
@@ -103,6 +103,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
           name: '',
           socialSecurity: '',
           commitedCrime: '',
+          phones: [],
           addressDto: {
             street: '',
             number: '',
@@ -140,7 +141,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
             <button className='button-38' type="button" onClick={handleAddPhone}>Add Phone</button>
             <p>Comitted Crime</p>
 
-            <textarea className="styled-textarea" type='text' name="commitedCrime" value={imate.commitedCrime} onChange={handleImateChange}  ></textarea>
+            <textarea className="styled-textarea" type='text' name="commitedCrime" value={imate.commitedCrime} onChange={(e) =>  handleImateChange(e.target.name, e.target.value)}  ></textarea>
 
             {/* Endereço */}
             <h3>Endereço</h3>

@@ -91,7 +91,7 @@ const AddressForm = ({ address, handleAddressChange, handleAddAdress }) => {
 
                 </select>
 
-                <button onClick={handleAddAdress}>Adicionar Endereço</button>
+                <button  className='button-38' onClick={handleAddAdress} type="button">Adicionar Endereço</button>
 
       {/* <input
         type="text"
