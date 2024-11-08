@@ -74,12 +74,26 @@ function PersonConsult() {
                       {/* <p>Person cellfone: {person.cellfoneNumber ? person.cellfoneNumber  : "Não disponível"}</p> */}
                       <p>Person socialSecurity: {person.socialSecurity ? person.socialSecurity  : "Não disponível"}</p>
                       <hr></hr>
-                      <h1>Imate</h1>
+                      {/* <h1>Imate</h1>
                       <p>Imates's nome: {person.imates ? person.imates.name  : "Não disponível"}</p>
                       <p>Age: {person.imates ? person.imates.dateOfBirth : "Não disponível"}</p> 
                         <p> Gender: {person.imates ? person.imates.gender : "Não disponível"}</p>
-                        <p>Social Security: {person.imates ? person.imates.socialSecurity : "Não disponível"}</p>
+                        <p>Social Security: {person.imates ? person.imates.socialSecurity : "Não disponível"}</p> */}
 
+                          {/* Verificando se há algum imates associado */}
+                    {person.imates && person.imates.length > 0 ? (
+                      person.imates.map((imate, idx) => (
+                        <div key={idx}>
+                          <p>Imate's name: {imate.name ?? "Não disponível"}</p>
+                          <p>Age: {imate.dateOfBirth ? calculateAge(imate.dateOfBirth) : "Não disponível"}</p>
+                          <p>Gender: {imate.gender ?? "Não disponível"}</p>
+                          <p>Social Security: {imate.socialSecurity ?? "Não disponível"}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p><b>Imate não disponível</b></p>
+                    )}
+                            
                       </div>
 
                           <button className='button-38' onClick={() => handleDeleteVisitor(person.id)}>Delete</button >
