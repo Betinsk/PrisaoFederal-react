@@ -11,6 +11,7 @@ import AdminPanel from "../components/administration/adminPanel";
 import PersonConsult from "../components/visitor/personConsult";
 import ImateConsult from "../components/imate/imatesList";
 import EditeImate from "../components/controller/editImate";
+import Prision from "../components/institution/prision";
 
 const Routess = () => {
    return(
@@ -21,6 +22,8 @@ const Routess = () => {
               <Route path="/adminPanel" element={ < AdminPanel/>} />
               <Route path="/personConsult" element={ < PersonConsult/>} />
               <Route path="/imatesList" element={ < ImateConsult/>} />
+
+              <Route path="/prisions" element={ < Prision/>} />
 
 
             <Route path="/imate" element={
