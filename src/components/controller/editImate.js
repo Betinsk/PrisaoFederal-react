@@ -31,16 +31,23 @@ function EditeImate () {
 });
 
 
+const [imate, setImate] = useState({
+  id: null,
+  gender: '',
+  dateOfBirth: '',
+  name: '',
+  socialSecurity: null,
+  commitedCrime: ''
+})
+
    // const [data, setData] = useState([''])
     const [isEditingName, setIsEditingName] = useState(false);
-    const [nameInput, setNameInput] = useState('');
-
-    console.log(data)
+    const [inputValue, setInputValue] = useState('');
+    const [editingField, setEditingField] = useState(null); // Controla qual campo está sendo editado
     //recebendo o paramentro da url
     const id = useParams()
     //const [idInt, setFoundImate] = useState('');
-    console.log(id)
-
+ 
     //convertendo de string para int fazendo a desestruturação
     const idInt = Number.parseInt(id.index)
     console.log(idInt)
@@ -100,8 +107,21 @@ function EditeImate () {
   const handleSaveClick = () => {
     // Aqui, salve os dados atualizados na API ou estado global
     setIsEditingName(false);
-    setData((prevData) => ({ ...prevData, name: data.name }));
+    setData((prevData) => ({ ...prevData, name: inputValue }));
+    setImate((prevData) => ({ ...prevData, name: inputValue }));
+
   };
+
+  const handleEdit = (field) => {
+    setEditingField(field); // Ativa o campo para edição
+    setInputValue(data[field]); // Preenche o input com o valor atual do campo
+  };
+
+  const handleSave = async () => {
+    const updatedData = { ...data, [editingField]: inputValue }; // Atualiza o campo editado
+  }
+
+  console.log(imate)
 
     return (
 
@@ -111,26 +131,38 @@ function EditeImate () {
         <div className="imate-information">
 
         <p>
-          <strong>Name:</strong>{' '}
-          {isEditingName ? (
+          <strong>Name:</strong>
+          {editingField === 'name' ? (
             <input
               type="text"
-              value={data.name}
-              onChange={(e) => setNameInput(e.target.value)}
-              onBlur={handleSaveClick} // Salva ao sair do campo
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onBlur={handleSave} // Salva ao sair do campo
               autoFocus
             />
           ) : (
-            <span onClick={handleEditClick}>{data.name}</span>
+            <span onClick={() => handleEdit('name')}>{data.name}</span>
           )}
         </p>
 
         {/* Outros campos */}
 
           <h2>Imate's identification: {data.name} </h2>
+          
           <p><strong>Date got arrested:</strong> </p>
           <p><strong>Age:</strong> {data.dateOfBirth}</p>
-          <p><strong>Gender:</strong> {data.gender}</p>
+          <p><strong>Gender:</strong></p>
+          {editingField === 'gender' ? (
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onBlur={handleSave} // Salva ao sair do campo
+              autoFocus
+            />
+          ) : (
+            <span onClick={() => handleEdit('gender')}>{data.gender}</span>
+          )}
           <p><strong>Name:</strong> {data.name} </p>
           <p><strong>Social Securyt:</strong> {data.socialSecurity}</p>
          {/* Renderiza cada telefone no array phones */}
@@ -144,6 +176,7 @@ function EditeImate () {
         ) : (
           <p>No phones available</p>
         )}
+        <hr></hr>
           <p><strong>Addresses:</strong> </p>
            {data.addresses.length > 0 ? (
             data.addresses.map(address => (
@@ -158,15 +191,8 @@ function EditeImate () {
            ) : (
             <p>No addresses available</p>
            )}
-          <p><strong>City:</strong> {data.city}</p>
           <p><strong>Comited Crime:</strong> {data.commitedCrime} </p>
-          <p><strong>Nat:</strong></p> 
-
-          <p><strong>Contry:</strong> </p> 
-          <p><strong>postcode:</strong> </p>
-          <p><strong>state: </strong></p>
-          <p><strong>Street: </strong> </p>
-
+       
         </div>
     </div>
        
