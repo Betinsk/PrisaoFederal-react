@@ -1,44 +1,26 @@
 import { useEffect, useState } from "react";
 import { PrisonDetails } from "./PrisonDetails";
+import React, { useContext } from 'react';
+import { PrisonContext } from "./prisionContext";
 
-function Prision () {
+function Prison () {
 
-    const [prisons, setPrisons] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
-            const response = await fetch(`http://localhost:8080/prisions`);
-              if (!response.ok) {
-                throw new Error('Erro ao buscar dados da API');
-              }
-              const jsonData = await response.json();
-              console.log('Chegou os preso + ', jsonData);
-
-              setPrisons(
-                jsonData
-            );
-
-          }
-           catch (error) {
-            console.error(error);
-          }
-        };
-    
-        fetchData();
-      }, []);
+  const { prisons, loading, error } = useContext(PrisonContext);
 
 
     return(
         <div className="container">
           <h1>Prisons List</h1>
-              {prisons.map((prison, index) => (
-          <PrisonDetails key={index} prison={prison} />
+          {loading && <p>Carregando prisões...</p>}
+      {error && <p>Erro: {error}</p>}
+      {prisons.length === 0 && !loading && <p>Nenhuma prisão encontrada</p>}
+
+      {prisons.map((prison) => (
+        <PrisonDetails key={prison.id} prison={prison} />
       ))}
         </div>    
     )
 
 }
 
-export default Prision
+export default Prison
