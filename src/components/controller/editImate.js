@@ -5,43 +5,51 @@ import { useEffect, useState } from 'react'
 
 function EditeImate () {
 
-  const [data, setData] = useState({
-    id: null,
-    gender: '',
-    dateOfBirth: '',
-    name: '',
-    socialSecurity: null,
-    commitedCrime: '',
-    addresses: [
-        {
-            id: null,
-            street: '',
-            number: '',
-            city: {
-                id: null,
-                city: '',
-                state: {
-                    id: null,
-                    state: ''
-                }
-            }
-        }
-    ],
-    phones: []
-});
-
-
 const [imate, setImate] = useState({
-  id: null,
+  id: '',
   gender: '',
   dateOfBirth: '',
   name: '',
-  socialSecurity: null,
+  socialSecurity: '',
   commitedCrime: ''
 })
 
-   // const [data, setData] = useState([''])
-    const [isEditingName, setIsEditingName] = useState(false);
+const [address, setAdress] = useState({
+  addresses: [
+    {
+        id: null,
+        street: '',
+        number: '',
+        city: {
+            id: null,
+            city: '',
+            state: {
+                id: null,
+                state: ''
+            }
+        }
+    }
+]
+})
+
+const [phone, setPhone] = useState({
+  phones: []
+})
+
+const saveImate = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/imates/${imate.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(imate),
+    });
+
+    if (!response.ok) throw new Error('Erro ao salvar os dados do Imate');
+    console.log('Dados do Imate atualizados com sucesso!');
+  } catch (error) {
+    console.error('Erro ao salvar Imate:', error);
+  }
+};
     const [inputValue, setInputValue] = useState('');
     const [editingField, setEditingField] = useState(null); // Controla qual campo está sendo editado
     //recebendo o paramentro da url
@@ -63,14 +71,15 @@ const [imate, setImate] = useState({
               const jsonData = await response.json();
               console.log('Chegou os preso + ', jsonData);
 
-              setData({
+              setImate({
                 id: jsonData.id,
                 gender: jsonData.gender,
                 dateOfBirth: jsonData.dateOfBirth,
                 name: jsonData.name,
                 socialSecurity: jsonData.socialSecurity,
                 commitedCrime: jsonData.commitedCrime,
-                addresses: jsonData.addresses.map(address => ({
+              })
+              setAdress({ addresses: jsonData.addresses.map(address => ({
                     id: address.id,
                     street: address.street,
                     number: address.number,
@@ -83,11 +92,11 @@ const [imate, setImate] = useState({
                         }
                     }
                     
-                })), 
-                 phones: jsonData.phones.map(phone => ({
+                })) 
+              })
+              setPhone({   phones: jsonData.phones.map(phone => ({
                   phones: phone
                 }))
-                
             });
 
           }
@@ -99,100 +108,88 @@ const [imate, setImate] = useState({
         fetchData();
       }, []);
 
-      const handleEditClick = () => {
-        setIsEditingName(true);
-      };
+      console.log(imate)
+      console.log(address)
+      console.log(phone)
 
-
-  const handleSaveClick = () => {
-    // Aqui, salve os dados atualizados na API ou estado global
-    setIsEditingName(false);
-    setData((prevData) => ({ ...prevData, name: inputValue }));
-    setImate((prevData) => ({ ...prevData, name: inputValue }));
-
+  const handleImateChange = (field, value) => {
+    setImate(prev => ({ ...prev, [field]: value }));
   };
+  
 
   const handleEdit = (field) => {
     setEditingField(field); // Ativa o campo para edição
-    setInputValue(data[field]); // Preenche o input com o valor atual do campo
+    setInputValue(imate[field]); // Preenche o input com o valor atual do campo
   };
-
-  const handleSave = async () => {
-    const updatedData = { ...data, [editingField]: inputValue }; // Atualiza o campo editado
-  }
-
-  console.log(imate)
 
     return (
 
         <div>
-       
-        <div className="container">
-        <div className="imate-information">
+         <div className="container">
+            <div className="imate-information">
+              <p>
+                <strong>Name: </strong>
+                {editingField === 'name' ? (
+                <input
+                type="text"
+                value={imate.name}  // O valor vem do estado 'imate'
+                onChange={(e) => handleImateChange('name', e.target.value)}  // Atualiza o estado local
+              />
+                ) : (
+                  <span onClick={() => handleEdit('name')}>{imate.name}</span>
+                )}
+              </p>
 
-        <p>
-          <strong>Name:</strong>
-          {editingField === 'name' ? (
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onBlur={handleSave} // Salva ao sair do campo
-              autoFocus
-            />
-          ) : (
-            <span onClick={() => handleEdit('name')}>{data.name}</span>
-          )}
-        </p>
+              {/* Outros campos */}
 
-        {/* Outros campos */}
+                <h2>Imate's identification: {imate.name} </h2>
+                
+                <p><strong>Date got arrested:</strong> </p>
+                <p><strong>Age:</strong> {imate.dateOfBirth}</p>
+                <p><strong>Gender: </strong>
+                {editingField === 'gender' ? (
+                  <input
+                  type="text"
+                  value={imate.gender}  // O valor vem do estado 'imate'
+                  onChange={(e) => handleImateChange('gender', e.target.value)}  // Atualiza o estado local
+                />
+                ) : (
+                  <span onClick={() => handleEdit('gender')}>{imate.gender}</span>
+                )}
+                </p>
+                <p><strong>Name:</strong> {imate.name} </p>
+                <p><strong>Social Securyt:</strong> {imate.socialSecurity}</p>
+                <p><strong>Comited Crime:</strong> {imate.commitedCrime} </p>
 
-          <h2>Imate's identification: {data.name} </h2>
-          
-          <p><strong>Date got arrested:</strong> </p>
-          <p><strong>Age:</strong> {data.dateOfBirth}</p>
-          <p><strong>Gender:</strong></p>
-          {editingField === 'gender' ? (
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onBlur={handleSave} // Salva ao sair do campo
-              autoFocus
-            />
-          ) : (
-            <span onClick={() => handleEdit('gender')}>{data.gender}</span>
-          )}
-          <p><strong>Name:</strong> {data.name} </p>
-          <p><strong>Social Securyt:</strong> {data.socialSecurity}</p>
-         {/* Renderiza cada telefone no array phones */}
-        {data.phones.length > 0 ? (
-          data.phones.map(phone => (
-            <div key={phone.id}>
-              <p><strong>Phone Number:</strong> {phone.phones.number ? phone.phones.number : 'No number assigned'}</p>
-              <hr />
-            </div>
-          ))
-        ) : (
-          <p>No phones available</p>
-        )}
-        <hr></hr>
-          <p><strong>Addresses:</strong> </p>
-           {data.addresses.length > 0 ? (
-            data.addresses.map(address => (
-              <>
-              <p><strong>Street:</strong> {address.street}</p>
-              <p><strong>Number:</strong> {address.number}</p>
+                <button className='button-38' onClick={saveImate}>Edit Imate</button>
 
-              <p><strong>City:</strong> {address.city.city}</p>
-              <hr />
-              </>
-            ))
-           ) : (
-            <p>No addresses available</p>
-           )}
-          <p><strong>Comited Crime:</strong> {data.commitedCrime} </p>
-       
+              {/* Renderiza cada telefone no array phones */}
+              {phone.phones.length > 0 ? (
+                phone.phones.map(phone => (
+                  <div key={phone.id}>
+                    <p><strong>Phone Number:</strong> {phone.phones.number ? phone.phones.number : 'No number assigned'}</p>
+                    <hr />
+                  </div>
+                ))
+              ) : (
+                <p>No phones available</p>
+              )}
+              <hr></hr>
+                <p><strong>Addresses:</strong> </p>
+                {address.addresses.length > 0 ? (
+                  address.addresses.map(address => (
+                    <>
+                    <p><strong>Street:</strong> {address.street}</p>
+                    <p><strong>Number:</strong> {address.number}</p>
+
+                    <p><strong>City:</strong> {address.city.city}</p>
+                    <hr />
+                    </>
+                  ))
+                ) : (
+                  <p>No addresses available</p>
+                )}
+            
         </div>
     </div>
        

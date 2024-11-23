@@ -6,7 +6,6 @@ import fetchImates from '../../api/fetchImates';
 function Imates() {
 
   const {dadosJson, setData} = useContext(Context)
-  console.log(dadosJson)
 
   const [atualPage, setPaginaAtual] = useState(1);
   const [itensPerPage] = useState(4);
