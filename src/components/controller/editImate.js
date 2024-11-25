@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 function EditeImate () {
 
+
 const [imate, setImate] = useState({
   id: '',
   gender: '',
@@ -13,6 +14,9 @@ const [imate, setImate] = useState({
   socialSecurity: '',
   commitedCrime: ''
 })
+
+const [refreshKey, setRefreshKey] = useState(0);
+
 
 const [address, setAdress] = useState({
   addresses: [
@@ -46,10 +50,22 @@ const saveImate = async () => {
 
     if (!response.ok) throw new Error('Erro ao salvar os dados do Imate');
     console.log('Dados do Imate atualizados com sucesso!');
+    // Após salvar, recarrega os dados do Imate
+
+    // Atualiza a chave para "reiniciar" visualmente, se necessário
+    setRefreshKey((prev) => prev + 1);
+
+
   } catch (error) {
     console.error('Erro ao salvar Imate:', error);
   }
 };
+useEffect(() => {
+  // Aqui você pode adicionar lógica adicional, como recarregar dados
+  console.log('Componente reiniciado após salvar!');
+}, [refreshKey]); // Executa sempre que `refreshKey` mudar
+
+
     const [inputValue, setInputValue] = useState('');
     const [editingField, setEditingField] = useState(null); // Controla qual campo está sendo editado
     //recebendo o paramentro da url
@@ -158,7 +174,19 @@ const saveImate = async () => {
                 )}
                 </p>
                 <p><strong>Name:</strong> {imate.name} </p>
-                <p><strong>Social Securyt:</strong> {imate.socialSecurity}</p>
+                <p>
+                    <strong>Social Securyt: </strong>
+                  {editingField === 'socialSecurity' ? (
+                    <input
+                    type="text"
+                    value={imate.socialSecurity}  // O valor vem do estado 'imate'
+                    onChange={(e) => handleImateChange('socialSecurity', e.target.value)}  // Atualiza o estado local
+                  />
+                  ) : (
+                    <span onClick={() => handleEdit('socialSecurity')}>{imate.socialSecurity}</span>
+                  )}
+                </p>
+                
                 <p><strong>Comited Crime:</strong> {imate.commitedCrime} </p>
 
                 <button className='button-38' onClick={saveImate}>Edit Imate</button>
