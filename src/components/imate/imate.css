@@ -172,3 +172,9 @@
   box-shadow: 0 4px 12px rgba(221, 228, 236, 0.3);
   outline: none;
 }
+
+.inputEdition {
+  width: 500px;
+  font-size: 30px;
+  padding: 5px 10px;
+}

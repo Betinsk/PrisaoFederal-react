@@ -1,5 +1,5 @@
 
-import '../imate/imate.css'
+
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
@@ -58,6 +58,27 @@ const saveImate = async () => {
 
   } catch (error) {
     console.error('Erro ao salvar Imate:', error);
+  }
+};
+
+const saveAddress = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/addresses/${address.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(imate),
+    });
+
+    if (!response.ok) throw new Error('Erro ao salvar os dados do Address');
+    console.log('Dados do Address atualizados com sucesso!');
+    // Após salvar, recarrega os dados do Imate
+
+    // Atualiza a chave para "reiniciar" visualmente, se necessário
+    setRefreshKey((prev) => prev + 1);
+
+
+  } catch (error) {
+    console.error('Erro ao salvar Address:', error);
   }
 };
 useEffect(() => {
@@ -131,6 +152,18 @@ useEffect(() => {
   const handleImateChange = (field, value) => {
     setImate(prev => ({ ...prev, [field]: value }));
   };
+
+  
+  const handleAddressChange = (index, field, value) => {
+    setAdress((prev) => {
+      const updatedAddresses = [...prev.addresses]; // Copia o array existente
+      updatedAddresses[index] = {
+        ...updatedAddresses[index], // Copia o objeto de endereço atual
+        [field]: value, // Atualiza apenas o campo específico
+      };
+      return { ...prev, addresses: updatedAddresses }; // Retorna o novo estado
+    });
+  };
   
 
   const handleEdit = (field) => {
@@ -161,7 +194,18 @@ useEffect(() => {
                 <h2>Imate's identification: {imate.name} </h2>
                 
                 <p><strong>Date got arrested:</strong> </p>
-                <p><strong>Age:</strong> {imate.dateOfBirth}</p>
+                <p><strong>Age: </strong> 
+                  {editingField === 'dateOfBirth' ? (
+                  <input
+                  type="text"
+                  value={imate.dateOfBirth}  // O valor vem do estado 'imate'
+                  onChange={(e) => handleImateChange('dateOfBirth', e.target.value)}  // Atualiza o estado local
+                />
+                ) : (
+                  <span onClick={() => handleEdit('dateOfBirth')}>{imate.dateOfBirth}</span>
+                )}
+                </p>
+
                 <p><strong>Gender: </strong>
                 {editingField === 'gender' ? (
                   <input
@@ -173,7 +217,6 @@ useEffect(() => {
                   <span onClick={() => handleEdit('gender')}>{imate.gender}</span>
                 )}
                 </p>
-                <p><strong>Name:</strong> {imate.name} </p>
                 <p>
                     <strong>Social Securyt: </strong>
                   {editingField === 'socialSecurity' ? (
@@ -187,7 +230,18 @@ useEffect(() => {
                   )}
                 </p>
                 
-                <p><strong>Comited Crime:</strong> {imate.commitedCrime} </p>
+                <p><strong>Comited Crime: </strong> 
+                {editingField === 'commitedCrime' ? (
+                  <textarea 
+                  className="styled-textarea"
+                  type="text"
+                  value={imate.commitedCrime}  // O valor vem do estado 'imate'
+                  onChange={(e) => handleImateChange('commitedCrime', e.target.value)}  // Atualiza o estado local
+                />
+                ) : (
+                  <span onClick={() => handleEdit('commitedCrime')}>{imate.commitedCrime}</span>
+                )}
+                 </p>
 
                 <button className='button-38' onClick={saveImate}>Edit Imate</button>
 
@@ -204,13 +258,26 @@ useEffect(() => {
               )}
               <hr></hr>
                 <p><strong>Addresses:</strong> </p>
-                {address.addresses.length > 0 ? (
-                  address.addresses.map(address => (
-                    <>
-                    <p><strong>Street:</strong> {address.street}</p>
+                  {address.addresses.length > 0 ? (
+                    address.addresses.map(address => (
+                      <>
+                      <p><strong>Street:</strong> {address.street}
+                    {editingField === 'street' ? (
+                    <input 
+                    className='inputEdition'
+                    type="text"
+                    value={address.addresses[0].street} // Exemplo: primeiro endereço
+                    onChange={(e) => handleAddressChange(0, 'street', e.target.value)}
+                  />
+                  ) : (
+                    <span onClick={() => handleEdit('street')}>{address.street}</span>
+                  )}
+              
+
+                    </p>
                     <p><strong>Number:</strong> {address.number}</p>
 
-                    <p><strong>City:</strong> {address.city.city}</p>
+                    <p><strong>City:</strong> {address.city.city},  {address.city.state.state}</p>
                     <hr />
                     </>
                   ))
