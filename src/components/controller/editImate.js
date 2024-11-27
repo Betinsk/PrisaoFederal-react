@@ -5,6 +5,55 @@ import { useEffect, useState } from 'react'
 
 function EditeImate () {
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
+        const response = await fetch(`http://localhost:8080/imates/${idInt}`);
+          if (!response.ok) {
+            throw new Error('Erro ao buscar dados da API');
+          }
+          const jsonData = await response.json();
+          console.log('Chegou os preso + ', jsonData);
+
+          setImate({
+            id: jsonData.id,
+            gender: jsonData.gender,
+            dateOfBirth: jsonData.dateOfBirth,
+            name: jsonData.name,
+            socialSecurity: jsonData.socialSecurity,
+            commitedCrime: jsonData.commitedCrime,
+          })
+          setAdress({ addresses: jsonData.addresses.map(address => ({
+                id: address.id,
+                street: address.street,
+                number: address.number,
+                city: {
+                    id: address.city.id,
+                    city: address.city.city,
+                    state: {
+                        id: address.city.state.id,
+                        state: address.city.state.state
+                    }
+                }
+                
+            })) 
+          })
+          setPhone({   phones: jsonData.phones.map(phone => ({
+              phones: phone
+            }))
+        });
+
+      }
+       catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+ 
 
 const [imate, setImate] = useState({
   id: '',
@@ -21,14 +70,14 @@ const [refreshKey, setRefreshKey] = useState(0);
 const [address, setAdress] = useState({
   addresses: [
     {
-        id: null,
+        id: '',
         street: '',
         number: '',
         city: {
-            id: null,
+            id:  '',
             city: '',
             state: {
-                id: null,
+                id: '',
                 state: ''
             }
         }
@@ -39,6 +88,10 @@ const [address, setAdress] = useState({
 const [phone, setPhone] = useState({
   phones: []
 })
+
+console.log(imate)
+ 
+console.log(phone)
 
 const saveImate = async () => {
   try {
@@ -61,30 +114,40 @@ const saveImate = async () => {
   }
 };
 
-const saveAddress = async () => {
+const saveAddress = async (index) => {
   try {
-    const response = await fetch(`http://localhost:8080/addresses/${address.id}`, {
+
+// Obtém o endereço pelo índice fornecido
+const addressToSave = address.addresses[index]; 
+console.log("Adress to save", addressToSave)
+
+if (!addressToSave || !addressToSave.id) {
+  throw new Error('Endereço ou ID inválido');
+}
+
+const addressDto = {
+  street: addressToSave.street,
+  number: addressToSave.number,
+  stateName: addressToSave.city?.state?.state, // Nome do estado
+  cityName: addressToSave.city?.city // Nome da cidade
+};
+
+    const response = await fetch(`http://localhost:8080/addresses/${addressToSave.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(imate),
+      body: JSON.stringify(addressDto),
     });
 
     if (!response.ok) throw new Error('Erro ao salvar os dados do Address');
     console.log('Dados do Address atualizados com sucesso!');
     // Após salvar, recarrega os dados do Imate
 
-    // Atualiza a chave para "reiniciar" visualmente, se necessário
-    setRefreshKey((prev) => prev + 1);
-
 
   } catch (error) {
     console.error('Erro ao salvar Address:', error);
   }
 };
-useEffect(() => {
-  // Aqui você pode adicionar lógica adicional, como recarregar dados
-  console.log('Componente reiniciado após salvar!');
-}, [refreshKey]); // Executa sempre que `refreshKey` mudar
+
 
 
     const [inputValue, setInputValue] = useState('');
@@ -97,64 +160,14 @@ useEffect(() => {
     const idInt = Number.parseInt(id.index)
     console.log(idInt)
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
-            const response = await fetch(`http://localhost:8080/imates/${idInt}`);
-              if (!response.ok) {
-                throw new Error('Erro ao buscar dados da API');
-              }
-              const jsonData = await response.json();
-              console.log('Chegou os preso + ', jsonData);
-
-              setImate({
-                id: jsonData.id,
-                gender: jsonData.gender,
-                dateOfBirth: jsonData.dateOfBirth,
-                name: jsonData.name,
-                socialSecurity: jsonData.socialSecurity,
-                commitedCrime: jsonData.commitedCrime,
-              })
-              setAdress({ addresses: jsonData.addresses.map(address => ({
-                    id: address.id,
-                    street: address.street,
-                    number: address.number,
-                    city: {
-                        id: address.city.id,
-                        city: address.city.city,
-                        state: {
-                            id: address.city.state.id,
-                            state: address.city.state.state
-                        }
-                    }
-                    
-                })) 
-              })
-              setPhone({   phones: jsonData.phones.map(phone => ({
-                  phones: phone
-                }))
-            });
-
-          }
-           catch (error) {
-            console.error(error);
-          }
-        };
-    
-        fetchData();
-      }, []);
-
-      console.log(imate)
-      console.log(address)
-      console.log(phone)
+   
 
   const handleImateChange = (field, value) => {
     setImate(prev => ({ ...prev, [field]: value }));
   };
 
   
-  const handleAddressChange = (index, field, value) => {
+  const handleAddressChane = (index, field, value) => {
     setAdress((prev) => {
       const updatedAddresses = [...prev.addresses]; // Copia o array existente
       updatedAddresses[index] = {
@@ -164,6 +177,33 @@ useEffect(() => {
       return { ...prev, addresses: updatedAddresses }; // Retorna o novo estado
     });
   };
+
+  const handleAddressChange = (index, fieldPath, value) => {
+    setAdress((prev) => {
+      const updatedAddresses = [...prev.addresses]; // Copia o array existente
+      
+      // Encontra o endereço específico
+      const address = updatedAddresses[index];
+  
+      // Função para lidar com campos aninhados
+      const setNestedField = (obj, path, val) => {
+        const keys = path.split('.');
+        const lastKey = keys.pop();
+        const deepObj = keys.reduce((acc, key) => acc[key] || (acc[key] = {}), obj);
+        deepObj[lastKey] = val;
+      };
+  
+      // Aplica a atualização ao endereço específico
+      setNestedField(address, fieldPath, value);
+  
+      updatedAddresses[index] = { ...address }; // Garante imutabilidade
+  
+      return { ...prev, addresses: updatedAddresses }; // Retorna o novo estado
+    });
+  };
+  
+
+  console.log(address)
   
 
   const handleEdit = (field) => {
@@ -257,17 +297,17 @@ useEffect(() => {
                 <p>No phones available</p>
               )}
               <hr></hr>
-                <p><strong>Addresses:</strong> </p>
+                <h2>Addresses:</h2>
                   {address.addresses.length > 0 ? (
-                    address.addresses.map(address => (
+                    address.addresses.map((address, index) => (
                       <>
-                      <p><strong>Street:</strong> {address.street}
+                      <p><strong>Street:</strong>
                     {editingField === 'street' ? (
                     <input 
                     className='inputEdition'
                     type="text"
-                    value={address.addresses[0].street} // Exemplo: primeiro endereço
-                    onChange={(e) => handleAddressChange(0, 'street', e.target.value)}
+                    value={address.street} // Exemplo: primeiro endereço
+                    onChange={(e) => handleAddressChange(index, 'street', e.target.value)}
                   />
                   ) : (
                     <span onClick={() => handleEdit('street')}>{address.street}</span>
@@ -275,20 +315,59 @@ useEffect(() => {
               
 
                     </p>
-                    <p><strong>Number:</strong> {address.number}</p>
+                    <p><strong>Number:</strong>
+                      {editingField === 'number' ? (
+                      <input 
+                      className='inputEdition'
+                      type="text"
+                      value={address.number} // Exemplo: primeiro endereço
+                      onChange={(e) => handleAddressChange(index, 'number', e.target.value)}
+                    />
+                    ) : (
+                      <span onClick={() => handleEdit('number')}>{address.number}</span>
+                  )}
+                     </p>
 
-                    <p><strong>City:</strong> {address.city.city},  {address.city.state.state}</p>
+                    <p><strong>City: </strong> 
+                    {editingField === 'city' ? (
+                     <input 
+                      className='inputEdition'
+                      type="text"
+                      value={address.city.city} // Exemplo: primeiro endereço
+                      onChange={(e) => handleAddressChange(index, 'city.city', e.target.value)}
+                    />
+                    ) : (
+                      <span onClick={() => handleEdit('city')}>{address.city.city}</span>
+                  )}
+                    </p>
+                    <p><strong>State: </strong>  
+                    {editingField === 'state' ? (
+                      <input 
+                      className='inputEdition'
+                      type="text"
+                      value={address.city.state.state} // Exemplo: primeiro endereço
+                      onChange={(e) => handleAddressChange(index, 'city.state.state', e.target.value)}
+                    />
+                    ) : (
+                      <span onClick={() => handleEdit('state')}>{address.city.state.state}</span>
+                  )}
+                   </p>
                     <hr />
+                    <button className="button-38" onClick={() => saveAddress(index)}>Salvar Endereço</button>
+
                     </>
+                    
                   ))
                 ) : (
                   <p>No addresses available</p>
                 )}
+
+               
+
             
         </div>
     </div>
        
-        <button className="button-38">Edit Imate</button>
         </div>
     )
 
