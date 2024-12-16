@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import './imate.css'
 import AddressForm from "../address/address";
 import Person from "../person/person";
+import { PrisonContext } from "../institution/prisionContext";
 
 function NewImate() {
+
+  const { prisons, loading, error } = useContext(PrisonContext);
+
+  console.log(PrisonContext)
 
   const [imate, setImate] = useState({
     dateOfBirth: '',

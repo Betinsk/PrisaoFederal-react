@@ -53,7 +53,6 @@ function EditeImate () {
     fetchData();
   }, []);
 
- 
 
 const [imate, setImate] = useState({
   id: '',

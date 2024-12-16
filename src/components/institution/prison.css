@@ -1,0 +1,180 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('../../assets/fonts/Raleway/static/Raleway-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.container {
+  width: 80%;
+  margin: auto;
+  box-shadow: 0px 0px 3px rgb(184, 180, 180);
+}
+
+.imate-information {
+  font-family: 'Raleway';
+  padding: 15px;
+  margin-bottom: 25px;
+}
+  
+.card-container {
+    max-width: 1400px;
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    padding: 30px;
+    text-align: center;
+
+}
+
+.imate-card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
+    padding: 5px;
+  }   
+
+.imate-card:hover {
+    transform: scale(1.02); /* Aumenta o tamanho do card em 5% */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Muda a sombra ao passar o mouse */
+  }
+
+
+.card-img img {
+    width: 100%;
+
+}
+
+.card-title {
+    font-size: 30px;
+    color: #333;
+    margin: 5px 0 25px 0;
+    border-bottom: 1px solid rgb(216, 214, 214);
+    font-family: 'Raleway';
+
+
+  }
+
+  .link-with-underline {
+    text-decoration: none;
+    color: #333;
+    font-family: 'Raleway';
+
+  }
+
+  .card-information  {
+    text-align: left;
+    padding-left: 10px;
+    font-family: 'Raleway';
+  }
+
+    .card-information p {
+    line-height: 0.9rem;
+    padding: 0px;
+    margin: 0.5rem;
+  }
+
+
+.imate-information p {
+  text-decoration: none;
+}
+
+
+.card-button {
+  margin: 5px 0px 35px 0px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 35px;
+}
+.divCreateImate  {
+  padding: 10px;
+}
+
+.divCreateImate p {
+  padding: 2px;
+  margin: 3px;
+  background-color: #f2f2f2;   
+ }
+ 
+ 
+  .divCreateImate input {
+    width: 150px;
+    margin: 3px;
+     padding: 10px;
+     background-color: #f2f2f2;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-family: 'Raleway';
+   }
+ 
+  
+
+/* CSS */
+.button-38 {
+  background-color: #eeeeee;
+  border: 0;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Raleway",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: .75rem 1rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+
+}
+
+.button-38:hover {
+  background-color: rgb(249,250,251);
+}
+
+.button-38:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.button-38:focus-visible {
+  box-shadow: none;
+}
+
+.button-38:disabled {
+  background-color: #ffffff;
+  cursor: not-allowed;
+}
+
+.text-input {
+  width: 100%;
+  font-size: 30px;
+  padding: 5px 10px;
+}
+
+.styled-textarea {
+  width: 400px;
+  height: 170px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.styled-textarea:focus {
+  border-color: #e4dddd;
+  box-shadow: 0 4px 12px rgba(221, 228, 236, 0.3);
+  outline: none;
+}
+
+.inputEdition {
+  width: 500px;
+  font-size: 30px;
+  padding: 5px 10px;
+}
