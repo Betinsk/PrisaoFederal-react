@@ -5,7 +5,7 @@ function DeletImate ({imateId}) {
 
     const handleDeleteImate = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/imates/${imateId}`, {
+            const response = await fetch(`http://3.14.131.47:8080/imates/${imateId}`, {
                 method: 'DELETE'
             });
             console.log(response)

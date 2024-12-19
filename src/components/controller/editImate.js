@@ -131,7 +131,7 @@ const addressDto = {
   cityName: addressToSave.city?.city // Nome da cidade
 };
 
-    const response = await fetch(`http://localhost:8080/addresses/${addressToSave.id}`, {
+    const response = await fetch(`http://3.14.131.47:8080/${addressToSave.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(addressDto),

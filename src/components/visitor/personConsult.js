@@ -13,7 +13,7 @@ function PersonConsult() {
           try {
             // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
             setTimeout(async () => {
-              const response = await fetch('http://localhost:8080/visitor');
+              const response = await fetch('http://3.14.131.47:8080/visitor');
               if (!response.ok) {
                 throw new Error('Erro ao buscar dados da API');
               }
