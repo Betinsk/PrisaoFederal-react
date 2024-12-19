@@ -15,7 +15,7 @@ function ImateList() {
           try {
             // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
             setTimeout(async () => {
-              const response = await fetch('https://3.14.131.47:8080/imates');
+              const response = await fetch('http://3.14.131.47:8080/imates');
               if (!response.ok) {
                 throw new Error('Erro ao buscar dados da API');
               }
