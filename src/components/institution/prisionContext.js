@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 // Criando o contexto
 export const PrisonContext = createContext();
@@ -9,10 +9,12 @@ export const PrisonProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/prisions`);
+        const response = await fetch(`${apiBaseUrl}prisons`);
         if (!response.ok) {
           throw new Error('Erro ao buscar dados da API');
         }

@@ -9,13 +9,15 @@ function ImateList() {
     const [jsonData, setData] = useState(['']);
     const [loading, setLoading] = useState(true);
 
+    const apiBaseUrl = process.env.REACT_APP_API_URL;
+
 
     useEffect(() => {
         const fetchData = async () => {
           try {
             // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
             setTimeout(async () => {
-              const response = await fetch('http://3.14.131.47:8080/imates');
+              const response = await fetch(`${apiBaseUrl}imates`);
               if (!response.ok) {
                 throw new Error('Erro ao buscar dados da API');
               }

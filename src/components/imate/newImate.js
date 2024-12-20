@@ -6,9 +6,10 @@ import { PrisonContext } from "../institution/prisionContext";
 
 function NewImate() {
 
-  const { prisons, loading, error } = useContext(PrisonContext);
+  //const { prisons, loading, error } = useContext(PrisonContext);
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
 
-  console.log(PrisonContext)
+  //console.log(PrisonContext)
 
   const [imate, setImate] = useState({
     dateOfBirth: '',
@@ -81,7 +82,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8080/imates', {
+    fetch(`${apiBaseUrl}imates`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

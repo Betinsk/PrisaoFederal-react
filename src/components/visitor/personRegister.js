@@ -8,6 +8,8 @@ function PersonRegister() {
   //const [selectedOption, setSelectedOption] = useState(1); // Esse useState 1, significa que eu estou por padrão acessando o primeiro elemento da lista
   const [newPhone, setNewPhone] = useState(''); // State for the new phone number
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
     const [visitor, setVisitor] = useState({
       name: '',
       dateOfBirth: '',
@@ -80,7 +82,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/imates');
+  const response = await fetch(`${apiBaseUrl}imates`);
         if (!response.ok) {
           throw new Error('Erro ao buscar dados da API');
         }
@@ -100,7 +102,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
     event.preventDefault();
     try {
       // Envie os dados para o backend usando uma requisição HTTP (por exemplo, usando fetch ou axios)
-      const response = await fetch('http://localhost:8080/visitor', {
+      const response = await fetch(`${apiBaseUrl}visitor`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
