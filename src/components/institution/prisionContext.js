@@ -14,7 +14,7 @@ export const PrisonProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}prisons`);
+        const response = await fetch(`${apiBaseUrl}prisions`);
         if (!response.ok) {
           throw new Error('Erro ao buscar dados da API');
         }
