@@ -95,7 +95,7 @@ console.log(phone)
 
 const saveImate = async () => {
   try {
-    const response = await fetch(`http://localhost:8080/imates/${imate.id}`, {
+    const response = await fetch(`http://3.14.131.47:8080/imates/${imate.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(imate),
