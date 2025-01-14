@@ -9,7 +9,7 @@ function EditeImate () {
     const fetchData = async () => {
       try {
         // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
-        const response = await fetch(`http://localhost:8080/imates/${idInt}`);
+        const response = await fetch(`http://3.14.131.47:8080/imates/${idInt}`);
           if (!response.ok) {
             throw new Error('Erro ao buscar dados da API');
           }
@@ -23,6 +23,7 @@ function EditeImate () {
             name: jsonData.name,
             socialSecurity: jsonData.socialSecurity,
             commitedCrime: jsonData.commitedCrime,
+            profileImage: jsonData.profileImage
           })
           setAdress({ addresses: jsonData.addresses.map(address => ({
                 id: address.id,
@@ -231,7 +232,9 @@ const addressDto = {
               {/* Outros campos */}
 
                 <h2>Imate's identification: {imate.name} </h2>
-                
+
+                 <div className='profileImg'><img src={imate.profileImage} /></div> 
+
                 <p><strong>Date got arrested:</strong> </p>
                 <p><strong>Age: </strong> 
                   {editingField === 'dateOfBirth' ? (

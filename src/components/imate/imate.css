@@ -178,3 +178,13 @@
   font-size: 30px;
   padding: 5px 10px;
 }
+
+
+.profileImg{
+}
+ .profileImg img {
+  width: 350px;
+  border: 1px solid black;
+ }
+
+
