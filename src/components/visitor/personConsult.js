@@ -5,7 +5,7 @@ import calculateAge from "../Utils/calcBirth";
 
 function PersonConsult() {
 
-    const [jsonData, setData] = useState(['']);
+    const [data, setData] = useState(['']);
     const [loading, setLoading] = useState(true);
 
     const apiBaseUrl = process.env.REACT_APP_API_URL;
@@ -44,7 +44,7 @@ function PersonConsult() {
 
             if (response.ok) {
                 // Atualize o estado ou faça qualquer ação necessária após a exclusão bem-sucedida
-               setData(jsonData.filter(item => item.id !== id));
+               setData(data.filter(item => item.id !== id));
 
                 console.log('Visitor excluído com sucesso!');
             } else {
@@ -63,7 +63,7 @@ function PersonConsult() {
             <p>Carregando...</p>
                  ) : (
                     <>
-                  {jsonData !== null && jsonData.map((person, index) => (
+                  {data !== null && data.map((person, index) => (
                     <div className='imate-card' key={index} >
                       <div className='card-img'>
                       </div>

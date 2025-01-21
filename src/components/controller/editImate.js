@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 function EditeImate () {
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
-        const response = await fetch(`http://3.14.131.47:8080/imates/${idInt}`);
+        const response = await fetch(`${apiBaseUrl}imates/${idInt}`);
           if (!response.ok) {
             throw new Error('Erro ao buscar dados da API');
           }
@@ -61,7 +62,9 @@ const [imate, setImate] = useState({
   dateOfBirth: '',
   name: '',
   socialSecurity: '',
-  commitedCrime: ''
+  commitedCrime: '',
+  profileImage: ''
+
 })
 
 const [refreshKey, setRefreshKey] = useState(0);
