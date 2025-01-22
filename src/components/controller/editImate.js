@@ -135,7 +135,7 @@ const addressDto = {
   cityName: addressToSave.city?.city // Nome da cidade
 };
 
-    const response = await fetch(`${apiBaseUrl}${addressToSave.id}`, {
+    const response = await fetch(`${apiBaseUrl}addresses/${addressToSave.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(addressDto),
@@ -357,9 +357,9 @@ const addressDto = {
                       <span onClick={() => handleEdit('state')}>{address.city.state.state}</span>
                   )}
                    </p>
-                    <hr />
+                    
                     <button className="button-38" onClick={() => saveAddress(index)}>Salvar Endereço</button>
-
+                    <hr />
                     </>
                     
                   ))
