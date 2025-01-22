@@ -1,10 +1,11 @@
 
 
 const API_URL = 'http://localhost:8080/imates'; // Altere para a URL do seu servidor
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export const getImateBySocialSecurity = async (socialSecurityNumber) => {
     try {
-        const response = await fetch(`${API_URL}/ssn/${socialSecurityNumber}`, {
+        const response = await fetch(`${apiBaseUrl}imates/ssn/${socialSecurityNumber}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
