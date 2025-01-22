@@ -1,6 +1,5 @@
 
 
-const API_URL = 'http://localhost:8080/imates'; // Altere para a URL do seu servidor
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export const getImateBySocialSecurity = async (socialSecurityNumber) => {
