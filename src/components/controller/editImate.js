@@ -135,7 +135,7 @@ const addressDto = {
   cityName: addressToSave.city?.city // Nome da cidade
 };
 
-    const response = await fetch(`${apiBaseUrl}/${addressToSave.id}`, {
+    const response = await fetch(`${apiBaseUrl}${addressToSave.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(addressDto),
