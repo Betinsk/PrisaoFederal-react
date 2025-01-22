@@ -1,8 +1,9 @@
 
 
-const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export const getImateBySocialSecurity = async (socialSecurityNumber) => {
+    const apiBaseUrl = process.env.REACT_APP_API_URL;
+
     try {
         const response = await fetch(`${apiBaseUrl}imates/ssn/${socialSecurityNumber}`, {
             method: 'GET',
