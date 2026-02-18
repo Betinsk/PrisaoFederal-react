@@ -6,7 +6,8 @@ function PersonList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.prisaofederal.lat/person")
+    //fetch("https://api.prisaofederal.lat/person")
+     fetch("http://localhost:8080/person")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erro ao buscar dados");
@@ -45,7 +46,7 @@ function PersonList() {
           <p><strong>Data de Nascimento:</strong> {person.birthDate}</p>
 
           <h4>Endereços:</h4>
-          {person.adresses.map((address) => (
+          {person.addresses.map((address) => (
             <div key={address.id} style={{ marginLeft: "15px" }}>
               <p>
                 {address.streetAdress}, {address.adressComplement}
