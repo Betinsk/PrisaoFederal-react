@@ -16,7 +16,7 @@ function PersonConsult() {
           try {
             // Simulando um tempo de carregamento de 2 segundos antes de buscar os dados
             setTimeout(async () => {
-              const response = await fetch(`${apiBaseUrl}visitor`);
+              const response = await fetch(`${apiBaseUrl}person`);
               if (!response.ok) {
                 throw new Error('Erro ao buscar dados da API');
               }

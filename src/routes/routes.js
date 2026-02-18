@@ -13,6 +13,7 @@ import ImateConsult from "../components/imate/imatesList";
 import EditeImate from "../components/controller/editImate";
 import Prison from "../components/institution/prision";
 import { PrisonProvider } from "../components/institution/prisionContext";
+import PersonList from "../components/person/personList";
 const Routess = () => {
    return(
     
@@ -20,7 +21,7 @@ const Routess = () => {
               <Route path="/" element={ <Home />} />
               <Route path="/personRegister" element={ < PersonRegister/>} />
               <Route path="/adminPanel" element={ < AdminPanel/>} />
-              <Route path="/personConsult" element={ < PersonConsult/>} />
+              <Route path="/PersonList" element={ < PersonList/>} />
               <Route path="/imatesList" element={ < ImateConsult/>} />
 
               <Route path="/prisions" element={ 
@@ -30,6 +31,7 @@ const Routess = () => {
               </PrisonProvider>
                 
                 } />
+    
 
 
             <Route path="/imate" element={
