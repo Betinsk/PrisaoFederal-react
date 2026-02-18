@@ -1,14 +1,12 @@
-import React from "react";
+
 import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
-import ImatePersonData from "../components/imate/imatePersonData";
 import '../components/imate/imate.css';
 import WorkInside from "../components/home/hiring/workInside";
 import Provider from "../context/provider";
 import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/visitor/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
-import PersonConsult from "../components/visitor/personConsult";
 import ImateConsult from "../components/imate/imatesList";
 import EditeImate from "../components/controller/editImate";
 import Prison from "../components/institution/prision";
@@ -28,12 +26,8 @@ const Routess = () => {
                 
                 <PrisonProvider>
                 <Prison />
-              </PrisonProvider>
-                
-                } />
+               </PrisonProvider>  }    />
     
-
-
             <Route path="/imate" element={
                 <Provider>
                 <NewImate />

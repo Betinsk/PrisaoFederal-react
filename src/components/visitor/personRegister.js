@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './person.css';
 import Person from '../person/person';
 
@@ -15,7 +15,7 @@ function PersonRegister() {
 
   // Função para atualizar o estado baseado no input
   const handleChange = (name, value) => {
-    setVisitor(prevState => ({
+    setPerson(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -35,7 +35,7 @@ function PersonRegister() {
 
       if (response.ok) {
         console.log('Person criada com sucesso!');
-        setVisitor({
+        setPerson({
           name: '',
           birthDate: '',
           socialSecurity: '',
@@ -54,9 +54,7 @@ function PersonRegister() {
     <div className='container'>
       <div className='form'>
         <form onSubmit={handleSubmit}>
-
           <Person attributes={person} onChange={handleChange} />
-
           <button type="submit">Create Person</button>
         </form>
       </div>

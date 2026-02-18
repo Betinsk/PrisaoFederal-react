@@ -11,8 +11,6 @@ function App() {
       <Routess/>
       <Footer />
     </>
-
-    
   );
 }
 
