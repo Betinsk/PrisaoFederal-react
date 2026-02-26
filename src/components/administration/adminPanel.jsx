@@ -17,7 +17,7 @@ function AdminPanel() {
 
                     <div className="cardFunctions">
 
-                        <Link className='cardFunctionLink' to="/personConsult ">
+                        <Link className='cardFunctionLink' to="/person ">
                             <p>Consult Persons</p>
                         </Link>
 
@@ -35,6 +35,14 @@ function AdminPanel() {
 
                         <Link className='cardFunctionLink' to="/imate ">
                             <p>Imate's registration</p>
+                        </Link>
+
+                    </div>
+
+                    <div className="cardFunctions">
+
+                        <Link className='cardFunctionLink' to="/addresses ">
+                            <p>Addresses</p>
                         </Link>
 
                     </div>

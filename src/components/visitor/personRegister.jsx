@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import './person.css';
 import Person from '../person/person';
+import { createPerson } from '../../services/personService';
+import AddressRegister from '../address/addressRegister'; 
+import { createAddress } from '../../services/addressService';
 
 function PersonRegister() {
   const [person, setPerson] = useState({
@@ -11,7 +14,14 @@ function PersonRegister() {
     email: ''
   });
 
-  const apiBaseUrl = process.env.REACT_APP_API_URL;
+  const [address, setAddress] = useState({
+  street: '',
+  addressComplement: '',
+  city: '',
+  state: '',
+  country: ''
+});
+
 
   // Função para atualizar o estado baseado no input
   const handleChange = (name, value) => {
@@ -21,20 +31,29 @@ function PersonRegister() {
     }));
   };
 
+  const handleAddressChange = (name, value) => {
+  setAddress(prev => ({
+    ...prev,
+    [name]: value
+  }));
+};
+
   // Envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`${apiBaseUrl}person`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(person)
-      });
+     const personCreated = await createPerson(person);
 
-      if (response.ok) {
-        console.log('Person criada com sucesso!');
+       console.log('Person criada com sucesso!', personCreated);
+
+    // 2. cria address vinculado
+        await createAddress({
+          ...address,
+          person: { id: personCreated.id }
+        });
+
+        console.log("Tudo criado com sucesso");
+
         setPerson({
           name: '',
           birthDate: '',
@@ -42,10 +61,9 @@ function PersonRegister() {
           gender: '',
           email: ''
         }); // limpa o formulário
-      } else {
-        console.log('Erro ao criar Person. Tente novamente.');
       }
-    } catch (error) {
+      
+   catch (error) {
       console.log('Erro de rede. Verifique sua conexão.');
     }
   };
@@ -55,6 +73,7 @@ function PersonRegister() {
       <div className='form'>
         <form onSubmit={handleSubmit}>
           <Person attributes={person} onChange={handleChange} />
+          <AddressRegister attributes={address} onChange={handleAddressChange} />
           <button type="submit">Create Person</button>
         </form>
       </div>

@@ -25,11 +25,11 @@ function PersonList() {
       });
   }, []);
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>Erro: {error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
  return (
     <div>
-      <h2>Lista de Pessoas</h2>
+      <h2>Persons</h2>
 
       {persons.map((person) => (
         <div
@@ -43,9 +43,9 @@ function PersonList() {
           <h3>{person.name}</h3>
           <p><strong>Email:</strong> {person.email}</p>
           <p><strong>SSN:</strong> {person.socialSecurity}</p>
-          <p><strong>Data de Nascimento:</strong> {person.birthDate}</p>
+          <p><strong>Date of Birth:</strong> {person.birthDate}</p>
 
-          <h4>Endereços:</h4>
+          <h4>Person Addresses:</h4>
           {person.addresses.map((address) => (
             <div key={address.id} style={{ marginLeft: "15px" }}>
               <p>
