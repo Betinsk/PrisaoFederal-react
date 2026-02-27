@@ -1,5 +1,8 @@
+const apiBaseUrl = process.env.REACT_APP_API_URL;
+
+
 export async function createAddress(data) {
-  const response = await fetch("http://localhost:8080/addresses/persons/1/addresses", {
+  const response = await fetch(`${apiBaseUrl}addresses/persons/${data.person.id}/addresses`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

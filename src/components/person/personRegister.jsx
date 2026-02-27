@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './person.css';
-import Person from '../person/person';
+import Person from './person';
 import { createPerson } from '../../services/personService';
 import AddressRegister from '../address/addressRegister'; 
 import { createAddress } from '../../services/addressService';
+import { useAddresses } from '../../hooks/useAddresses';
 
 function PersonRegister() {
   const [person, setPerson] = useState({
@@ -14,14 +15,13 @@ function PersonRegister() {
     email: ''
   });
 
-  const [address, setAddress] = useState({
-  street: '',
-  addressComplement: '',
-  city: '',
-  state: '',
-  country: ''
-});
-
+const {
+  address,
+  addresses,
+  handleAddressChange,
+  addAddress,
+  resetAddresses
+} = useAddresses();
 
   // Função para atualizar o estado baseado no input
   const handleChange = (name, value) => {
@@ -31,13 +31,6 @@ function PersonRegister() {
     }));
   };
 
-  const handleAddressChange = (name, value) => {
-  setAddress(prev => ({
-    ...prev,
-    [name]: value
-  }));
-};
-
   // Envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,14 +38,14 @@ function PersonRegister() {
      const personCreated = await createPerson(person);
 
        console.log('Person criada com sucesso!', personCreated);
+          await Promise.all(
+          addresses.map(addr =>
+       createAddress({ ...addr, person: { id: personCreated.id } 
+          }))
+        );
 
-    // 2. cria address vinculado
-        await createAddress({
-          ...address,
-          person: { id: personCreated.id }
-        });
-
-        console.log("Tudo criado com sucesso");
+      console.log("Tudo criado com sucesso");
+       console.log('Address create with success!', addresses);
 
         setPerson({
           name: '',
@@ -61,7 +54,13 @@ function PersonRegister() {
           gender: '',
           email: ''
         }); // limpa o formulário
+
+        // limpa o form de address
+        resetAddresses();
+
       }
+
+      
       
    catch (error) {
       console.log('Erro de rede. Verifique sua conexão.');
@@ -73,7 +72,11 @@ function PersonRegister() {
       <div className='form'>
         <form onSubmit={handleSubmit}>
           <Person attributes={person} onChange={handleChange} />
+         <h2>Addresses</h2>
           <AddressRegister attributes={address} onChange={handleAddressChange} />
+            <button type="button" onClick={addAddress}>
+              Adicionar endereço
+            </button>
           <button type="submit">Create Person</button>
         </form>
       </div>

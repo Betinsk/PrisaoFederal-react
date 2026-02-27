@@ -5,7 +5,7 @@ import '../components/imate/imate.css';
 import WorkInside from "../components/home/hiring/workInside";
 import Provider from "../context/provider";
 import NewImate from "../components/imate/newImate";
-import PersonRegister from "../components/visitor/personRegister";
+import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
 import ImateConsult from "../components/imate/imatesList";
 import EditeImate from "../components/controller/editImate";
