@@ -6,8 +6,8 @@ function PersonList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    //fetch("https://api.prisaofederal.lat/person")
-     fetch("http://localhost:8080/person")
+    fetch("https://api.prisaofederal.lat/person")
+     //fetch("http://localhost:8080/person")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Erro ao buscar dados");
