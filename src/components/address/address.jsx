@@ -4,8 +4,10 @@ export default function Addresses() {
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    fetch("http://localhost:8080/addresses") // ajusta pra sua API
+    fetch(`${apiBaseUrl}addresses`) // ajusta pra sua API
       .then((res) => res.json())
       .then((data) => {
         setAddresses(data);

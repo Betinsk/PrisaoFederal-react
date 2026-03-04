@@ -5,8 +5,10 @@ function PersonList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    fetch("https://api.prisaofederal.lat/person")
+    fetch(`${apiBaseUrl}person`)
      //fetch("http://localhost:8080/person")
       .then((response) => {
         if (!response.ok) {

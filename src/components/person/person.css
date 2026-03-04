@@ -20,7 +20,7 @@
 
 
  .form select, input {
-    padding: 10px;
+    padding: 6px;
     background-color: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -42,7 +42,7 @@
     font-size: .875rem;
     font-weight: 600;
     line-height: 1.25rem;
-    padding: .75rem 1rem;
+    padding: .55rem 1rem;
     text-align: center;
     text-decoration: none #D1D5DB solid;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);

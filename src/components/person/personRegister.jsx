@@ -60,8 +60,6 @@ const {
 
       }
 
-      
-      
    catch (error) {
       console.log('Erro de rede. Verifique sua conexão.');
     }
@@ -71,13 +69,16 @@ const {
     <div className='container'>
       <div className='form'>
         <form onSubmit={handleSubmit}>
+          <h2>Person information</h2>
           <Person attributes={person} onChange={handleChange} />
          <h2>Addresses</h2>
           <AddressRegister attributes={address} onChange={handleAddressChange} />
             <button type="button" onClick={addAddress}>
               Adicionar endereço
             </button>
+            <div>
           <button type="submit">Create Person</button>
+          </div>
         </form>
       </div>
     </div>

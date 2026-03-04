@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
@@ -13,6 +15,8 @@ export async function createPerson(data) {
 
     const text = await res.text(); // 👈 pega qualquer resposta
     console.log("BODY:", text);
+
+    toast.success('Person successfully created!');
 
     if (!res.ok) {
       throw new Error("Erro na API");

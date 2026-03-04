@@ -5,12 +5,12 @@ import { useState } from 'react';
 // eslint-disable-next-line
 import img2 from './federal.png'; 
 import img3 from './bop_logo.png';
-
+import NavBar from './navBar';
 import { Link } from 'react-router-dom';
 
 const Nav = () => {
 
-    const [isOpen, setIsOpen] = useState(true);
+  /*  const [isOpen, setIsOpen] = useState(true);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -40,13 +40,15 @@ const Nav = () => {
         }
       };
   
-
+*/
     return (
 
         <div className='container-nav'>
             <img className='logo' src={img3} alt=''></img>
 
-        <div className="menu-container">
+            <NavBar />
+        
+      {/*  <div className="menu-container">
             <span className='federal'><Link to='/'  onClick={handleResize}
         
                 ><b>Federal Prision</b></Link></span>
@@ -67,13 +69,13 @@ const Nav = () => {
                             <li><Link to='/imate'
                             >Imates</Link></li>
                             <li><a href='/#'>Services</a></li>
-                            {/* ... more menu items */}
+                            {/* ... more menu items }
                         </ul>
                     )}
                     </div>
                 </div>
             </div>
-
+                   */}
         </div>
       
     )
