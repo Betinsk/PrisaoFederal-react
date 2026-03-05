@@ -28,3 +28,13 @@ export async function createPerson(data) {
     throw error;
   }
 }
+
+export async function getPersons() {
+  const response = await fetch(`${apiBaseUrl}person`);
+
+  if (!response.ok) {
+    throw new Error("Error fetching persons");
+  }
+
+  return response.json();
+}

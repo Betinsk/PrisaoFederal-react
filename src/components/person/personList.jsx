@@ -1,25 +1,16 @@
 import { useEffect, useState } from "react";
+import { getPersons } from "../../services/personService";
 
 function PersonList() {
   const [persons, setPersons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiBaseUrl = process.env.REACT_APP_API_URL;
-
   useEffect(() => {
-    fetch(`${apiBaseUrl}person`)
-     //fetch("http://localhost:8080/person")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao buscar dados");
-        }
-        return response.json();
-      })
+    getPersons()
       .then((data) => {
         setPersons(data);
         setLoading(false);
-        console.log(data)
       })
       .catch((err) => {
         setError(err.message);
@@ -29,35 +20,41 @@ function PersonList() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
- return (
-    <div>
-      <h2>Persons</h2>
+
+  return (
+    <div className="container mt-4">
+      <h2 className="mb-4">Persons</h2>
 
       {persons.map((person) => (
-        <div
-          key={person.id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <h3>{person.name}</h3>
-          <p><strong>Email:</strong> {person.email}</p>
-          <p><strong>SSN:</strong> {person.socialSecurity}</p>
-          <p><strong>Date of Birth:</strong> {person.birthDate}</p>
+        <div key={person.id} className="card mb-3">
+          <div className="card-body">
+            <h5 className="card-title">{person.name}</h5>
 
-          <h4>Person Addresses:</h4>
-          {person.addresses.map((address) => (
-            <div key={address.id} style={{ marginLeft: "15px" }}>
-              <p>
-                {address.streetAdress}, {address.adressComplement}
-              </p>
-              <p>
-                {address.city} - {address.state} ({address.country})
-              </p>
-            </div>
-          ))}
+            <p className="card-text">
+              <strong>Email:</strong> {person.email}
+            </p>
+
+            <p className="card-text">
+              <strong>SSN:</strong> {person.socialSecurity}
+            </p>
+
+            <p className="card-text">
+              <strong>Date of Birth:</strong> {person.birthDate}
+            </p>
+
+            <h6 className="mt-3">Addresses</h6>
+
+            {person.addresses.map((address) => (
+              <div key={address.id} className="ms-3 mb-2">
+                <p className="mb-0">
+                  {address.street}, {address.addressComplement}
+                </p>
+                <p className="mb-0">
+                  {address.city} - {address.state} ({address.country})
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>
