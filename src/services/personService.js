@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
-export async function createPerson(data) {
+export async function createPersonWithAddress(data) {
     try {
     const res = await fetch(`${apiBaseUrl}person`, {
     method: "POST",

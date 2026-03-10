@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './person.css';
 import Person from './person';
-import { createPerson } from '../../services/personService';
+import { createPersonWithAddress } from '../../services/personService';
 import AddressRegister from '../address/addressRegister'; 
 import { createAddress } from '../../services/addressService';
 import { useAddresses } from '../../hooks/useAddresses';
@@ -35,14 +35,14 @@ const {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-     const personCreated = await createPerson(person);
+    const payload = {
+      ...person,
+      addresseDto: addresses
+    };
 
-       console.log('Person criada com sucesso!', personCreated);
-          await Promise.all(
-          addresses.map(addr =>
-       createAddress({ ...addr, person: { id: personCreated.id } 
-          }))
-        );
+    console.log("Payload being sent:", payload);
+    await createPersonWithAddress(payload);
+          
 
       console.log("Tudo criado com sucesso");
        console.log('Address create with success!', addresses);
