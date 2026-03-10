@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPersons } from "../../services/personService";
+import { Link } from "react-router-dom";
 
 function PersonList() {
   const [persons, setPersons] = useState([]);
@@ -25,9 +26,13 @@ function PersonList() {
     <div className="container mt-4">
       <h2 className="mb-4">Persons</h2>
 
+
       {persons.map((person) => (
         <div key={person.id} className="card mb-3">
           <div className="card-body">
+        <Link to={`/person/${person.id}`}>
+          {person.name}
+        </Link>
             <h5 className="card-title">{person.name}</h5>
 
             <p className="card-text">

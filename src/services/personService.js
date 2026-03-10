@@ -38,3 +38,9 @@ export async function getPersons() {
 
   return response.json();
 }
+
+export async function findById(id) {
+  const response = await fetch(`${apiBaseUrl}person/${id}`);
+  const data = await response.json();
+  return data;
+}

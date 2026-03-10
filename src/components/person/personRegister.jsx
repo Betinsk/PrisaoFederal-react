@@ -37,7 +37,7 @@ const {
     try {
     const payload = {
       ...person,
-      addresseDto: addresses
+      addresses: addresses
     };
 
     console.log("Payload being sent:", payload);
