@@ -11,40 +11,44 @@ import img4 from './assets/248.jpg'
 
 const NewsCarousel = ({ newsData }) => {
 
+
     const settings = {
-        dots: true,
-        infinite: false,
-        speed: 3000,
+    dots: true,
+  infinite: true,
+  speed: 800,
+  slidesToShow: 2,
+  slidesToScroll: 1,
+
+  autoplay: true,          // ativa rotação automática
+  autoplaySpeed: 2000,     // tempo entre slides (3s)
+
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
         slidesToShow: 2,
-        slidesToScroll: 4,
-        initialSlide: 0,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 4,
-              infinite: false,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 1000,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 4,
-              initialSlide: 2
-            }
-          },
-          {
-            breakpoint: 501,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-    };
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 501,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
 
     return (
         <div className='container-carrosel'>

@@ -23,7 +23,7 @@ function PersonList() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 ">
       <h2 className="mb-4">Persons</h2>
 
 
