@@ -1,82 +1,51 @@
-
-import { Link } from 'react-router-dom'
-import './adminPanel.css'
+import { Link } from "react-router-dom";
 
 function AdminPanel() {
 
-    return (
-        <div className="container">
-            <div className='adminTitle'>
-                <h1>Admin Panel</h1>
-            </div>
+  const functions = [
+    { name: "Consult Persons", path: "/person" },
+    { name: "Prisions", path: "/prisions" },
+    { name: "Imate's registration", path: "/imate" },
+    { name: "Addresses", path: "/addresses" },
+    { name: "Person Register", path: "/personRegister" },
+    { name: "Imate Consult", path: "/imatesList" }
+  ];
 
+  return (
+    <div className="container py-5">
 
-            <div className="painelGrid">
+      <div className="text-center mb-5">
+        <h2 className="fw-semibold">Admin Panel</h2>
+      </div>
 
-                <div className="painelFunctions">
+      <div className="row g-4">
 
-                    <div className="cardFunctions">
+        {functions.map((item, index) => (
+          <div className="col-md-4" key={index}>
 
-                        <Link className='cardFunctionLink' to="/person ">
-                            <p>Consult Persons</p>
-                        </Link>
+            <Link to={item.path} className="text-decoration-none">
 
-                    </div>
+              <div className="card border-0 shadow-sm rounded-4 h-100">
 
-                    <div className="cardFunctions">
+                <div className="card-body text-center py-4">
 
-                        <Link className='cardFunctionLink' to="/prisions ">
-                            <p>Prisions</p>
-                        </Link>
-
-                    </div>
-
-                    <div className="cardFunctions">
-
-                        <Link className='cardFunctionLink' to="/imate ">
-                            <p>Imate's registration</p>
-                        </Link>
-
-                    </div>
-
-                    <div className="cardFunctions">
-
-                        <Link className='cardFunctionLink' to="/addresses ">
-                            <p>Addresses</p>
-                        </Link>
-
-                    </div>
-
-
-                    <div className="cardFunctions">
-
-
-                        <Link className='cardFunctionLink' to="/personRegister ">
-                            <p>Person Register</p>
-                        </Link>
-
-                    </div>
-
-
-                    <div className="cardFunctions">
-
-                        <Link className='cardFunctionLink' to="/imatesList ">
-
-                            <p>Imate Consult</p>
-
-                        </Link>
-
-                    </div>
+                  <h5 className="text-dark fw-normal">
+                    {item.name}
+                  </h5>
 
                 </div>
 
-            </div>
+              </div>
 
+            </Link>
 
-        </div>
-    )
+          </div>
+        ))}
 
+      </div>
 
+    </div>
+  );
 }
 
-export default AdminPanel
+export default AdminPanel;

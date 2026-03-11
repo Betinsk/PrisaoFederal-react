@@ -3,10 +3,13 @@ import './person.css';
 import Person from './person';
 import { createPersonWithAddress } from '../../services/personService';
 import AddressRegister from '../address/addressRegister'; 
-import { createAddress } from '../../services/addressService';
+import { useNavigate } from 'react-router-dom';
 import { useAddresses } from '../../hooks/useAddresses';
 
 function PersonRegister() {
+
+const navigate = useNavigate();
+
   const [person, setPerson] = useState({
     name: '',
     birthDate: '',
@@ -41,11 +44,14 @@ const {
     };
 
     console.log("Payload being sent:", payload);
-    await createPersonWithAddress(payload);
-          
-
+   
+    const response = await createPersonWithAddress(payload);
+  
       console.log("Tudo criado com sucesso");
        console.log('Address create with success!', addresses);
+
+  // redireciona para o perfil
+    navigate(`/person/${response.id}`);
 
         setPerson({
           name: '',
@@ -66,6 +72,7 @@ const {
   };
 
   return (
+    
     <div className='container'>
       <div className='form'>
         <form onSubmit={handleSubmit}>
