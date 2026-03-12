@@ -1,3 +1,9 @@
+
+* {
+      font-family: 'Raleway';
+
+}
+
 .listaImates {
     padding: 10px;
 }
@@ -21,7 +27,7 @@
 
  .form select, input {
     padding: 6px;
-    background-color: #f2f2f2;
+  /*  background-color: #f2f2f2; */
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: 'Raleway';

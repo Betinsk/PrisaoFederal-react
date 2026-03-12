@@ -5,10 +5,12 @@ import { createPersonWithAddress } from '../../services/personService';
 import AddressRegister from '../address/addressRegister'; 
 import { useNavigate } from 'react-router-dom';
 import { useAddresses } from '../../hooks/useAddresses';
+import { validatePerson } from '../../validations/personValidation';
 
 function PersonRegister() {
 
 const navigate = useNavigate();
+const [errors, setErrors] = useState({});
 
   const [person, setPerson] = useState({
     name: '',
@@ -45,6 +47,13 @@ const {
 
     console.log("Payload being sent:", payload);
    
+    const validationErrors = validatePerson(payload);
+
+      if(Object.keys(validationErrors).length > 0){
+        setErrors(validationErrors);
+        return;
+      }
+
     const response = await createPersonWithAddress(payload);
   
       console.log("Tudo criado com sucesso");
@@ -77,7 +86,8 @@ const {
       <div className='form'>
         <form onSubmit={handleSubmit}>
           <h2>Person information</h2>
-          <Person attributes={person} onChange={handleChange} />
+          <Person attributes={person} onChange={handleChange} errors={errors}
+ />
          <h2>Addresses</h2>
           <AddressRegister attributes={address} onChange={handleAddressChange} />
             <button type="button" onClick={addAddress}>

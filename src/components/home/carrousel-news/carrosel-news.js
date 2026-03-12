@@ -19,8 +19,8 @@ const NewsCarousel = ({ newsData }) => {
   slidesToShow: 2,
   slidesToScroll: 1,
 
-  autoplay: true,          // ativa rotação automática
-  autoplaySpeed: 2000,     // tempo entre slides (3s)
+  autoplay: true,          
+  autoplaySpeed: 3000,    
 
   initialSlide: 0,
   responsive: [

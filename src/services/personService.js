@@ -44,3 +44,29 @@ export async function findById(id) {
   const data = await response.json();
   return data;
 }
+
+export async function updatePerson(id, person){
+  try {
+    const res = await fetch(`${apiBaseUrl}person/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(person),
+  });
+
+     console.log("STATUS:", res.status);
+
+    const text = await res.text(); // 👈 pega qualquer resposta
+    console.log("BODY:", text);
+
+    toast.success('Person successfully edited!');
+
+    if (!res.ok) {
+      throw new Error("Erro na API");
+    }
+
+    return JSON.parse(text);
+  } catch (error) {
+    console.error("ERRO DETALHADO:", error);
+    throw error;
+  }
+}

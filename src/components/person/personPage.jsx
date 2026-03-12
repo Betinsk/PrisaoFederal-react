@@ -1,16 +1,38 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { findById } from "../../services/personService";
+import { findById, updatePerson } from "../../services/personService";
 
 function PersonProfile() {
 
   const { id } = useParams();
   const [person, setPerson] = useState(null);
   const [tab, setTab] = useState("personal");
+  const [editing, setEditing] = useState(false);
+  const [formData, setFormData] = useState(null);
+
 
   useEffect(() => {
-    findById(id).then(data => setPerson(data));
+    findById(id).then(data => {setPerson(data)
+        setFormData(data)
+      }
+  );
   }, [id]);
+
+
+
+   async function handleSave(){
+    const updated = await updatePerson(person.id, formData);
+    setEditing(false);
+    setPerson(updated);   
+    setFormData(updated); 
+  }
+
+   function handleChange(e){
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
 
   if (!person) return <div className="container mt-4">Loading...</div>;
 
@@ -38,13 +60,40 @@ function PersonProfile() {
 
               <div className="d-grid gap-2">
 
-                <button className="btn btn-primary">
+                 {!editing && (
+              <>
+                <button
+                  className="btn btn-secondary mb-2"
+                  onClick={() => setEditing(true)}
+                >
                   Edit
                 </button>
 
-                <button className="btn btn-danger">
-                  Delete
+                <button className="btn btn-outline-danger">
+                  Status
                 </button>
+              </>
+            )}
+
+            {editing && (
+              <>
+                <button
+                  className="btn btn-success mb-2"
+                  onClick={handleSave}
+                >
+                  Save
+                </button>
+
+                <button
+                  className="btn btn-secondary"
+                      onClick={() => {
+                      setEditing(false);
+                      setFormData({ ...person });
+                    }}>
+                  Cancel
+                </button>
+              </>
+            )}
 
               </div>
 
@@ -90,6 +139,15 @@ function PersonProfile() {
                   </button>
                 </li>
 
+                 <li className="nav-item">
+                  <button
+                    className={`nav-link ${tab === "history" ? "active" : ""}`}
+                    onClick={() => setTab("history")}
+                  >
+                    History
+                  </button>
+                </li>
+
               </ul>
 
               {/* PERSONAL TAB */}
@@ -97,8 +155,52 @@ function PersonProfile() {
                 <div className="row">
 
                   <div className="col-md-6">
-                    <p><strong>Email:</strong> {person.email}</p>
-                    <p><strong>Birth Date:</strong> {person.birthDate}</p>
+
+                <label className="form-label">Name</label>
+
+                   {editing ? (
+                  <input
+                    type="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                ) : (
+                  <p>{person.name}</p>
+                )}
+
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+
+                {editing ? (
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData?.email || ""}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                ) : (
+                  <p>{person.email}</p>
+                )}
+              </div>
+
+                  <div className="mb-3">
+                <label className="form-label">BirthDate</label>
+                     {editing ? (
+                  <input
+                    type="date"
+                    name="birthDate"
+                    value={formData.birthDate}
+                    onChange={handleChange}
+                    className="form-control"
+                  />
+                ) : (
+                  <p>{person.birthDate}</p>
+                )}
+
+                </div>
                   </div>
 
                   <div className="col-md-6">
