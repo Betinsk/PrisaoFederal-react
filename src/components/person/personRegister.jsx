@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './person.css';
 import Person from './person';
 import { createPersonWithAddress } from '../../services/personService';
-import AddressRegister from '../address/addressRegister'; 
+import Address from '../address/address'; 
 import { useNavigate } from 'react-router-dom';
 import { useAddresses } from '../../hooks/useAddresses';
 import { validatePerson } from '../../validations/personValidation';
@@ -26,7 +26,7 @@ const {
   handleAddressChange,
   addAddress,
   resetAddresses
-} = useAddresses();
+} = useAddresses(setErrors);
 
   // Função para atualizar o estado baseado no input
   const handleChange = (name, value) => {
@@ -47,8 +47,9 @@ const {
 
     console.log("Payload being sent:", payload);
    
-    const validationErrors = validatePerson(payload);
-
+    const validationErrors = {
+     ...validatePerson(payload),
+    }
       if(Object.keys(validationErrors).length > 0){
         setErrors(validationErrors);
         return;
@@ -89,7 +90,7 @@ const {
           <Person attributes={person} onChange={handleChange} errors={errors}
  />
          <h2>Addresses</h2>
-          <AddressRegister attributes={address} onChange={handleAddressChange} />
+          <Address attributes={address} onChange={handleAddressChange} errors={errors} />
             <button type="button" onClick={addAddress}>
               Adicionar endereço
             </button>

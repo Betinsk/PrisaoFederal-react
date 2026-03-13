@@ -1,58 +1,56 @@
-import { useEffect, useState } from "react";
+import { countries } from "./countries";
 
-export default function Addresses() {
-  const [addresses, setAddresses] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const Address = ({ attributes, onChange, errors }) => {
+  
 
-  const apiBaseUrl = process.env.REACT_APP_API_URL;
-
-  useEffect(() => {
-    fetch(`${apiBaseUrl}addresses`) // ajusta pra sua API
-      .then((res) => res.json())
-      .then((data) => {
-        setAddresses(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar endereços:", err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Carregando...</p>;
+  const fields = [
+  { name: "street", placeholder: "Street name", col: "col-md-6" },
+  { name: "addressComplement", placeholder: "Complement", col: "col-md-6" },
+  { name: "city", placeholder: "City", col: "col-md-4" },
+  { name: "state", placeholder: "State", col: "col-md-4" }
+];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Lista de Endereços</h1>
+    <div className="person-form row g-2">
 
-      {addresses.length === 0 ? (
-        <p>Nenhum endereço encontrado.</p>
-      ) : (
-        <table border="1" cellPadding="10">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Rua</th>
-              <th>Complemento</th>
-              <th>Cidade</th>
-              <th>Estado</th>
-              <th>País</th>
-            </tr>
-          </thead>
-          <tbody>
-            {addresses.map((addr) => (
-              <tr key={addr.id}>
-                <td>{addr.id}</td>
-                <td>{addr.street}</td>
-                <td>{addr.addressComplement}</td>
-                <td>{addr.city}</td>
-                <td>{addr.state}</td>
-                <td>{addr.country}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+    {fields.map((field) => (
+      <div className={field.col} key={field.name}>
+
+    <input
+      type="text"
+      name={field.name}
+      value={attributes[field.name] || ""}
+      onChange={(e) => onChange(field.name, e.target.value)}
+      placeholder={field.placeholder}
+      className={`form-control ${errors?.[field.name] ? "is-invalid" : ""}`}
+    />
+
+    {errors?.[field.name] && (
+      <div className="invalid-feedback">
+        {errors[field.name]}
+      </div>
+    )}
+
+  </div>
+))}
+    <select
+  name="country"
+  className="col-md-6"
+  value={attributes.country || ""}
+  onChange={(e) => onChange("country", e.target.value)}
+>
+
+  {countries.map((country) => (
+    <option key={country.code} value={country.code}>
+      {country.name}
+    </option>
+  ))}
+
+</select>
+     </div>
+      
+   
   );
 }
+
+export default Address;

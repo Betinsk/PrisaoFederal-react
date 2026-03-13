@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { validateAddress } from '../validations/addressValidation';
 
 const initialAddressState = {
   street: '',
@@ -8,9 +9,10 @@ const initialAddressState = {
   country: ''
 };
 
-export function useAddresses() {
+export function useAddresses(setErrors) {
   const [address, setAddress] = useState(initialAddressState);
   const [addresses, setAddresses] = useState([]);
+
 
   // Atualiza o form
   const handleAddressChange = (name, value) => {
@@ -22,8 +24,22 @@ export function useAddresses() {
 
   // Adiciona na lista
   const addAddress = () => {
-    setAddresses(prev => [...prev, address]);
+    console.log("address atual:", address);
+      console.log("clicou no botão");
 
+    const validationErrors = validateAddress(address);
+  console.log("erros:", validationErrors);
+
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
+
+  // adiciona na lista
+  setAddresses(prev => [...prev, address]);
+
+  // limpa erros
+  setErrors({});
     // limpa o form
     setAddress(initialAddressState);
   };
