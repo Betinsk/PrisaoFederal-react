@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { findById, updatePerson } from "../../services/personService";
+import { updateAddress } from "../../services/addressService";
 
 function PersonProfile() {
 
@@ -9,30 +10,58 @@ function PersonProfile() {
   const [tab, setTab] = useState("personal");
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState(null);
+  const [editingType, setEditingType] = useState(null);
 
-
-  useEffect(() => {
-    findById(id).then(data => {setPerson(data)
-        setFormData(data)
-      }
-  );
-  }, [id]);
-
-
+      useEffect(() => {
+        findById(id).then(data => {setPerson(data)
+            setFormData(data)
+          }
+      );
+      }, [id]);
 
    async function handleSave(){
-    const updated = await updatePerson(person.id, formData);
-    setEditing(false);
-    setPerson(updated);   
-    setFormData(updated); 
-  }
 
-   function handleChange(e){
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  }
+        if(tab === "personal") {
+        const updated = await updatePerson(person.id, formData);
+        setEditing(false);
+        setEditingType(null);
+        setPerson(updated);   
+        setFormData(updated); 
+        }
+
+        
+   if(tab === "address") {
+
+      for (const address of formData.addresses) {
+        await updateAddress(address.id, address);
+      }
+
+      const updated = await findById(person.id);
+
+      setEditing(false);
+      setPerson(updated);
+      setFormData(updated);
+    }
+      }
+
+        function handleChange(e){
+          setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+          });
+        }
+
+          function handleAddressChange(e, index){
+          const { value } = e.target;
+
+          const updatedAddresses = [...formData.addresses];
+          updatedAddresses[index].street = value;
+
+          setFormData({
+            ...formData,
+            addresses: updatedAddresses
+          });
+        }
 
   if (!person) return <div className="container mt-4">Loading...</div>;
 
@@ -60,11 +89,14 @@ function PersonProfile() {
 
               <div className="d-grid gap-2">
 
-                 {!editing && (
+             {!editing && (
               <>
                 <button
                   className="btn btn-secondary mb-2"
-                  onClick={() => setEditing(true)}
+                  onClick={() => {
+                      setEditing(true);
+                      setEditingType(tab);
+                    }}
                 >
                   Edit
                 </button>
@@ -88,6 +120,7 @@ function PersonProfile() {
                   className="btn btn-secondary"
                       onClick={() => {
                       setEditing(false);
+                        setEditingType(null);
                       setFormData({ ...person });
                     }}>
                   Cancel
@@ -158,7 +191,7 @@ function PersonProfile() {
 
                 <label className="form-label">Name</label>
 
-                   {editing ? (
+                {editingType === "personal" ? (
                   <input
                     type="name"
                     name="name"
@@ -211,19 +244,32 @@ function PersonProfile() {
               )}
 
               {/* ADDRESS TAB */}
-              {tab === "address" && person.addresses && (
+              {tab === "address" && formData?.addresses && (
 
-                <div className="row">
+              <div className="row">
 
-                  {person.addresses.map(address => (
+                {formData.addresses.map((address, index) => (
 
-                    <div key={address.id} className="col-md-6 mb-3">
+                  <div key={address.id} className="col-md-6 mb-3">
 
-                      <div className="card border-secondary">
+                    <div className="card border-secondary">
 
-                        <div className="card-body">
+                      <div className="card-body">
 
-                          <p><strong>Street:</strong> {address.street}</p>
+                        <strong>Street:</strong>
+
+                           {editing && tab === "address" ? (
+                            <input
+                              type="text"
+                              value={address.street || ""}
+                              onChange={(e) => handleAddressChange(e, index)}
+                              className="form-control"
+                            />
+                          ) : (
+                            <p>{address.street}</p>
+                          )}
+                          <p>Editing: {editing.toString()}</p>
+                          <p>EditingType: {editingType}</p>
                           <p><strong>City:</strong> {address.city}</p>
                           <p><strong>State:</strong> {address.state}</p>
                           <p><strong>Country:</strong> {address.country}</p>
@@ -246,6 +292,19 @@ function PersonProfile() {
                 <div>
 
                   <p><strong>Crime:</strong> {person.commitedCrime}</p>
+
+                    {editing ? (
+                        <input
+                          type="commitedCrime"
+                          name="commitedCrime"
+                          value={formData.commitedCrime}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      ) : (
+                        <p>{person.commitedCrime}</p>
+                      )}
+
                   <p><strong>Arrest Date:</strong> {person.arrestDate}</p>
                   <p><strong>Sentence:</strong> {person.sentenceYears} years</p>
 
