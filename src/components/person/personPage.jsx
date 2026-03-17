@@ -12,25 +12,31 @@ function PersonProfile() {
   const [formData, setFormData] = useState(null);
   const [editingType, setEditingType] = useState(null);
 
-      useEffect(() => {
-        findById(id).then(data => {setPerson(data)
-            setFormData(data)
-          }
-      );
-      }, [id]);
+  useEffect(() => {
+    findById(id).then(data => {
+      setPerson(data)
+      setFormData(data)
+    }
+    );
+  }, [id]);
 
-   async function handleSave(){
+  useEffect(() => {
+    setEditing(false);
+    setEditingType(null);
+  }, [tab]);
 
-        if(tab === "personal") {
-        const updated = await updatePerson(person.id, formData);
-        setEditing(false);
-        setEditingType(null);
-        setPerson(updated);   
-        setFormData(updated); 
-        }
+  async function handleSave() {
 
-        
-   if(tab === "address") {
+    if (tab === "personal") {
+      const updated = await updatePerson(person.id, formData);
+      setEditing(false);
+      setEditingType(null);
+      setPerson(updated);
+      setFormData(updated);
+    }
+
+
+    if (tab === "address") {
 
       for (const address of formData.addresses) {
         await updateAddress(address.id, address);
@@ -42,26 +48,28 @@ function PersonProfile() {
       setPerson(updated);
       setFormData(updated);
     }
-      }
+  }
 
-        function handleChange(e){
-          setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-          });
-        }
+  function handleChange(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  }
 
-          function handleAddressChange(e, index){
-          const { value } = e.target;
+  function handleAddressChange(e, index) {
+    const { name: fieldName, value } = e.target;
+    const updatedAddresses = [...formData.addresses];
+    updatedAddresses[index] = {
+      ...updatedAddresses[index],
+      [fieldName]: value // 👈 DINÂMICO
+    };
 
-          const updatedAddresses = [...formData.addresses];
-          updatedAddresses[index].street = value;
-
-          setFormData({
-            ...formData,
-            addresses: updatedAddresses
-          });
-        }
+    setFormData({
+      ...formData,
+      addresses: updatedAddresses
+    });
+  }
 
   if (!person) return <div className="container mt-4">Loading...</div>;
 
@@ -89,44 +97,44 @@ function PersonProfile() {
 
               <div className="d-grid gap-2">
 
-             {!editing && (
-              <>
-                <button
-                  className="btn btn-secondary mb-2"
-                  onClick={() => {
-                      setEditing(true);
-                      setEditingType(tab);
-                    }}
-                >
-                  Edit
-                </button>
-
-                <button className="btn btn-outline-danger">
-                  Status
-                </button>
-              </>
-            )}
-
-            {editing && (
-              <>
-                <button
-                  className="btn btn-success mb-2"
-                  onClick={handleSave}
-                >
-                  Save
-                </button>
-
-                <button
-                  className="btn btn-secondary"
+                {!editing && (
+                  <>
+                    <button
+                      className="btn btn-secondary mb-2"
                       onClick={() => {
-                      setEditing(false);
+                        setEditing(true);
+                        setEditingType(tab);
+                      }}
+                    >
+                      Edit
+                    </button>
+
+                    <button className="btn btn-outline-danger">
+                      Status
+                    </button>
+                  </>
+                )}
+
+                {editing && (
+                  <>
+                    <button
+                      className="btn btn-success mb-2"
+                      onClick={handleSave}
+                    >
+                      Save
+                    </button>
+
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => {
+                        setEditing(false);
                         setEditingType(null);
-                      setFormData({ ...person });
-                    }}>
-                  Cancel
-                </button>
-              </>
-            )}
+                        setFormData({ ...person });
+                      }}>
+                      Cancel
+                    </button>
+                  </>
+                )}
 
               </div>
 
@@ -172,7 +180,7 @@ function PersonProfile() {
                   </button>
                 </li>
 
-                 <li className="nav-item">
+                <li className="nav-item">
                   <button
                     className={`nav-link ${tab === "history" ? "active" : ""}`}
                     onClick={() => setTab("history")}
@@ -189,51 +197,51 @@ function PersonProfile() {
 
                   <div className="col-md-6">
 
-                <label className="form-label">Name</label>
+                    <label className="form-label">Name</label>
+                    {editing && tab === "personal" ? (
 
-                {editingType === "personal" ? (
-                  <input
-                    type="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                ) : (
-                  <p>{person.name}</p>
-                )}
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="form-control"
+                      />
+                    ) : (
+                      <p>{person.name}</p>
+                    )}
 
-              <div className="mb-3">
-                <label className="form-label">Email</label>
+                    <div className="mb-3">
+                      <label className="form-label">Email</label>
 
-                {editing ? (
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData?.email || ""}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                ) : (
-                  <p>{person.email}</p>
-                )}
-              </div>
+                      {editing ? (
+                        <input
+                          type="text"
+                          name="email"
+                          value={formData?.email || ""}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      ) : (
+                        <p>{person.email}</p>
+                      )}
+                    </div>
 
-                  <div className="mb-3">
-                <label className="form-label">BirthDate</label>
-                     {editing ? (
-                  <input
-                    type="date"
-                    name="birthDate"
-                    value={formData.birthDate}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                ) : (
-                  <p>{person.birthDate}</p>
-                )}
+                    <div className="mb-3">
+                      <label className="form-label">BirthDate</label>
+                      {editing ? (
+                        <input
+                          type="date"
+                          name="birthDate"
+                          value={formData.birthDate}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      ) : (
+                        <p>{person.birthDate}</p>
+                      )}
 
-                </div>
+                    </div>
                   </div>
 
                   <div className="col-md-6">
@@ -246,21 +254,22 @@ function PersonProfile() {
               {/* ADDRESS TAB */}
               {tab === "address" && formData?.addresses && (
 
-              <div className="row">
+                <div className="row">
 
-                {formData.addresses.map((address, index) => (
+                  {formData.addresses.map((address, index) => (
 
-                  <div key={address.id} className="col-md-6 mb-3">
+                    <div key={address.id} className="col-md-6 mb-3">
 
-                    <div className="card border-secondary">
+                      <div className="card border-secondary">
 
-                      <div className="card-body">
+                        <div className="card-body">
 
-                        <strong>Street:</strong>
+                          <strong>Street:</strong>
 
-                           {editing && tab === "address" ? (
+                          {editing && tab === "address" ? (
                             <input
                               type="text"
+                              name="street"
                               value={address.street || ""}
                               onChange={(e) => handleAddressChange(e, index)}
                               className="form-control"
@@ -268,12 +277,49 @@ function PersonProfile() {
                           ) : (
                             <p>{address.street}</p>
                           )}
-                          <p>Editing: {editing.toString()}</p>
-                          <p>EditingType: {editingType}</p>
-                          <p><strong>City:</strong> {address.city}</p>
-                          <p><strong>State:</strong> {address.state}</p>
-                          <p><strong>Country:</strong> {address.country}</p>
 
+                          <strong>City:</strong>
+                          {editing && tab === "address" ? (
+                            <input
+                              type="text"
+                              name="city"
+                              value={address.city || ""}
+                              onChange={(e) => handleAddressChange(e, index)}
+                              className="form-control"
+                            />
+                          ) : (
+                            <p>{address.city}</p>
+                          )}
+
+                          <strong>State:</strong>
+
+
+                          {editing && tab === "address" ? (
+                            <input
+                              type="text"
+                              name="state"
+                              value={address.state || ""}
+                              onChange={(e) => handleAddressChange(e, index)}
+                              className="form-control"
+                            />
+                          ) : (
+                            <p>{address.state}</p>
+                          )}
+
+                          <strong>Country:</strong>
+
+
+                          {editing && tab === "address" ? (
+                            <input
+                              type="text"
+                              name="country"
+                              value={address.country || ""}
+                              onChange={(e) => handleAddressChange(e, index)}
+                              className="form-control"
+                            />
+                          ) : (
+                            <p>{address.country}</p>
+                          )}
                         </div>
 
                       </div>
@@ -293,17 +339,17 @@ function PersonProfile() {
 
                   <p><strong>Crime:</strong> {person.commitedCrime}</p>
 
-                    {editing ? (
-                        <input
-                          type="commitedCrime"
-                          name="commitedCrime"
-                          value={formData.commitedCrime}
-                          onChange={handleChange}
-                          className="form-control"
-                        />
-                      ) : (
-                        <p>{person.commitedCrime}</p>
-                      )}
+                  {editing ? (
+                    <input
+                      type="commitedCrime"
+                      name="commitedCrime"
+                      value={formData.commitedCrime}
+                      onChange={handleChange}
+                      className="form-control"
+                    />
+                  ) : (
+                    <p>{person.commitedCrime}</p>
+                  )}
 
                   <p><strong>Arrest Date:</strong> {person.arrestDate}</p>
                   <p><strong>Sentence:</strong> {person.sentenceYears} years</p>

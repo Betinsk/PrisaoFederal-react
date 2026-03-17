@@ -22,7 +22,7 @@ export async function createAddress(data) {
 
 export async function updateAddress(id, address){
   try {
-    const res = await fetch(`${apiBaseUrl}address/${id}`, {
+    const res = await fetch(`${apiBaseUrl}addresses/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(address),
