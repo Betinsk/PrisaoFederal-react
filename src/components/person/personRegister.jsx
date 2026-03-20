@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './person.css';
-import Person from './person';
+import Person from './PersonForm';
 import { createPersonWithAddress } from '../../services/personService';
 import Address from '../address/address'; 
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ function PersonRegister() {
 
 const navigate = useNavigate();
 const [errors, setErrors] = useState({});
+const [loading, setLoading] = useState(false);
 
   const [person, setPerson] = useState({
     name: '',
@@ -29,16 +30,30 @@ const {
 } = useAddresses(setErrors);
 
   // Função para atualizar o estado baseado no input
-  const handleChange = (name, value) => {
-    setPerson(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setPerson(prev => ({
+    ...prev,
+    [name]: value,
+  }));
+
+     // limpa erro do campo ao digitar
+  setErrors(prev => ({
+    ...prev,
+    [name]: null
+  }));
+
+};
 
   // Envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+       if (loading) return; // evita spam
+
+        setLoading(true);
+
     try {
     const payload = {
       ...person,
@@ -47,9 +62,8 @@ const {
 
     console.log("Payload being sent:", payload);
    
-    const validationErrors = {
-     ...validatePerson(payload),
-    }
+      const validationErrors = validatePerson(payload);
+      
       if(Object.keys(validationErrors).length > 0){
         setErrors(validationErrors);
         return;
@@ -76,26 +90,34 @@ const {
 
       }
 
-   catch (error) {
-      console.log('Erro de rede. Verifique sua conexão.');
-    }
-  };
+      catch (error) {
+    console.log('Erro de rede. Verifique sua conexão.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     
     <div className='container'>
       <div className='form'>
-        <form onSubmit={handleSubmit}>
-          <h2>Person information</h2>
-          <Person attributes={person} onChange={handleChange} errors={errors}
- />
-         <h2>Addresses</h2>
+        <form onSubmit={handleSubmit} className="border rounded p-3 bg-white">
+            <h6 className="text-uppercase fw-bold mb-3">Person Information</h6>
+          <Person attributes={person} onChange={handleChange} errors={errors} isEdit={false}
+/>
+      <h6 className="text-uppercase fw-bold mb-3">Address</h6>
           <Address attributes={address} onChange={handleAddressChange} errors={errors} />
-            <button type="button" onClick={addAddress}>
-              Adicionar endereço
-            </button>
+          <button
+              type="button"
+              className="btn btn-outline-primary btn-sm mt-2"
+              onClick={addAddress}
+            >
+              + Adicionar endereço
+        </button>
             <div>
-          <button type="submit">Create Person</button>
+           <button type="submit" className="btn btn-primary" disabled={loading}>
+            {loading ? "Salvando..." : "Create Person"}
+          </button>
           </div>
         </form>
       </div>

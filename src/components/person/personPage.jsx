@@ -4,17 +4,19 @@ import { findById, updatePerson } from "../../services/personService";
 import { updateAddress } from "../../services/addressService";
 import { AddressTab } from "../tabs/AddressTab";
 import { PersonSidebar } from "./personSidebar";
-import { PersonTabs } from "./personTabs";
-import { PersonalTab } from "../tabs/PersonalTabs";
+import { Tabs } from "./personTabs";
+import { PersonTab } from "../tabs/PersonTab";
+import { validatePerson } from "../../validations/personValidation";
 
 function PersonProfile() {
 
   const { id } = useParams();
   const [person, setPerson] = useState(null);
-  const [tab, setTab] = useState("personal");
+  const [tab, setTab] = useState("person");
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState(null);
   const [editingType, setEditingType] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     findById(id).then(data => {
@@ -31,12 +33,22 @@ function PersonProfile() {
 
   async function handleSave() {
 
-    if (tab === "personal") {
+    if (tab === "person") {
+
+       const validationErrors = {
+             ...validatePerson(formData),
+            }
+              if(Object.keys(validationErrors).length > 0){
+                setErrors(validationErrors);
+                return;
+              }
       const updated = await updatePerson(person.id, formData);
+
       setEditing(false);
       setEditingType(null);
       setPerson(updated);
       setFormData(updated);
+      setErrors({});
     }
 
 
@@ -55,13 +67,13 @@ function PersonProfile() {
   }
 
   function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  }
+  const { name, value } = e.target;
 
-
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+}
 
   function handleCancel() {
     setEditing(false);
@@ -102,14 +114,15 @@ function PersonProfile() {
 
         <div className="col-md-9">
 
-          <PersonTabs tab={tab} setTab={setTab} />
+          <Tabs tab={tab} setTab={setTab} />
 
-          {tab === "personal" && (
-            <PersonalTab
+          {tab === "person" && (
+            <PersonTab
               person={person}
               formData={formData}
               editing={editing}
               onChange={handleChange}
+              errors = {errors}
             />
           )}
 

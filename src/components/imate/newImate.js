@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import './imate.css'
 import AddressForm from "../address/address";
-import Person from "../person/person";
+import PersonForm from "../person/PersonForm";
 import { PrisonContext } from "../institution/prisionContext";
 
 function NewImate() {
@@ -135,7 +135,7 @@ setNewAddress({ street: '', number: '', cityName: '', stateName: '' });     }
 
         <form onSubmit={handleSubmit}>
           <div className='inputs'>
-            <Person attributes={imate} onChange={handleImateChange} />
+            <PersonForm attributes={imate} onChange={handleImateChange} />
 
             {/* New phone input */}
             <input
