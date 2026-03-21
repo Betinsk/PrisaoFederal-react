@@ -1,8 +1,7 @@
-import { useState, useContext } from "react";
+import { useState,  } from "react";
 import './imate.css'
-import AddressForm from "../address/address";
+import AddressForm from "../address/AddressForm";
 import PersonForm from "../person/PersonForm";
-import { PrisonContext } from "../institution/prisionContext";
 
 function NewImate() {
 

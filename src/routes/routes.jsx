@@ -12,7 +12,7 @@ import EditeImate from "../components/controller/editImate";
 import Prison from "../components/institution/prision";
 import { PrisonProvider } from "../components/institution/prisionContext";
 import PersonList from "../components/person/personList";
-import Addresses from "../components/address/address";
+import AddressForm from "../components/address/AddressForm";
 import PersonProfile from "../components/person/personPage";
 
 const Routess = () => {
@@ -25,7 +25,7 @@ const Routess = () => {
               <Route path="/person" element={ < PersonList/>} />
                       <Route path="/person/:id" element={<PersonProfile />} />
               <Route path="/imatesList" element={ < ImateConsult/>} />
-             <Route path="/addresses" element={ < Addresses/>} />
+             <Route path="/addresses" element={ < AddressForm/>} />
 
 
               <Route path="/prisions" element={ 

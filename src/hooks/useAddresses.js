@@ -14,13 +14,14 @@ export function useAddresses(setErrors) {
   const [addresses, setAddresses] = useState([]);
 
 
-  // Atualiza o form
-  const handleAddressChange = (name, value) => {
-    setAddress(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+const handleAddressChange = (e) => {
+  const { name, value } = e.target;
+
+  setAddress(prev => ({
+    ...prev,
+    [name]: value
+  }));
+};
 
   // Adiciona na lista
   const addAddress = () => {

@@ -82,13 +82,14 @@ function PersonProfile() {
   }
 
   function handleAddressChange(e, index) {
+          console.log("EVENT:", e);
+
     const { name: fieldName, value } = e.target;
     const updatedAddresses = [...formData.addresses];
     updatedAddresses[index] = {
       ...updatedAddresses[index],
       [fieldName]: value // 👈 DINÂMICO
     };
-
     setFormData({
       ...formData,
       addresses: updatedAddresses
@@ -128,6 +129,7 @@ function PersonProfile() {
 
           {tab === "address" && (
             <AddressTab
+              person={person}
               formData={formData}
               editing={editing}
               onAddressChange={handleAddressChange}

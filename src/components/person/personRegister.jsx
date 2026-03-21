@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './person.css';
 import Person from './PersonForm';
 import { createPersonWithAddress } from '../../services/personService';
-import Address from '../address/address'; 
+import { AddressForm } from '../address/AddressForm'; 
 import { useNavigate } from 'react-router-dom';
 import { useAddresses } from '../../hooks/useAddresses';
 import { validatePerson } from '../../validations/personValidation';
@@ -17,7 +17,7 @@ const [loading, setLoading] = useState(false);
     name: '',
     birthDate: '',
     socialSecurity: '',
-    gender: '',
+    gender: "Male",
     email: ''
   });
 
@@ -106,13 +106,15 @@ const {
           <Person attributes={person} onChange={handleChange} errors={errors} isEdit={false}
 />
       <h6 className="text-uppercase fw-bold mb-3">Address</h6>
-          <Address attributes={address} onChange={handleAddressChange} errors={errors} />
+          <AddressForm attributes={address} 
+          onChange={handleAddressChange} 
+          errors={errors} />
           <button
               type="button"
               className="btn btn-outline-primary btn-sm mt-2"
               onClick={addAddress}
             >
-              + Adicionar endereço
+             Some address
         </button>
             <div>
            <button type="submit" className="btn btn-primary" disabled={loading}>

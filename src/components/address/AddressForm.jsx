@@ -1,6 +1,6 @@
 import { countries } from "./countries";
 
-export const Address = ({ attributes, onChange, errors }) => {
+export const AddressForm = ({ attributes, onChange, errors }) => {
   
 
   const fields = [
@@ -20,9 +20,9 @@ export const Address = ({ attributes, onChange, errors }) => {
       type="text"
       name={field.name}
       value={attributes[field.name] || ""}
-      onChange={(e) => onChange(field.name, e.target.value)}
+      onChange={onChange}
       placeholder={field.placeholder}
-      className={`form-control ${errors?.[field.name] ? "is-invalid" : ""}`}
+      className={`form-control form-control-sm ${errors?.[field.name] ? "is-invalid" : ""}`}
     />
 
     {errors?.[field.name] && (
@@ -33,12 +33,13 @@ export const Address = ({ attributes, onChange, errors }) => {
 
   </div>
 ))}
+  <div className="col-md-6">
     <select
-  name="country"
-  className="col-md-6"
-  value={attributes.country || ""}
-  onChange={(e) => onChange("country", e.target.value)}
->
+      name="country"
+      className="form-control form-control-sm"
+      value={attributes.country || ""}
+      onChange={onChange}
+    >
 
   {countries.map((country) => (
     <option key={country.code} value={country.code}>
@@ -47,10 +48,11 @@ export const Address = ({ attributes, onChange, errors }) => {
   ))}
 
 </select>
+</div>
      </div>
       
    
   );
 }
 
-export default Address;
+export default AddressForm;
