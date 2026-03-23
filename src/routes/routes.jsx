@@ -14,40 +14,33 @@ import { PrisonProvider } from "../components/institution/prisionContext";
 import PersonList from "../components/person/personList";
 import AddressForm from "../components/address/AddressForm";
 import PersonProfile from "../components/person/personPage";
+import LoginPage from "../components/login/LoginPage";
 
 const Routess = () => {
    return(
-    
-           <Routes>
-              <Route path="/" element={ <Home />} />
-              <Route path="/personRegister" element={ < PersonRegister/>} />
-              <Route path="/adminPanel" element={ < AdminPanel/>} />
-              <Route path="/person" element={ < PersonList/>} />
-                      <Route path="/person/:id" element={<PersonProfile />} />
-              <Route path="/imatesList" element={ < ImateConsult/>} />
-             <Route path="/addresses" element={ < AddressForm/>} />
+            <Provider>
+            <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/personRegister" element={<PersonRegister />} />
+            <Route path="/adminPanel" element={<AdminPanel />} />
+            <Route path="/person" element={<PersonList />} />
+            <Route path="/person/:id" element={<PersonProfile />} />
+            <Route path="/imatesList" element={<ImateConsult />} />
+            <Route path="/addresses" element={<AddressForm />} />
 
-
-              <Route path="/prisions" element={ 
-                
+            <Route path="/prisions" element={
                 <PrisonProvider>
-                <Prison />
-               </PrisonProvider>  }    />
+                    <Prison />
+                </PrisonProvider>
+            } />
     
-            <Route path="/imate" element={
-                <Provider>
-                <NewImate />
-                </Provider>
-            } />
-            <Route path="/imateEdit/:index" element={
-                <Provider>
-                <EditeImate />
-                </Provider>
-            } />
-
-           <Route path="/hiring" element={<WorkInside />} />
-
-           </Routes>
+         
+            <Route path="/imate" element={<NewImate />} />
+            <Route path="/imateEdit/:index" element={<EditeImate />} />
+            <Route path="/hiring" element={<WorkInside />} />
+        </Routes>
+      </Provider>
     
    )
 }

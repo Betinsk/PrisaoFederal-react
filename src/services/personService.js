@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { authHeader } from '../auth/loginService'
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
@@ -7,7 +8,9 @@ export async function createPersonWithAddress(data) {
     try {
     const res = await fetch(`${apiBaseUrl}person`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+      ...authHeader()
+     },
     body: JSON.stringify(data),
   });
 
@@ -29,8 +32,16 @@ export async function createPersonWithAddress(data) {
   }
 }
 
+console.log(authHeader)
 export async function getPersons() {
-  const response = await fetch(`${apiBaseUrl}person`);
+  const response = await fetch(`${apiBaseUrl}person`, {
+     method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeader()
+        }
+
+  });
 
   if (!response.ok) {
     throw new Error("Error fetching persons");
@@ -40,7 +51,20 @@ export async function getPersons() {
 }
 
 export async function findById(id) {
-  const response = await fetch(`${apiBaseUrl}person/${id}`);
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${apiBaseUrl}person/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+       ...authHeader()
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar pessoa");
+  }
+
   const data = await response.json();
   return data;
 }
@@ -49,7 +73,9 @@ export async function updatePerson(id, person){
   try {
     const res = await fetch(`${apiBaseUrl}person/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+       ...authHeader()
+     },
     body: JSON.stringify(person),
   });
 

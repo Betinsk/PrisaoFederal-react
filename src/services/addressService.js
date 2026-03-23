@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { authHeader } from '../auth/loginService';
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
@@ -9,6 +10,7 @@ export async function createAddress(data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+       ...authHeader()
     },
     body: JSON.stringify(data),
   });
@@ -24,7 +26,9 @@ export async function updateAddress(id, address){
   try {
     const res = await fetch(`${apiBaseUrl}addresses/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+       ...authHeader()
+     },
     body: JSON.stringify(address),
   });
 

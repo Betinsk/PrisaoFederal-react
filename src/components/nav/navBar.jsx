@@ -13,7 +13,7 @@ export default function NavBar() {
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/#">Home</a>
+           <Link to='/login' className="nav-link" >Login</Link>
         </li>
         <li className="nav-item">
           <Link to='/personRegister' className="nav-link" >Person Register</Link>
