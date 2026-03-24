@@ -1,9 +1,14 @@
 import { useState,  } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../auth/loginService";
+import { useContext } from "react";
+import AuthContext from "../../context/appContext";
+
 function LoginPage() {
 
    const navigate = useNavigate();
+
+  const { login: loginContext, user } = useContext(AuthContext);
 
   const [form, setForm] = useState({
     email: "",
@@ -28,8 +33,12 @@ function LoginPage() {
     try {
       const token = await login(form.email, form.password); 
 
+        loginContext({ name: form.email }, token);
+
+      console.log("LOGOU!");
+
        navigate("/adminPanel"); // 👈 REDIRECIONA AQUI
- 
+        console.log("USER:", user);
         console.log("ANTES DO LOGIN");
     } catch (err) {
       setError("Email ou senha inválidos");

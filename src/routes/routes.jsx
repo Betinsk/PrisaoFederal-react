@@ -15,37 +15,43 @@ import PersonList from "../components/person/personList";
 import AddressForm from "../components/address/AddressForm";
 import PersonProfile from "../components/person/personPage";
 import LoginPage from "../components/login/LoginPage";
+import PrivateRoute from "../components/login/PrivateRoute";
 
 const Routess = () => {
-   return(
-            <Provider>
+    return (
+       
             <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/personRegister" element={<PersonRegister />} />
-            <Route path="/adminPanel" element={<AdminPanel />} />
-            <Route path="/person" element={<PersonList />} />
-            <Route path="/person/:id" element={<PersonProfile />} />
-            <Route path="/imatesList" element={<ImateConsult />} />
-            <Route path="/addresses" element={<AddressForm />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/personRegister" element={<PersonRegister />} />
 
-            <Route path="/prisions" element={
-                <PrisonProvider>
-                    <Prison />
-                </PrisonProvider>
-            } />
-    
-         
-            <Route path="/imate" element={<NewImate />} />
-            <Route path="/imateEdit/:index" element={<EditeImate />} />
-            <Route path="/hiring" element={<WorkInside />} />
-        </Routes>
-      </Provider>
-    
-   )
+                <Route
+                    path="/adminPanel"
+                    element={
+                        <PrivateRoute>
+                            <AdminPanel />
+                        </PrivateRoute>
+                    }
+                />
+                <Route path="/person" element={<PersonList />} />
+                <Route path="/person/:id" element={<PersonProfile />} />
+                <Route path="/imatesList" element={<ImateConsult />} />
+                <Route path="/addresses" element={<AddressForm />} />
+
+                <Route path="/prisions" element={
+                    <PrisonProvider>
+                        <Prison />
+                    </PrisonProvider>
+                } />
+
+                <Route path="/imate" element={<NewImate />} />
+                <Route path="/imateEdit/:index" element={<EditeImate />} />
+                <Route path="/hiring" element={<WorkInside />} />
+            </Routes>
+    )
 }
 
 export default Routess;
 
 //<Route path="/Filter" element={<Filter />} />
-    //     <Route component = { ImateCard }  path="/imates" />
+//     <Route component = { ImateCard }  path="/imates" />

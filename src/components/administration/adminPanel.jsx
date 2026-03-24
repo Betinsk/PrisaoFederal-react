@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/appContext";
+import { useContext } from "react";
 
 function AdminPanel() {
 
+    const { login: loginContext, user } = useContext(AuthContext);
+
+
   const functions = [
     { name: "Consult Persons", path: "/person" },
-    { name: "Prisions", path: "/prisions" },
-    { name: "Imate's registration", path: "/imate" },
-    { name: "Addresses", path: "/addresses" },
+   // { name: "Prisions", path: "/prisions" },
+   // { name: "Imate's registration", path: "/imate" },
+   // { name: "Addresses", path: "/addresses" },
     { name: "Person Register", path: "/personRegister" },
-    { name: "Imate Consult", path: "/imatesList" }
+  //  { name: "Imate Consult", path: "/imatesList" }
   ];
 
   return (
@@ -16,6 +21,7 @@ function AdminPanel() {
 
       <div className="text-center mb-5">
         <h2 className="fw-semibold">Admin Panel</h2>
+        <span>Olá, {user?.name}</span>
       </div>
 
       <div className="row g-4">
