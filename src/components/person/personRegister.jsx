@@ -117,11 +117,18 @@ const {
              Some address
         </button>
             <div>
-           <button type="submit" className="btn btn-primary" disabled={loading}>
+           <button type="submit" className="btn btn-primary" disabled={addresses.length === 0}>
             {loading ? "Salvando..." : "Create Person"}
           </button>
           </div>
         </form>
+            {addresses.map((address, index) => (
+        <div key={index} className="card p-2 mb-2">
+          <div>{address.street}</div>
+          <div>{address.city}</div>
+          <div>{address.state}</div>
+        </div>
+      ))}
       </div>
     </div>
   );

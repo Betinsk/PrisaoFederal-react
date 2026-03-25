@@ -12,6 +12,10 @@ export async function login(email, password) {
     body: JSON.stringify({ email, password })
   });
 
+   if (!response.ok) {
+    throw new Error("Invalid email or password"); // 🔥 ISSO FAZ O CATCH FUNCIONAR
+  }
+
   const token = await response.text();
 
   // 💾 salva o token

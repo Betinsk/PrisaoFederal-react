@@ -28,20 +28,13 @@ function LoginPage() {
 
   async function handleLogin(e) {
     e.preventDefault();
-          console.log("ANTES DO LOGIN");
 
     try {
       const token = await login(form.email, form.password); 
-
         loginContext({ name: form.email }, token);
-
-      console.log("LOGOU!");
-
-       navigate("/adminPanel"); // 👈 REDIRECIONA AQUI
-        console.log("USER:", user);
-        console.log("ANTES DO LOGIN");
-    } catch (err) {
-      setError("Email ou senha inválidos");
+       navigate("/adminPanel"); 
+    } catch (error) {
+      setError("Invalid email or password");
     }
   }
 

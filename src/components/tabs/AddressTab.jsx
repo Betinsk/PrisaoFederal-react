@@ -1,6 +1,6 @@
-import Address from "../address/AddressForm";
+import { AddressForm } from "../address/AddressForm";
 
-export function AddressTab({ person, formData, editing, onAddressChange }) {
+export function AddressTab({ person, formData, editing, onAddressChange, errors }) {
 
   const fields = [
     { name: "street", label: "street", col: "col-md-4" },
@@ -22,9 +22,10 @@ export function AddressTab({ person, formData, editing, onAddressChange }) {
    
   {editing ? (
       formData.addresses?.map((address, index) => (
-        <Address
+        <AddressForm
           key={index}
           attributes={address}
+           errors={errors[index] || {}}
           onChange={(e) => onAddressChange(e, index)}
         />
       ))

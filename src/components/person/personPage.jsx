@@ -7,6 +7,7 @@ import { PersonSidebar } from "./personSidebar";
 import { Tabs } from "./personTabs";
 import { PersonTab } from "../tabs/PersonTab";
 import { validatePerson } from "../../validations/personValidation";
+import { validateAddress } from "../../validations/addressValidation";
 
 function PersonProfile() {
 
@@ -33,47 +34,63 @@ function PersonProfile() {
 
   async function handleSave() {
 
-    if (tab === "person") {
+  if (tab === "person") {
 
-       const validationErrors = {
-             ...validatePerson(formData),
-            }
-              if(Object.keys(validationErrors).length > 0){
-                setErrors(validationErrors);
-                return;
-              }
-      const updated = await updatePerson(person.id, formData);
+    const validationErrors = validatePerson(formData);
 
-      setEditing(false);
-      setEditingType(null);
-      setPerson(updated);
-      setFormData(updated);
-      setErrors({});
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
 
+    const updated = await updatePerson(person.id, formData);
 
-    if (tab === "address") {
-
-      for (const address of formData.addresses) {
-        await updateAddress(address.id, address);
-      }
-
-      const updated = await findById(person.id);
-
-      setEditing(false);
-      setPerson(updated);
-      setFormData(updated);
-    }
+    setEditing(false);
+    setEditingType(null);
+    setPerson(updated);
+    setFormData(updated);
+    setErrors({});
   }
 
-  function handleChange(e) {
-  const { name, value } = e.target;
+ if (tab === "address") {
 
-  setFormData({
-    ...formData,
-    [name]: value,
+  const errorsArray = [];
+
+  formData.addresses.forEach((address, index) => {
+    const validation = validateAddress(address);
+
+    if (Object.keys(validation).length > 0) {
+      errorsArray[index] = validation;
+    }
   });
+
+  if (errorsArray.some(e => e)) {
+    setErrors(errorsArray);
+    return;
+  }
+
+  await Promise.all(
+    formData.addresses.map(address =>
+      updateAddress(address.id, address)
+    )
+  );
+
+  const updated = await findById(person.id);
+
+  setEditing(false);
+  setPerson(updated);
+  setFormData(updated);
+  setErrors([]);
 }
+}
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
 
   function handleCancel() {
     setEditing(false);
@@ -82,18 +99,19 @@ function PersonProfile() {
   }
 
   function handleAddressChange(e, index) {
-          console.log("EVENT:", e);
-
     const { name: fieldName, value } = e.target;
+
     const updatedAddresses = [...formData.addresses];
     updatedAddresses[index] = {
       ...updatedAddresses[index],
-      [fieldName]: value // 👈 DINÂMICO
+      [fieldName]: value
     };
-    setFormData({
+
+    const updatedForm = {
       ...formData,
       addresses: updatedAddresses
-    });
+    };
+    setFormData(updatedForm);
   }
 
   if (!person) return <div className="container mt-4">Loading...</div>;
@@ -123,7 +141,7 @@ function PersonProfile() {
               formData={formData}
               editing={editing}
               onChange={handleChange}
-              errors = {errors}
+              errors={errors}
             />
           )}
 
@@ -133,6 +151,7 @@ function PersonProfile() {
               formData={formData}
               editing={editing}
               onAddressChange={handleAddressChange}
+              errors={errors}
             />
           )}
 
