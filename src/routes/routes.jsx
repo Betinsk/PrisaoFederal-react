@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
 import '../components/imate/imate.css';
 import WorkInside from "../components/home/hiring/workInside";
-import Provider from "../context/provider";
 import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
@@ -16,21 +15,27 @@ import AddressForm from "../components/address/AddressForm";
 import PersonProfile from "../components/person/personPage";
 import LoginPage from "../components/login/LoginPage";
 import PrivateRoute from "../components/login/PrivateRoute";
+import PageNotFound from "../validations/PageNotFound";
 
 const Routess = () => {
     return (
-       
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/personRegister" element={<PersonRegister />} />
 
+        <Routes>
+
+            {/* public routes*/}
+            <Route path="/" element={<Home />} />
+            <Route path="/hiring" element={<WorkInside />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<PageNotFound />} />
+                    
+                            {/* private routes*/}
+            <Route element={<PrivateRoute />}>
+
+                <Route path="/personRegister" element={<PersonRegister />} />
                 <Route
                     path="/adminPanel"
                     element={
-                        <PrivateRoute>
                             <AdminPanel />
-                        </PrivateRoute>
                     }
                 />
                 <Route path="/person" element={<PersonList />} />
@@ -46,8 +51,8 @@ const Routess = () => {
 
                 <Route path="/imate" element={<NewImate />} />
                 <Route path="/imateEdit/:index" element={<EditeImate />} />
-                <Route path="/hiring" element={<WorkInside />} />
-            </Routes>
+            </Route>
+        </Routes>
     )
 }
 
