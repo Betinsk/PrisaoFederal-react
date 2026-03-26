@@ -8,6 +8,7 @@ import { Tabs } from "./personTabs";
 import { PersonTab } from "../tabs/PersonTab";
 import { validatePerson } from "../../validations/personValidation";
 import { validateAddress } from "../../validations/addressValidation";
+import { requestWithToast } from '../../exceptions/toast';
 
 function PersonProfile() {
 
@@ -32,6 +33,9 @@ function PersonProfile() {
     setEditingType(null);
   }, [tab]);
 
+  const isChanged =
+  JSON.stringify(formData) !== JSON.stringify(person);
+
   async function handleSave() {
 
   if (tab === "person") {
@@ -43,7 +47,10 @@ function PersonProfile() {
       return;
     }
 
-    const updated = await updatePerson(person.id, formData);
+    const updated = await requestWithToast(
+    updatePerson(person.id, formData),
+    "Person updated sucessfuly"
+    )
 
     setEditing(false);
     setEditingType(null);
@@ -71,8 +78,10 @@ function PersonProfile() {
 
   await Promise.all(
     formData.addresses.map(address =>
-      updateAddress(address.id, address)
-    )
+       requestWithToast(
+      updateAddress(address.id, address),
+      "Address edited sucessfuly"
+    ))
   );
 
   const updated = await findById(person.id);
@@ -96,6 +105,11 @@ function PersonProfile() {
     setEditing(false);
     setEditingType(null);
     setFormData(JSON.parse(JSON.stringify(person)));
+    /*   if (isChanged) {
+    const confirm = window.confirm("Deseja descartar as alterações?");
+    if (!confirm) return;
+  } */
+
   }
 
   function handleAddressChange(e, index) {
@@ -128,6 +142,7 @@ function PersonProfile() {
             onEdit={() => setEditing(true)}
             onSave={handleSave}
             onCancel={handleCancel}
+            isChanged={isChanged}
           />
         </div>
 

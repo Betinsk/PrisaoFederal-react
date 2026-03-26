@@ -5,31 +5,32 @@ import { authHeader } from '../auth/loginService'
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export async function createPersonWithAddress(data) {
-    try {
-    const res = await fetch(`${apiBaseUrl}person`, {
+  const res = await fetch(`${apiBaseUrl}person`, {
     method: "POST",
-    headers: { "Content-Type": "application/json",
-      ...authHeader()
-     },
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(),
+    },
     body: JSON.stringify(data),
   });
 
-     console.log("STATUS:", res.status);
+  const text = await res.text();
 
-    const text = await res.text(); // 👈 pega qualquer resposta
-    console.log("BODY:", text);
+  if (!res.ok) {
+    // tenta pegar mensagem do backend
+    let message = "Erro na API";
 
-    toast.success('Person successfully created!');
-
-    if (!res.ok) {
-      throw new Error("Erro na API");
+    try {
+      const json = JSON.parse(text);
+      message = json.message || message;
+    } catch {
+      // resposta não era JSON
     }
 
-    return JSON.parse(text);
-  } catch (error) {
-    console.error("ERRO DETALHADO:", error);
-    throw error;
+    throw new Error(message);
   }
+
+  return JSON.parse(text);
 }
 
 console.log(authHeader)
@@ -83,8 +84,6 @@ export async function updatePerson(id, person){
 
     const text = await res.text(); // 👈 pega qualquer resposta
     console.log("BODY:", text);
-
-    toast.success('Person successfully edited!');
 
     if (!res.ok) {
       throw new Error("Erro na API");

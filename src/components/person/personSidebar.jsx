@@ -1,4 +1,4 @@
-export function PersonSidebar({ person, editing, onEdit, onSave, onCancel }) {
+export function PersonSidebar({ person, editing, onEdit, onSave, onCancel, isChanged }) {
   return (
     <div className="card border-0 shadow-sm text-center">
       <div className="card-body">
@@ -26,11 +26,11 @@ export function PersonSidebar({ person, editing, onEdit, onSave, onCancel }) {
             </>
           ) : (
             <>
-              <button className="btn btn-success btn-sm" onClick={onSave}>
-                Salvar
+              <button className="btn btn-success btn-sm" onClick={onSave} disabled={!isChanged}>
+                Save
               </button>
-              <button className="btn btn-outline-secondary btn-sm" onClick={onCancel}>
-                Cancelar
+              <button className="btn btn-outline-secondary btn-sm" onClick={onCancel} >
+                Cancel
               </button>
             </>
           )}

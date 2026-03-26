@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { authHeader } from '../auth/loginService';
 
@@ -36,8 +35,6 @@ export async function updateAddress(id, address){
 
     const text = await res.text(); // 👈 pega qualquer resposta
     console.log("BODY:", text);
-
-    toast.success('Address successfully edited!');
 
     if (!res.ok) {
       throw new Error("Error in API");
