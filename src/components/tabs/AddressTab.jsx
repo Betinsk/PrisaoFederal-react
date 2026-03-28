@@ -34,7 +34,7 @@ export function AddressTab({ person, formData, editing, onAddressChange, errors 
     <div key={index} className="row mb-3">
 
       <div className="col-12">
-        <strong>Firts Address {index + 1}</strong>
+        <strong>Address {index + 1}</strong>
       </div>
 
       {fields.map((field) => (
