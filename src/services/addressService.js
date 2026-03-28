@@ -1,11 +1,11 @@
-import 'react-toastify/dist/ReactToastify.css';
 import { authHeader } from '../auth/loginService';
+import { apiFetch } from '../api/api';
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 
 export async function createAddress(data) {
-  const response = await fetch(`${apiBaseUrl}addresses/persons/${data.person.id}/addresses`, {
+  const response = await apiFetch(`${apiBaseUrl}addresses/persons/${data.person.id}/addresses`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export async function createAddress(data) {
 
 export async function updateAddress(id, address){
   try {
-    const res = await fetch(`${apiBaseUrl}addresses/${id}`, {
+    const res = await apiFetch(`${apiBaseUrl}addresses/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json",
        ...authHeader()

@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
+import { apiFetch } from "../api/api";
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export async function login(email, password) {
-  const response = await fetch(`${apiBaseUrl}auth/login`, {
+  const response = await apiFetch(`${apiBaseUrl}auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -19,14 +18,13 @@ export async function login(email, password) {
   const token = await response.text();
 
   // 💾 salva o token
-  localStorage.setItem("token", token);
+  sessionStorage.setItem("token", token);
 
   return token;
-
 }
 
 export function authHeader() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   return {
     "Authorization": `Bearer ${token}`

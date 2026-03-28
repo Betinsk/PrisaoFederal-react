@@ -1,18 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { isAuthenticated } from "../../auth/Jwt";
 
 export default function PrivateRoute() {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    return <Navigate to="/login" />;
-  }
-
-  return <Outlet />;
+   return isAuthenticated() ? <Outlet /> : <Navigate to="/login" />;
 }
 
 
 export function PublicRoute({ children }) {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   return token ? <Navigate to="/home" /> : children;
 }

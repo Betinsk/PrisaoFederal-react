@@ -8,6 +8,7 @@ function LogOut() {
 
   function handleLogout() {
     logout();  
+    sessionStorage.removeItem("token");
     navigate("/");
   }
 

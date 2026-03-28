@@ -1,11 +1,12 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { authHeader } from '../auth/loginService'
+import { apiFetch } from '../api/api';
 
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export async function createPersonWithAddress(data) {
-  const res = await fetch(`${apiBaseUrl}person`, {
+  const res = await apiFetch(`${apiBaseUrl}person`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export async function createPersonWithAddress(data) {
 
 console.log(authHeader)
 export async function getPersons() {
-  const response = await fetch(`${apiBaseUrl}person`, {
+  const response = await apiFetch(`${apiBaseUrl}person`, {
      method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export async function getPersons() {
 export async function findById(id) {
   const token = localStorage.getItem("token");
 
-  const response = await fetch(`${apiBaseUrl}person/${id}`, {
+  const response = await apiFetch(`${apiBaseUrl}person/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -72,7 +73,7 @@ export async function findById(id) {
 
 export async function updatePerson(id, person){
   try {
-    const res = await fetch(`${apiBaseUrl}person/${id}`, {
+    const res = await apiFetch(`${apiBaseUrl}person/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json",
        ...authHeader()
@@ -88,7 +89,7 @@ export async function updatePerson(id, person){
     if (!res.ok) {
       throw new Error("Erro na API");
     }
-
+    
     return JSON.parse(text);
   } catch (error) {
     console.error("ERRO DETALHADO:", error);
