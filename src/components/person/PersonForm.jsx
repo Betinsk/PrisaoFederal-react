@@ -13,7 +13,7 @@ export const PersonForm = ({ attributes, onChange, errors, isEdit }) => {
   ];
 
   return (
-    <div className="person-form row g-2">
+    <div className="person-form row g-2 mb-3">
 
       {fields.map((field) => (
         <div className={field.col} key={field.name}>

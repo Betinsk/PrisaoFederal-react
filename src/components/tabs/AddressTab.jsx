@@ -1,4 +1,5 @@
 import { AddressForm } from "../address/AddressForm";
+import { DataAddressTable } from "./DataAddressTab";
 
 export function AddressTab({ person, formData, editing, onAddressChange, errors }) {
 
@@ -19,43 +20,20 @@ export function AddressTab({ person, formData, editing, onAddressChange, errors 
         </h6>
       </div>
 
-   
-  {editing ? (
-      formData.addresses?.map((address, index) => (
-        <AddressForm
-          key={index}
-          attributes={address}
-           errors={errors[index] || {}}
-          onChange={(e) => onAddressChange(e, index)}
-        />
-      ))
-) : (
-  person.addresses?.map((address, index) => (
-    <div key={index} className="row mb-3">
-
-      <div className="col-12">
-        <strong>Address {index + 1}</strong>
-      </div>
-
-      {fields.map((field) => (
-        <div className={field.col} key={field.name}>
-          <div className="border-bottom py-2">
-            <div className="form-label text-muted small mb-0">
-              {field.label}
-            </div>
-
-            <div className="form-control-plaintext">
-              {address?.[field.name] || "—"}
-            </div>
-          </div>
-        </div>
-      ))}
-
+      
+      {editing ? (
+          formData.addresses?.map((address, index) => (
+            <AddressForm
+              key={index}
+              attributes={address}
+              errors={errors[index] || {}}
+              onChange={(e) => onAddressChange(e, index)}
+            />
+          ))
+    ) : (
+      <DataAddressTable data={person.addresses} fields={fields} />
+    )}
     </div>
-    
-  ))
-)}
-</div>
-  )}
+      )}
 
                        

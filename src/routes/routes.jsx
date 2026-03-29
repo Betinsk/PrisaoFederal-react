@@ -1,7 +1,6 @@
 
 import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
-import '../components/imate/imate.css';
 import WorkInside from "../components/home/hiring/workInside";
 import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/person/personRegister";

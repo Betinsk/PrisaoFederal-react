@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getPersons } from "../../services/personService";
 import { Link } from "react-router-dom";
+import { DataPersonTable } from "../tabs/DataPersonTable";
+import { AddressTab } from "../tabs/AddressTab";
+import { DataAddressTable } from "../tabs/DataAddressTab";
 
 function PersonList() {
   const [persons, setPersons] = useState([]);
@@ -30,35 +33,28 @@ function PersonList() {
       {persons.map((person) => (
         <div key={person.id} className="card mb-3">
           <div className="card-body">
-        <Link to={`/person/${person.id}`}>
-          {person.name}
-        </Link>
-            <h5 className="card-title">{person.name}</h5>
+            <Link
+              to={`/person/${person.id}`}
+              className="btn btn-sm btn-outline-secondary mb-2 d-inline-block"
+            >
+              {person.name}
+            </Link>
+            <DataPersonTable data={person} fields={[
+              { name: "email", label: "Email" },
+              { name: "birthDate", label: "Birth Date" },
+              { name: "socialSecurity", label: "Social Security" },
+              { name: "gender", label: "Gender" }
+            ]} />
 
-            <p className="card-text">
-              <strong>Email:</strong> {person.email}
-            </p>
+            <DataAddressTable data={person.addresses}
+              fields={[
+                { name: "street", label: "street", col: "col-md-4" },
+                { name: "addressComplement", label: "addressComplement", col: "col-md-6" },
+                { name: "state", label: "state Date", col: "col-md-6" },
+                { name: "city", label: "city", col: "col-md-6" },
+                { name: "country", label: "country", col: "col-md-6" }
+              ]} />
 
-            <p className="card-text">
-              <strong>SSN:</strong> {person.socialSecurity}
-            </p>
-
-            <p className="card-text">
-              <strong>Date of Birth:</strong> {person.birthDate}
-            </p>
-
-            <h6 className="mt-3">Addresses</h6>
-
-            {person.addresses.map((address) => (
-              <div key={address.id} className="ms-3 mb-2">
-                <p className="mb-0">
-                  {address.street}, {address.addressComplement}
-                </p>
-                <p className="mb-0">
-                  {address.city} - {address.state} ({address.country})
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       ))}
