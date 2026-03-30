@@ -121,7 +121,7 @@ function PersonRegister() {
             className="btn btn-outline-primary btn-sm mt-2"
             onClick={addAddress}
           >
-            Some address
+            Add address
           </button>
           <div>
             <button type="submit" className="btn btn-primary" disabled={addresses.length === 0}>

@@ -23,12 +23,14 @@ export function AddressTab({ person, formData, editing, onAddressChange, errors 
       
       {editing ? (
           formData.addresses?.map((address, index) => (
+             <div key={index}>
+             <span>Address {index + 1}</span>
             <AddressForm
-              key={index}
               attributes={address}
               errors={errors[index] || {}}
               onChange={(e) => onAddressChange(e, index)}
             />
+            </div>
           ))
     ) : (
       <DataAddressTable data={person.addresses} fields={fields} />

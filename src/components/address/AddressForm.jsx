@@ -1,6 +1,6 @@
 import { countries } from "./countries";
 
-export const AddressForm = ({ attributes, onChange, errors }) => {
+export const AddressForm = ({ attributes, onChange, errors}) => {
 
 
   const fields = [
@@ -11,11 +11,9 @@ export const AddressForm = ({ attributes, onChange, errors }) => {
   ];
 
   return (
-    <div className="person-form row g-2">
-
+    <div className="person-form row g-2 mb-3">
       {fields.map((field) => (
         <div className={field.col} key={field.name}>
-
           <input
             type="text"
             name={field.name}

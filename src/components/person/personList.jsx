@@ -33,6 +33,7 @@ function PersonList() {
       {persons.map((person) => (
         <div key={person.id} className="card mb-3">
           <div className="card-body">
+            <span>Person's name: </span>
             <Link
               to={`/person/${person.id}`}
               className="btn btn-sm btn-outline-secondary mb-2 d-inline-block"
@@ -45,6 +46,8 @@ function PersonList() {
               { name: "socialSecurity", label: "Social Security" },
               { name: "gender", label: "Gender" }
             ]} />
+
+              <h6>{person.name}'s addresses: </h6>
 
             <DataAddressTable data={person.addresses}
               fields={[

@@ -76,13 +76,14 @@ function PersonProfile() {
     return;
   }
 
-  await Promise.all(
+  await requestWithToast(
+  Promise.all(
     formData.addresses.map(address =>
-       requestWithToast(
-      updateAddress(address.id, address),
-      "Address edited sucessfuly"
-    ))
-  );
+      updateAddress(address.id, address)
+    )
+  ),
+  "Address edited successfully"
+);
 
   const updated = await findById(person.id);
 
