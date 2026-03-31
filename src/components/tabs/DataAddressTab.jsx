@@ -7,7 +7,7 @@ export function DataAddressTable({ data, fields }) {
   return (
     <div className="card shadow-sm">
     <div className="card-body">
-
+     <div className="table-responsive">
       <table className="table table-striped table-hover align-middle">
         <thead className="table-dark">
           <tr>
@@ -33,7 +33,7 @@ export function DataAddressTable({ data, fields }) {
             ))}
           </tbody>
       </table>
-
+        </div>
     </div>
   </div>
 )}

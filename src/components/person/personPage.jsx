@@ -38,6 +38,11 @@ function PersonProfile() {
   const isChanged =
   JSON.stringify(formData) !== JSON.stringify(person);
 
+  const wasInmate =
+  person?.commitedCrime ||
+  person?.arrestDate ||
+  person?.sentencedYears;
+
   async function handleSave() {
 
   if (tab === "person") {
@@ -151,7 +156,7 @@ function PersonProfile() {
 
         <div className="col-md-9">
 
-          <Tabs tab={tab} setTab={setTab} />
+          <Tabs tab={tab} setTab={setTab} wasInmate={wasInmate} />
 
           {tab === "person" && (
             <PersonTab
