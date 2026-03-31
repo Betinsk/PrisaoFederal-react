@@ -2,11 +2,9 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
 import WorkInside from "../components/home/hiring/workInside";
-import NewImate from "../components/imate/newImate";
 import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
-import ImateConsult from "../components/imate/imatesList";
-import EditeImate from "../components/controller/editImate";
+
 import Prison from "../components/institution/prision";
 import { PrisonProvider } from "../components/institution/prisionContext";
 import PersonList from "../components/person/personList";
@@ -15,6 +13,7 @@ import PersonProfile from "../components/person/personPage";
 import LoginPage from "../components/login/LoginPage";
 import PrivateRoute from "../components/login/PrivateRoute";
 import PageNotFound from "../validations/PageNotFound";
+import InmateRegister from "../components/imate/InmateRegister";
 
 const Routess = () => {
     return (
@@ -39,7 +38,6 @@ const Routess = () => {
                 />
                 <Route path="/person" element={<PersonList />} />
                 <Route path="/person/:id" element={<PersonProfile />} />
-                <Route path="/imatesList" element={<ImateConsult />} />
                 <Route path="/addresses" element={<AddressForm />} />
 
                 <Route path="/prisions" element={
@@ -48,8 +46,7 @@ const Routess = () => {
                     </PrisonProvider>
                 } />
 
-                <Route path="/imate" element={<NewImate />} />
-                <Route path="/imateEdit/:index" element={<EditeImate />} />
+                <Route path="/imate" element={<InmateRegister />} />
             </Route>
         </Routes>
     )

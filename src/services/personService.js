@@ -34,7 +34,6 @@ export async function createPersonWithAddress(data) {
   return JSON.parse(text);
 }
 
-console.log(authHeader)
 export async function getPersons() {
   const response = await apiFetch(`${apiBaseUrl}person`, {
      method: "GET",

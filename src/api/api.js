@@ -18,7 +18,7 @@ export async function apiFetch(url, options = {}) {
     const response = await fetch(`${url}`, config);
 
     // 🔐 equivalente ao interceptor de response
-    if (response.status === 401 || response.status === 403) {
+    if (response.status === 401) {
       sessionStorage.removeItem("token");
       window.location.href = "/login";
       console.log("Session expired!")

@@ -6,9 +6,7 @@ const Imate = () => {
 
     return(
         <div className='container'>
-          <ImateData>
-          <Imates/>
-          </ImateData>
+           <h1>Inmate</h1>
         </div>
     )
 

@@ -10,7 +10,7 @@ function AdminPanel() {
   const functions = [
     { name: "Consult Persons", path: "/person" },
    // { name: "Prisions", path: "/prisions" },
-   // { name: "Imate's registration", path: "/imate" },
+   { name: "Imate's registration", path: "/imate" },
    // { name: "Addresses", path: "/addresses" },
     { name: "Person Register", path: "/personRegister" },
   //  { name: "Imate Consult", path: "/imatesList" }

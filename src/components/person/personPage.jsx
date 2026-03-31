@@ -28,6 +28,8 @@ function PersonProfile() {
     );
   }, [id]);
 
+    console.log(person);
+
   useEffect(() => {
     setEditing(false);
     setEditingType(null);
