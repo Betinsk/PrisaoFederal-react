@@ -9,6 +9,7 @@ import { PersonTab } from "../tabs/PersonTab";
 import { validatePerson } from "../../validations/personValidation";
 import { validateAddress } from "../../validations/addressValidation";
 import { requestWithToast } from '../../exceptions/toast';
+import { InmateTab } from "../tabs/InmateTab";
 
 function PersonProfile() {
 
@@ -174,6 +175,16 @@ function PersonProfile() {
               formData={formData}
               editing={editing}
               onAddressChange={handleAddressChange}
+              errors={errors}
+            />
+          )}
+
+          {tab === "inmate" && (
+            <InmateTab
+              person={person}
+              formData={formData}
+              editing={editing}
+              onAddressChange={handleChange}
               errors={errors}
             />
           )}
