@@ -7,8 +7,13 @@ export async function requestWithToast(promise, successMsg) {
     toast.success(successMsg);
 
     return response;
-  } catch (error) {
-    const msg = error.message || "Unexpected error";
+  }
+
+  catch (error) {
+    const msg =
+      error?.message ||
+      error?.error ||
+      "Unexpected error";
 
     toast.error(msg);
 

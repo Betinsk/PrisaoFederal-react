@@ -1,5 +1,4 @@
 
-
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export async function apiFetch(url, options = {}) {
@@ -17,14 +16,19 @@ export async function apiFetch(url, options = {}) {
   try {
     const response = await fetch(`${url}`, config);
 
-    // 🔐 equivalente ao interceptor de response
     if (response.status === 401) {
       sessionStorage.removeItem("token");
       window.location.href = "/login";
       console.log("Session expired!")
       throw new Error("Sessão expirada");
     }
-    
+
+    if (!response.ok) {
+      const errorText = await response.text(); 
+      console.error("Erro da API:", errorText);
+      throw new Error(errorText);
+    }
+
     return response;
   } catch (error) {
     console.error("Erro na requisição:", error);

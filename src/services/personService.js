@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { authHeader } from '../auth/loginService'
 import { apiFetch } from '../api/api';

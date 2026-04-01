@@ -12,7 +12,7 @@ export async function login(email, password) {
   });
 
    if (!response.ok) {
-    throw new Error("Invalid email or password"); // 🔥 ISSO FAZ O CATCH FUNCIONAR
+    throw new Error("Invalid email or password"); 
   }
 
   const token = await response.text();

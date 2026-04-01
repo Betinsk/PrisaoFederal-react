@@ -1,6 +1,5 @@
 export function Tabs({ tab, setTab, wasInmate }) {
 
-
     {/*recebe o wasInmate e verifica se é ou não, e depois mostra a respequitiva tab */}
     const tabs = ["person", "address", "inmate", "history"]
     .filter(t => t !== "inmate" || wasInmate);
