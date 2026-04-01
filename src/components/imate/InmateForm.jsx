@@ -4,7 +4,7 @@ export const InmateForm = ({ attributes, onChange, errors, isEdit }) => {
     onChange(e);
   };
 
-  const fields = [
+  const fieldsA = [
     { name: "name", type: "text", placeholder: "Name", col: "col-md-6" },
     { name: "birthDate", type: "date", placeholder: "Birth Date", col: "col-md-4" },
     { name: "socialSecurity", type: "text", placeholder: "Social Security", disabledOnEdit: true, col: "col-md-4" },
@@ -15,10 +15,19 @@ export const InmateForm = ({ attributes, onChange, errors, isEdit }) => {
     { name: "sentencedYears", type: "text", placeholder: "Sentenced Years", col: "col-md-4" },
   ];
 
+    const fieldsB = [
+    { name: "commitedCrime", type: "textarea", placeholder: "Commited Crime", col: "col-md-10" },
+    { name: "arrestDate", type: "date", placeholder: "Arrest Date", col: "col-md-6" },
+    { name: "sentencedYears", type: "text", placeholder: "Sentenced Years", col: "col-md-4" },
+  ];
+
+  const currentFields = isEdit ? fieldsB : fieldsA;
+
+
   return (
     <div className="person-form row g-2 mb-3">
 
-      {fields.map((field) => (
+      {currentFields.map((field) => (
         <div className={field.col} key={field.name}>
           {field.type === "select" && (
             <select

@@ -52,3 +52,29 @@ export async function getInmates() {
 
   return response.json();
 }
+
+export async function updateInmate(id, person){
+  try {
+    const res = await apiFetch(`${apiBaseUrl}inmate/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json",
+       ...authHeader()
+     },
+    body: JSON.stringify(person),
+  });
+
+     console.log("STATUS:", res.status);
+
+    const text = await res.text(); // 👈 pega qualquer resposta
+    console.log("BODY:", text);
+
+    if (!res.ok) {
+      throw new Error("Erro na API");
+    }
+    
+    return JSON.parse(text);
+  } catch (error) {
+    console.error("ERRO DETALHADO:", error);
+    throw error;
+  }
+}
