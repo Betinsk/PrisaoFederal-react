@@ -1,7 +1,11 @@
-import {ImateSearch} from '../../imate/imateSearch';
+import { ImateSearch } from '../../imate/imateSearch';
+import { Tabs } from '../../tabs/Tabs';
+import { useState } from 'react';
 import './locate.css';
 
 export const Locate = () => {
+    const [tab, setTab] = useState("First Step Act");
+    const tags = ["First Step Act", "Fallen Heroes", "How Do I ... ", "Actively Hiring"]
 
     return (
 
@@ -69,9 +73,34 @@ export const Locate = () => {
 
                 </select>
 
-                
-            <button className='button-38'> Find </button>
-          
+
+                <button className='button-38'> Find </button>
+
+
+            </div>
+
+            <div className="col-md-5">
+                <Tabs tab={tab} setTab={setTab} tags={tags} />
+
+                {tab === "First Step Act" && (
+                    <p>
+                        Learn more about the First Step Act (FSA):
+
+                        FSA Overview
+                        FSA PATTERN Risk Assessment
+                        FSA Needs Assessment and Programs
+                        View All FSA Resources ...
+                    </p>
+                )}
+
+
+                {tab === "Fallen Heroes" && (
+                    <p>
+                        During the month of April we remember and pay tribute to Scott J. Williams who made the ultimate sacrifice.                          
+                        
+                     Learn more about our fallen heroes
+                    </p>
+                )}
 
             </div>
 
@@ -80,7 +109,7 @@ export const Locate = () => {
 
 
                 <ImateSearch />
-                
+
 
 
             </div>

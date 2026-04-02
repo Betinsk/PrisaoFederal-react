@@ -5,10 +5,11 @@ import { updateAddress } from "../../services/addressService";
 import { updateInmate } from "../../services/inmateService";
 import { AddressTab } from "../tabs/AddressTab";
 import { PersonSidebar } from "./personSidebar";
-import { Tabs } from "./personTabs";
+import { Tabs } from "../tabs/Tabs";
 import { PersonTab } from "../tabs/PersonTab";
 import { validatePerson } from "../../validations/personValidation";
 import { validateAddress } from "../../validations/addressValidation";
+import { validateInmate } from "../../validations/inmateValidation";
 import { requestWithToast } from '../../exceptions/toast';
 import { InmateTab } from "../tabs/InmateTab";
 
@@ -23,6 +24,8 @@ function PersonProfile() {
   const [editingType, setEditingType] = useState(null);
   const [errors, setErrors] = useState({});
 
+  const tags = ["person", "address", "inmate", "history"];
+  
   useEffect(() => {
     findById(id).then(data => {
       setPerson(data)
@@ -105,7 +108,7 @@ function PersonProfile() {
 
     if (tab === "inmate") {
 
-      const validationErrors = validatePerson(formData);
+      const validationErrors = validateInmate(formData);
 
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
@@ -185,7 +188,7 @@ function PersonProfile() {
 
         <div className="col-md-9">
 
-          <Tabs tab={tab} setTab={setTab} wasInmate={wasInmate} />
+          <Tabs tab={tab} setTab={setTab} wasInmate={wasInmate} tags={tags} />
 
           {tab === "person" && (
             <PersonTab

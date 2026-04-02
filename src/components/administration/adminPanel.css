@@ -48,3 +48,34 @@
   margin-top: 30px;
   font-size: 18px;
 }
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #6e8bb4; /* cinza escuro */
+  color: #fff;
+}
+
+.sidebar h5 {
+  color: #e5e7eb;
+}
+
+/* LINKS */
+.sidebar-link {
+  color: #cbd5e1;
+  padding: 8px 10px;
+  border-radius: 4px;
+  display: block;
+}
+
+.sidebar-link:hover {
+  background-color: #374151;
+  color: #fff;
+}
+
+/* CONTENT */
+.content {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}

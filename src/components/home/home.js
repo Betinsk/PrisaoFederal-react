@@ -1,7 +1,7 @@
 
 import './home.css'
 import Hiring from '../home/hiring/hiring'
-import Locate from '../home/locate/locate'
+import Locate from './locate/locate.jsx'
 import NewsCarousel from './carrousel-news/carrosel-news'
 
 const newsDatas = [

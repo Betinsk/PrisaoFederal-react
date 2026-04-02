@@ -1,55 +1,54 @@
 import { Link } from "react-router-dom";
-import AuthContext from "../../context/appContext";
 import { useContext } from "react";
+import AuthContext from "../../context/appContext";
+import './adminPanel.css';
 
 function AdminPanel() {
-
-    const { login: loginContext, user } = useContext(AuthContext);
-
+  const { user } = useContext(AuthContext);
 
   const functions = [
     { name: "Consult Persons", path: "/person" },
-   // { name: "Prisions", path: "/prisions" },
-   { name: "Imate's registration", path: "/imate" },
-   // { name: "Addresses", path: "/addresses" },
+    { name: "Inmate Registration", path: "/imate" },
     { name: "Person Register", path: "/personRegister" },
-  //  { name: "Imate Consult", path: "/imatesList" }
   ];
 
   return (
-    <div className="container py-5">
+        <div className="container">
 
-      <div className="text-center mb-5">
-        <h2 className="fw-semibold">Admin Panel</h2>
-        <span>Olá, {user?.name}</span>
+    <div className="d-flex">
+
+      {/* SIDEBAR */}
+      <div className="sidebar p-3">
+        <h5 className="mb-4">Admin Panel</h5>
+
+        <ul className="nav flex-column">
+
+          {functions.map((item, index) => (
+            <li key={index} className="nav-item mb-2">
+
+              <Link to={item.path} className="nav-link sidebar-link">
+                {item.name}
+              </Link>
+
+            </li>
+          ))}
+
+        </ul>
       </div>
 
-      <div className="row g-4">
+      {/* CONTENT */}
+      <div className="content p-4 w-100">
 
-        {functions.map((item, index) => (
-          <div className="col-md-4" key={index}>
+        <h4 className="mb-2">Dashboard</h4>
+        <p className="text-muted">Usuário: {user?.name}</p>
 
-            <Link to={item.path} className="text-decoration-none">
-
-              <div className="card border-0 shadow-sm rounded-4 h-100">
-
-                <div className="card-body text-center py-4">
-
-                  <h5 className="text-dark fw-normal">
-                    {item.name}
-                  </h5>
-
-                </div>
-
-              </div>
-
-            </Link>
-
-          </div>
-        ))}
+        <div className="mt-4">
+          <p>Selecione uma opção no menu lateral.</p>
+        </div>
 
       </div>
 
+    </div>
     </div>
   );
 }
