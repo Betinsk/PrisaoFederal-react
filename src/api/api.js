@@ -3,12 +3,15 @@ const apiBaseUrl = process.env.REACT_APP_API_URL;
 export async function apiFetch(url, options = {}) {
   const token = sessionStorage.getItem("token");
 
+  const isLoginRoute = url.includes("auth/login");
+
   const config = {
     ...options,
     headers: {
       "Content-Type": "application/json",
       ...options.headers,
-      ...(token && { Authorization: `Bearer ${token}` }),
+      //não manda token se for rota de login
+      ...(!isLoginRoute && token && { Authorization: `Bearer ${token}` }),
     },
   };
 

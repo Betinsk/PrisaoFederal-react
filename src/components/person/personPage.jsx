@@ -13,7 +13,8 @@ import { validateInmate } from "../../validations/inmateValidation";
 import { requestWithToast } from '../../exceptions/toast';
 import { InmateTab } from "../tabs/InmateTab";
 import MugshotsViewer from "../pictures/Mugshots";
-
+import AddressForm from "../address/AddressForm";
+import { addAddress } from "../../services/addressService";
 
 function PersonProfile() {
 
@@ -25,8 +26,17 @@ function PersonProfile() {
   const [editingType, setEditingType] = useState(null);
   const [errors, setErrors] = useState({});
 
+  const [addingAddress, setAddingAddress] = useState(false);
+  const [newAddress, setNewAddress] = useState({
+    street: "",
+    addressComplement: "",
+    city: "",
+    state: "",
+    country: "",
+  });
+
   const tags = ["person", "address", "inmate", "history", "pictures"];
-  
+
   useEffect(() => {
     findById(id).then(data => {
       setPerson(data)
@@ -50,7 +60,14 @@ function PersonProfile() {
     person?.arrestDate ||
     person?.sentencedYears;
 
-async function handleSave() {
+    function onPersonUpdate() {
+  findById(id).then(data => {
+    setPerson(data);
+    setFormData(data);
+  });
+}
+
+  async function handleSave() {
 
     if (tab === "person") {
       const validationErrors = validatePerson(formData);
@@ -143,11 +160,6 @@ async function handleSave() {
     setEditing(false);
     setEditingType(null);
     setFormData(JSON.parse(JSON.stringify(person)));
-    /*   if (isChanged) {
-    const confirm = window.confirm("Deseja descartar as alterações?");
-    if (!confirm) return;
-  } */
-
   }
 
   function handleAddressChange(e, index) {
@@ -166,6 +178,22 @@ async function handleSave() {
     setFormData(updatedForm);
   }
 
+  async function handleAddAddress() {
+    try {
+      await requestWithToast(
+        addAddress(person.id, newAddress), // 👈 novo método no addressService
+        "Address added successfully"
+      );
+      const updated = await findById(person.id);
+      setPerson(updated);
+      setFormData(updated);
+      setAddingAddress(false);
+      setNewAddress({ street: "", addressComplement: "", city: "", state: "", country: "" });
+    } catch {
+      // toast já exibido
+    }
+  }
+
   if (!person) return <div className="container mt-4">Loading...</div>;
 
   return (
@@ -181,6 +209,7 @@ async function handleSave() {
             onSave={handleSave}
             onCancel={handleCancel}
             isChanged={isChanged}
+            onPersonUpdate={onPersonUpdate} // 👈
           />
         </div>
 
@@ -199,13 +228,44 @@ async function handleSave() {
           )}
 
           {tab === "address" && (
-            <AddressTab
-              person={person}
-              formData={formData}
-              editing={editing}
-              onAddressChange={handleAddressChange}
-              errors={errors}
-            />
+            <>
+              <div className="d-flex justify-content-end mb-2">
+                {!addingAddress && (
+                  <button
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => setAddingAddress(true)}
+                  >
+                    <i className="bi bi-plus-circle me-1"></i> Add Address
+                  </button>
+                )}
+              </div>
+
+              {addingAddress ? (
+                <>
+                  <AddressForm
+                    attributes={newAddress}
+                    onChange={(e) => setNewAddress({ ...newAddress, [e.target.name]: e.target.value })}
+                    errors={errors}
+                  />
+                  <div className="d-flex gap-2 mt-2 mb-2">
+                    <button className="btn btn-primary btn-sm" onClick={handleAddAddress}>
+                      Save
+                    </button>
+                    <button className="btn btn-outline-secondary btn-sm" onClick={() => setAddingAddress(false)}>
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <AddressTab
+                  person={person}
+                  formData={formData}
+                  editing={editing}
+                  onAddressChange={handleAddressChange}
+                  errors={errors}
+                />
+              )}
+            </>
           )}
 
           {tab === "inmate" && (
@@ -218,10 +278,10 @@ async function handleSave() {
             />
           )}
 
-            {tab === "pictures" && (
+          {tab === "pictures" && (
             <MugshotsViewer
               person={person}
-             
+              onPersonUpdate={onPersonUpdate} 
             />
           )}
 

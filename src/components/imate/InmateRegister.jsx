@@ -4,7 +4,6 @@ import { createInmateWithAddress } from '../../services/inmateService';
 import { AddressForm } from '../address/AddressForm';
 import { useNavigate } from 'react-router-dom';
 import { useAddresses } from '../../hooks/useAddresses';
-import { validatePerson } from '../../validations/personValidation';
 import { requestWithToast } from '../../exceptions/toast';
 import InmateForm from './InmateForm';
 import { validateInmate } from '../../validations/inmateValidation';

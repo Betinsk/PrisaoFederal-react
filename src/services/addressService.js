@@ -46,3 +46,12 @@ export async function updateAddress(id, address){
     throw error;
   }
 }
+
+export async function addAddress(personId, address) {
+  const res = await apiFetch(`${apiBaseUrl}person/${personId}/address`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(address),
+  });
+  return res.json();
+}

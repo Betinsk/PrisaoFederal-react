@@ -17,6 +17,8 @@ export async function login(email, password) {
 
 export function authHeader() {
   const token = sessionStorage.getItem("token");
+    console.log("TOKEN:", token); // 👈 adiciona isso
+
   return {
     Authorization: `Bearer ${token}`
   };
