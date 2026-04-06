@@ -49,36 +49,34 @@ function PersonProfile() {
     person?.arrestDate ||
     person?.sentencedYears;
 
-  async function handleSave() {
+async function handleSave() {
 
     if (tab === "person") {
-
       const validationErrors = validatePerson(formData);
-
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
       }
 
-      const updated = await requestWithToast(
-        updatePerson(person.id, formData),
-        "Person updated sucessfuly"
-      )
-
-      setEditing(false);
-      setEditingType(null);
-      setPerson(updated);
-      setFormData(updated);
-      setErrors({});
+      try {
+        const updated = await requestWithToast(
+          updatePerson(person.id, formData),
+          "Person updated sucessfuly"
+        );
+        setEditing(false);
+        setEditingType(null);
+        setPerson(updated);
+        setFormData(updated);
+        setErrors({});
+      } catch {
+        // toast já exibido pelo requestWithToast
+      }
     }
 
     if (tab === "address") {
-
       const errorsArray = [];
-
       formData.addresses.forEach((address, index) => {
         const validation = validateAddress(address);
-
         if (Object.keys(validation).length > 0) {
           errorsArray[index] = validation;
         }
@@ -89,27 +87,27 @@ function PersonProfile() {
         return;
       }
 
-      await requestWithToast(
-        Promise.all(
-          formData.addresses.map(address =>
-            updateAddress(address.id, address)
-          )
-        ),
-        "Address edited successfully"
-      );
-
-      const updated = await findById(person.id);
-
-      setEditing(false);
-      setPerson(updated);
-      setFormData(updated);
-      setErrors([]);
+      try {
+        await requestWithToast(
+          Promise.all(
+            formData.addresses.map(address =>
+              updateAddress(address.id, address)
+            )
+          ),
+          "Address edited successfully"
+        );
+        const updated = await findById(person.id);
+        setEditing(false);
+        setPerson(updated);
+        setFormData(updated);
+        setErrors([]);
+      } catch {
+        // toast já exibido pelo requestWithToast
+      }
     }
 
     if (tab === "inmate") {
-
       const validationErrors = validateInmate(formData);
-
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
@@ -119,19 +117,18 @@ function PersonProfile() {
         const updated = await requestWithToast(
           updateInmate(person.id, formData),
           "Inmate updated sucessfuly"
-        )
-
+        );
         setEditing(false);
         setEditingType(null);
         setPerson(updated);
         setFormData(updated);
         setErrors({});
-      }
-      catch (error) {
-        console.error("ERRO DETALHADO:", error);
+      } catch {
+        // toast já exibido pelo requestWithToast
       }
     }
   }
+
   function handleChange(e) {
     const { name, value } = e.target;
 

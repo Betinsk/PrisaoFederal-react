@@ -1,4 +1,3 @@
-
 const apiBaseUrl = process.env.REACT_APP_API_URL;
 
 export async function apiFetch(url, options = {}) {
@@ -13,25 +12,33 @@ export async function apiFetch(url, options = {}) {
     },
   };
 
-  try {
-    const response = await fetch(`${url}`, config);
+  const response = await fetch(`${url}`, config); // 👈 sem try/catch aqui
 
-    if (response.status === 401) {
-      sessionStorage.removeItem("token");
-      window.location.href = "/login";
-      console.log("Session expired!")
-      throw new Error("Sessão expirada");
+  if (response.status === 401) {
+    const isLoginRoute = url.includes("auth/login");
+
+    if (isLoginRoute) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Wrong email or password");
     }
 
-    if (!response.ok) {
-      const errorText = await response.text(); 
-      console.error("Erro da API:", errorText);
-      throw new Error(errorText);
-    }
-
-    return response;
-  } catch (error) {
-    console.error("Erro na requisição:", error);
-    throw error;
+    sessionStorage.removeItem("token");
+    window.location.href = "/login";
+    throw new Error("Expired session");
   }
+
+  if (!response.ok) {
+    let errorMsg = "Unexpected error";
+
+    try {
+      const errorData = await response.json();
+      errorMsg = errorData.message || errorData.error || "Unexpected error";
+    } catch {
+      errorMsg = await response.text();
+    }
+
+    throw new Error(errorMsg); // 👈 só lança, sem toast
+  }
+
+  return response; // 👈 retorna a response limpa
 }

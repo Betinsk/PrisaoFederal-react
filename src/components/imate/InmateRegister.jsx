@@ -7,6 +7,7 @@ import { useAddresses } from '../../hooks/useAddresses';
 import { validatePerson } from '../../validations/personValidation';
 import { requestWithToast } from '../../exceptions/toast';
 import InmateForm from './InmateForm';
+import { validateInmate } from '../../validations/inmateValidation';
 
 function InmateRegister() {
 
@@ -66,7 +67,7 @@ function InmateRegister() {
 
       console.log("Payload being sent:", payload);
 
-      const validationErrors = validatePerson(payload);
+      const validationErrors = validateInmate(payload);
 
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);

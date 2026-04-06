@@ -1,3 +1,6 @@
+import { validatePerson } from './personValidation';
+
+
 const inmateSchema = {
 commitedCrime: {
   required: {
@@ -30,6 +33,10 @@ sentencedYears: {
 
 export function validateInmate(data) {
   const errors = {};
+
+  //roda as validações de person primeiro
+  const personErrors = validatePerson(data);
+  Object.assign(errors, personErrors);
 
   Object.keys(inmateSchema).forEach(field => {
     const rules = inmateSchema[field];
