@@ -4,7 +4,7 @@ export function PersonSidebar({ person, editing, onEdit, onSave, onCancel, isCha
       <div className="card-body">
 
         <img
-          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          src={person.profilePictureUrl}
           className="rounded-circle mb-3 border"
           width="90"
           alt="profile"

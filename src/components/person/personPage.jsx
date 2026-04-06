@@ -12,6 +12,7 @@ import { validateAddress } from "../../validations/addressValidation";
 import { validateInmate } from "../../validations/inmateValidation";
 import { requestWithToast } from '../../exceptions/toast';
 import { InmateTab } from "../tabs/InmateTab";
+import MugshotsViewer from "../pictures/Mugshots";
 
 
 function PersonProfile() {
@@ -24,7 +25,7 @@ function PersonProfile() {
   const [editingType, setEditingType] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const tags = ["person", "address", "inmate", "history"];
+  const tags = ["person", "address", "inmate", "history", "pictures"];
   
   useEffect(() => {
     findById(id).then(data => {
@@ -216,6 +217,14 @@ async function handleSave() {
               errors={errors}
             />
           )}
+
+            {tab === "pictures" && (
+            <MugshotsViewer
+              person={person}
+             
+            />
+          )}
+
 
         </div>
 
