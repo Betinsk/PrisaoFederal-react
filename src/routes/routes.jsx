@@ -1,10 +1,9 @@
-
 import { Route, Routes } from "react-router-dom";
-import Home from "../components/home/home";
+
+import Home from "../components/home/Home.jsx";
 import WorkInside from "../components/home/hiring/workInside";
 import PersonRegister from "../components/person/personRegister";
 import AdminPanel from "../components/administration/adminPanel";
-
 import Prison from "../components/institution/prision";
 import { PrisonProvider } from "../components/institution/prisionContext";
 import PersonList from "../components/person/personList";
@@ -14,45 +13,40 @@ import LoginPage from "../components/login/LoginPage";
 import PrivateRoute from "../components/login/PrivateRoute";
 import PageNotFound from "../validations/PageNotFound";
 import InmateRegister from "../components/imate/InmateRegister";
+import Layout from "../components/layout/Layout.jsx";
 
 const Routess = () => {
-    return (
+  return (
+    <Routes>
 
-        <Routes>
+      {/* rotas públicas — sem navbar */}
+      <Route path="/" element={<Home />} />
+      <Route path="/hiring" element={<WorkInside />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="*" element={<PageNotFound />} />
 
-            {/* public routes*/}
-            <Route path="/" element={<Home />} />
-            <Route path="/hiring" element={<WorkInside />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<PageNotFound />} />
-                    
-                            {/* private routes*/}
-            <Route element={<PrivateRoute />}>
+      {/* rotas privadas — com navbar */}
+      <Route element={<PrivateRoute />}>
+        <Route element={<Layout />}>
 
-                <Route path="/personRegister" element={<PersonRegister />} />
-                <Route
-                    path="/adminPanel"
-                    element={
-                            <AdminPanel />
-                    }
-                />
-                <Route path="/person" element={<PersonList />} />
-                <Route path="/person/:id" element={<PersonProfile />} />
-                <Route path="/addresses" element={<AddressForm />} />
+          <Route path="/personRegister" element={<PersonRegister />} />
+          <Route path="/adminPanel" element={<AdminPanel />} />
+          <Route path="/person" element={<PersonList />} />
+          <Route path="/person/:id" element={<PersonProfile />} />
+          <Route path="/addresses" element={<AddressForm />} />
+          <Route path="/imate" element={<InmateRegister />} />
 
-                <Route path="/prisions" element={
-                    <PrisonProvider>
-                        <Prison />
-                    </PrisonProvider>
-                } />
+          <Route path="/prisions" element={
+            <PrisonProvider>
+              <Prison />
+            </PrisonProvider>
+          } />
 
-                <Route path="/imate" element={<InmateRegister />} />
-            </Route>
-        </Routes>
-    )
-}
+        </Route>
+      </Route>
+
+    </Routes>
+  );
+};
 
 export default Routess;
-
-//<Route path="/Filter" element={<Filter />} />
-//     <Route component = { ImateCard }  path="/imates" />

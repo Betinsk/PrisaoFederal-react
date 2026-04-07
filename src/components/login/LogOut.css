@@ -1,0 +1,49 @@
+/* LogOut.css */
+
+.logout-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c0392b;
+  background: transparent;
+  border: 1.5px solid #c0392b;
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.logout-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #c0392b;
+  transform: translateX(-101%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.logout-btn:hover::before {
+  transform: translateX(0);
+}
+
+.logout-btn:hover {
+  color: #fff;
+}
+
+.logout-btn span,
+.logout-btn svg {
+  position: relative;
+  z-index: 1;
+}
+
+.logout-btn:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}

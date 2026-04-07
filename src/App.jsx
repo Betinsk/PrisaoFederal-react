@@ -8,10 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-      <Nav /> 
       <ToastContainer />
       <Routess/>
-      <Footer />
+      
     </>
   );
 }

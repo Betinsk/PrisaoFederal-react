@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../context/appContext";
+import Nav from "../nav/nav";
+import Footer from "../footer/FooterP";
 
 const navItems = [
   {
@@ -86,6 +88,7 @@ const styles = `
 function SidebarContent({ location }) {
   return (
     <>
+
       {navItems.map((group) => (
         <div key={group.section}>
           <div className="section-label">{group.section}</div>
@@ -117,7 +120,10 @@ function AdminPanel() {
   const initials = user?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "AD";
 
   return (
+    
     <div className="container">
+       
+
       <style>{styles}</style>
       <div className="d-flex" style={{ minHeight: "100vh", background: "var(--content-bg)" }}>
 
@@ -220,7 +226,9 @@ function AdminPanel() {
 
         </div>
       </div>
+        <Footer />
     </div>
+  
   );
 }
 
