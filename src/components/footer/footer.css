@@ -1,44 +1,163 @@
-/* Estilize o rodapé da prisão federal */
-.federal-prison-footer {
-    background-color: #f1efef;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    width: 80%; 
-    margin: auto;
-    margin-top: 12px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Aqui você define a sombra */
+.site-footer {
+  background: #0d2b55;
+  color: #a8b8cc;
+  padding: 28px 0 0;
+  border-top: 3px solid #c8a84b;
+  font-family: Arial, sans-serif;
+}
 
-  }
-  
-  /* Estilize o texto no rodapé */
-  .federal-prison-footer p {
-    margin: 5px 0;
-    font-family: 'Raleway';
-    color: black;
-    
-  }
-  
-  .footer-links{
-    margin-top: 15px;
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  padding-bottom: 8px;
+}
+
+.footer-seal {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background: #c8a84b;
+  color: #0d2b55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.footer-agency-name {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.35;
+  font-family: Georgia, serif;
+}
+
+.footer-agency-sub {
+  color: #8aaac8;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  margin-top: 3px;
+}
+
+.footer-contact-label {
+  font-size: 11px;
+  color: #6a8aaa;
+  margin-bottom: 2px;
+  margin-top: 10px;
+}
+
+.footer-contact-label:first-of-type {
+  margin-top: 0;
+}
+
+.footer-contact-value {
+  font-size: 13px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.footer-contact-addr {
+  font-size: 11px;
+  color: #6a8aaa;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 10px;
+}
+
+.footer-link {
+  font-size: 12px;
+  color: #8aaac8;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  transition: color 0.15s;
+}
+
+.footer-link:hover {
+  color: #c8a84b;
+}
+
+.footer-divider {
+  border: none;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  margin: 20px 0 0;
+}
+
+.footer-bottom {
+  padding: 12px 0 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: #5a7090;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-link {
+  font-size: 11px;
+  color: #5a7090;
+  text-decoration: none;
+}
+
+.footer-bottom-link:hover {
+  color: #8aaac8;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 
-  /* Estilize os links no rodapé */
-  .federal-prison-footer .footer-links a {
-    color: black;
-    text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.3s ease;
+  .footer-identity {
+    grid-column: 1 / -1;
+  }
+}
 
+/* Mobile */
+@media (max-width: 500px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
-  
-  /* Estilize os links quando o mouse passar sobre eles */
-  .federal-prison-footer .footer-links a:hover {
-    color: #ff9900;
+
+  .footer-identity {
+    grid-column: 1 / -1;
   }
-  
-  /* Estilize os links ativos no rodapé */
-  .federal-prison-footer .footer-links a.active {
-    font-weight: bold;
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+}

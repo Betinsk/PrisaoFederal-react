@@ -1,8 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../context/appContext";
-import Nav from "../nav/nav";
-import Footer from "../footer/FooterP";
+import Footer from "../footer/Footer";
 
 const navItems = [
   {
@@ -47,48 +46,67 @@ const quickCards = [
 
 const styles = `
   :root {
-    --sidebar-bg: #031736;
-    --sidebar-border: rgba(10, 10, 10, 0.07);
-    --topbar-bg: #4c6897;
-    --topbar-border: rgba(255,255,255,0.08);
-    --content-bg: #ffffff;
-    --card-bg:    #ffffff; 
-    --card-border: #dde1ea; 
-    --accent: #4a90d9;
-    --text-muted-custom: #040508;
-    --text-main:     #000307;
+    --sidebar-bg: #0d2b55;
+    --sidebar-border: rgba(255,255,255,0.07);
+    --topbar-bg: #0a2248;
+    --topbar-border: rgba(200,168,75,0.2);
+    --content-bg: #f0f2f5;
+    --card-bg: #ffffff;
+    --card-border: #dde1ea;
+    --accent: #c8a84b;
+    --accent-dim: rgba(200,168,75,0.12);
+    --text-muted-custom: #8a94a8;
+    --text-main: #1a2233;
   }
   body { background: var(--content-bg); color: var(--text-main); }
-  .sidebar { width: 230px; min-width: 230px; background: var(--sidebar-bg); border-right: 0.5px solid var(--sidebar-border); min-height: 100vh; }
-  .sidebar .brand { border-bottom: 0.5px solid var(--sidebar-border); padding: 18px 16px 14px; }
-  .sidebar .brand-icon { width: 34px; height: 34px; background: rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 8px; }
-  .sidebar .section-label { font-size: 10px; color: #4a6070; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; padding: 14px 16px 5px; }
-  .nav-item-link { display: flex; align-items: center; gap: 9px; padding: 7px 16px; font-size: 13px; color: #99a8bc; text-decoration: none; border-left: 3px solid transparent; transition: background 0.15s; }
+
+  .admin-outer {
+    margin: 24px 20px 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0.5px solid #c8cdd8;
+    box-shadow: 0 4px 24px rgba(13,43,85,0.10);
+  }
+
+  .sidebar { width: 220px; min-width: 220px; background: var(--sidebar-bg); border-right: 0.5px solid var(--sidebar-border); min-height: 100vh; }
+  .sidebar .brand { border-bottom: 0.5px solid var(--sidebar-border); padding: 16px 14px 12px; }
+  .sidebar .brand-icon { width: 32px; height: 32px; background: var(--accent-dim); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 7px; border: 0.5px solid rgba(200,168,75,0.25); }
+  .sidebar .brand-sup { font-size: 9px; color: #4a6070; text-transform: uppercase; letter-spacing: 0.7px; }
+  .sidebar .brand-name { font-size: 13px; color: #d8dee8; font-weight: bold; margin-top: 2px; font-family: Georgia, serif; }
+  .sidebar .section-label { font-size: 9px; color: #4a6070; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; padding: 12px 14px 4px; }
+
+  .nav-item-link { display: flex; align-items: center; gap: 9px; padding: 7px 14px; font-size: 12px; color: #8aaac8; text-decoration: none; border-left: 3px solid transparent; transition: background 0.15s; }
   .nav-item-link:hover { background: rgba(255,255,255,0.04); color: #d8dee8; }
-  .nav-item-link.active { border-left-color: var(--accent); background: rgba(74,144,217,0.1); color: #d8dee8; }
-  .nav-item-disabled { display: flex; align-items: center; gap: 9px; padding: 7px 16px; font-size: 13px; color: #4a5568; cursor: not-allowed; }
-  .soon-badge { font-size: 9px; background: rgba(74,144,217,0.15); color: #4a90d9; padding: 1px 5px; border-radius: 3px; margin-left: auto; }
-  .topbar { background: var(--topbar-bg); border-bottom: 0.5px solid var(--topbar-border); height: 50px; padding: 0 20px; }
-  .admin-badge { font-size: 10px; background: rgba(74,144,217,0.15); color: var(--accent); padding: 2px 9px; border-radius: 3px; font-weight: 600; }
-  .avatar-circle { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
-  .stat-card { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 8px; padding: 14px 16px; }
-  .stat-card.alert-card { border-left: 3px solid #c0392b; border-radius: 0 8px 8px 0; }
-  .stat-label { font-size: 10px; color: var(--text-muted-custom); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
-  .stat-value { font-size: 22px; font-weight: 500; color: #dce4f0; }
-  .stat-value.danger { color: #e05555; }
+  .nav-item-link.active { border-left-color: var(--accent); background: var(--accent-dim); color: #f0e0a0; }
+  .nav-item-disabled { display: flex; align-items: center; gap: 9px; padding: 7px 14px; font-size: 12px; color: #3a4e68; cursor: not-allowed; }
+  .soon-badge { font-size: 9px; background: var(--accent-dim); color: var(--accent); padding: 1px 5px; border-radius: 3px; margin-left: auto; border: 0.5px solid rgba(200,168,75,0.2); }
+
+  .topbar { background: var(--topbar-bg); border-bottom: 2px solid var(--accent); height: 50px; padding: 0 20px; }
+  .topbar-sup { font-size: 9px; color: #5a7090; text-transform: uppercase; letter-spacing: 0.5px; }
+  .topbar-name { font-size: 12px; color: #dce4f0; font-weight: bold; font-family: Georgia, serif; }
+  .admin-badge { font-size: 9px; background: var(--accent-dim); color: var(--accent); padding: 2px 9px; border-radius: 3px; font-weight: 600; border: 0.5px solid rgba(200,168,75,0.3); }
+  .avatar-circle { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #0d2b55; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+
+  .section-title { font-size: 10px; color: var(--text-muted-custom); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; }
+  .main-title { font-size: 19px; font-weight: bold; color: #0d2b55; margin-bottom: 20px; font-family: Georgia, serif; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+
+  .stat-card { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 6px; padding: 13px 15px; border-top: 3px solid var(--accent); }
+  .stat-card.alert-card { border-top-color: #c0392b; }
+  .stat-label { font-size: 9px; color: var(--text-muted-custom); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .stat-value { font-size: 22px; font-weight: bold; color: #0d2b55; }
+  .stat-value.danger { color: #c0392b; }
   .stat-sub { font-size: 11px; color: var(--text-muted-custom); margin-top: 2px; }
-  .section-title { font-size: 11px; color: var(--text-muted-custom); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
-  .main-title { font-size: 19px; font-weight: 500; color: #dce4f0; margin-bottom: 20px; }
-  .quick-card { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 8px; padding: 14px 16px; text-decoration: none; color: var(--text-main); display: block; transition: background 0.15s; }
-  .quick-card:hover { background: #2e343d; color: var(--text-main); }
-  .quick-card-icon { width: 32px; height: 32px; background: rgba(74,144,217,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; font-size: 15px; }
+
+  .quick-card { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 6px; padding: 13px 15px; text-decoration: none; color: var(--text-main); display: block; transition: border-color 0.15s, box-shadow 0.15s; border-bottom: 2px solid var(--accent); }
+  .quick-card:hover { box-shadow: 0 2px 10px rgba(13,43,85,0.1); color: var(--text-main); }
+  .quick-card-icon { width: 30px; height: 30px; background: var(--accent-dim); border-radius: 5px; display: flex; align-items: center; justify-content: center; margin-bottom: 9px; font-size: 14px; border: 0.5px solid rgba(200,168,75,0.25); }
+
   .offcanvas-custom { background: var(--sidebar-bg); border-right: 0.5px solid var(--sidebar-border); }
 `;
 
 function SidebarContent({ location }) {
   return (
     <>
-
       {navItems.map((group) => (
         <div key={group.section}>
           <div className="section-label">{group.section}</div>
@@ -120,115 +138,109 @@ function AdminPanel() {
   const initials = user?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "AD";
 
   return (
-    
-    <div className="container">
-       
-
+    <div className="container-fluid px-0">
       <style>{styles}</style>
-      <div className="d-flex" style={{ minHeight: "100vh", background: "var(--content-bg)" }}>
 
-        {/* SIDEBAR desktop */}
-        <div className="sidebar d-none d-md-flex flex-column">
-          <div className="brand">
-            <div className="brand-icon">🏛️</div>
-            <div style={{ fontSize: 10, color: "#4a6070", textTransform: "uppercase", letterSpacing: 0.5 }}>
-              U.S. Federal Bureau
-            </div>
-            <div style={{ fontSize: 13, color: "#d8dee8", fontWeight: 500, marginTop: 2 }}>
-              Prison Management
-            </div>
-          </div>
-          <SidebarContent location={location} />
-        </div>
+      <div className="admin-outer">
+        <div className="d-flex" style={{ minHeight: "100vh", background: "var(--content-bg)" }}>
 
-        {/* OFFCANVAS mobile */}
-        <div className="offcanvas offcanvas-start offcanvas-custom" tabIndex="-1" id="mobileSidebar">
-          <div className="offcanvas-header" style={{ borderBottom: "0.5px solid var(--sidebar-border)" }}>
-            <span style={{ fontSize: 13, color: "#d8dee8", fontWeight: 500 }}>Prison Management</span>
-            <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" />
-          </div>
-          <div className="offcanvas-body p-0">
+          {/* SIDEBAR desktop */}
+          <div className="sidebar d-none d-md-flex flex-column">
+            <div className="brand">
+              <div className="brand-icon">🏛️</div>
+              <div className="brand-sup">U.S. Federal Bureau</div>
+              <div className="brand-name">Prison Management</div>
+            </div>
             <SidebarContent location={location} />
           </div>
-        </div>
 
-        {/* MAIN */}
-        <div className="flex-grow-1 d-flex flex-column" style={{ minWidth: 0 }}>
+          {/* OFFCANVAS mobile */}
+          <div className="offcanvas offcanvas-start offcanvas-custom" tabIndex="-1" id="mobileSidebar">
+            <div className="offcanvas-header" style={{ borderBottom: "0.5px solid var(--sidebar-border)" }}>
+              <span style={{ fontSize: 13, color: "#d8dee8", fontWeight: "bold", fontFamily: "Georgia, serif" }}>
+                Prison Management
+              </span>
+              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" />
+            </div>
+            <div className="offcanvas-body p-0">
+              <SidebarContent location={location} />
+            </div>
+          </div>
 
-          {/* TOPBAR */}
-          <div className="topbar d-flex align-items-center justify-content-between">
-            <div className="d-flex align-items-center gap-3">
-              <button
-                className="btn btn-sm d-md-none"
-                style={{ background: "rgba(255,255,255,0.07)", border: "0.5px solid var(--card-border)", color: "#d8dee8" }}
-                data-bs-toggle="offcanvas"
-                data-bs-target="#mobileSidebar"
-              >
-                ☰
-              </button>
-              <div className="d-none d-sm-block">
-                <div style={{ fontSize: 10, color: "var(--text-muted-custom)" }}>
-                  Federal Bureau of Prisons — Admin Console
-                </div>
-                <div style={{ fontSize: 13, color: "#dce4f0", fontWeight: 500 }}>
-                  Albuquerque Federal Correctional Institution
+          {/* MAIN */}
+          <div className="flex-grow-1 d-flex flex-column" style={{ minWidth: 0 }}>
+
+            {/* TOPBAR */}
+            <div className="topbar d-flex align-items-center justify-content-between">
+              <div className="d-flex align-items-center gap-3">
+                <button
+                  className="btn btn-sm d-md-none"
+                  style={{ background: "rgba(255,255,255,0.07)", border: "0.5px solid var(--card-border)", color: "#d8dee8" }}
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#mobileSidebar"
+                >
+                  ☰
+                </button>
+                <div className="d-none d-sm-block">
+                  <div className="topbar-sup">Federal Bureau of Prisons — Admin Console</div>
+                  <div className="topbar-name">Albuquerque Federal Correctional Institution</div>
                 </div>
               </div>
-            </div>
-            <div className="d-flex align-items-center gap-2">
-              <span className="admin-badge d-none d-sm-inline">ADMINISTRATOR</span>
-              <div className="avatar-circle">{initials}</div>
-              <span className="d-none d-sm-inline" style={{ fontSize: 13, color: "#9aabbc" }}>
-                {user?.name}
-              </span>
-            </div>
-          </div>
-
-          {/* CONTENT */}
-          <div className="flex-grow-1 p-3 p-md-4">
-            <div className="section-title">Overview</div>
-            <div className="main-title">Dashboard</div>
-
-            {/* STATS */}
-            <div className="row g-3 mb-4">
-              {stats.map((s) => (
-                <div key={s.label} className="col-6 col-xl-3">
-                  <div className={`stat-card h-100${s.alert ? " alert-card" : ""}`}>
-                    <div className="stat-label">{s.label}</div>
-                    <div className={`stat-value${s.alert ? " danger" : ""}`}>{s.value}</div>
-                    <div className="stat-sub">{s.sub}</div>
-                  </div>
-                </div>
-              ))}
+              <div className="d-flex align-items-center gap-2">
+                <span className="admin-badge d-none d-sm-inline">ADMINISTRATOR</span>
+                <div className="avatar-circle">{initials}</div>
+                <span className="d-none d-sm-inline" style={{ fontSize: 12, color: "#8aaac8" }}>
+                  {user?.name}
+                </span>
+              </div>
             </div>
 
-            {/* QUICK ACCESS */}
-            <div className="section-title mb-3">Quick Access</div>
-            <div className="row g-3">
-              {quickCards.map((c) => (
-                <div key={c.name} className="col-12 col-sm-6 col-lg-3">
-                  <Link
-                    to={c.path}
-                    className="quick-card"
-                    style={c.soon ? { opacity: 0.45, pointerEvents: "none" } : {}}
-                  >
-                    <div className="quick-card-icon">{c.icon}</div>
-                    <div style={{ fontSize: 13, fontWeight: 500, marginBottom: 3 }}>
-                      {c.name}
-                      {c.soon && <span className="soon-badge ms-1">Soon</span>}
+            {/* CONTENT */}
+            <div className="flex-grow-1 p-3 p-md-4" style={{ background: "var(--content-bg)" }}>
+              <div className="section-title">Overview</div>
+              <div className="main-title">Dashboard</div>
+
+              {/* STATS */}
+              <div className="row g-3 mb-4">
+                {stats.map((s) => (
+                  <div key={s.label} className="col-6 col-xl-3">
+                    <div className={`stat-card h-100${s.alert ? " alert-card" : ""}`}>
+                      <div className="stat-label">{s.label}</div>
+                      <div className={`stat-value${s.alert ? " danger" : ""}`}>{s.value}</div>
+                      <div className="stat-sub">{s.sub}</div>
                     </div>
-                    <div style={{ fontSize: 11, color: "var(--text-muted-custom)" }}>{c.desc}</div>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+                  </div>
+                ))}
+              </div>
 
+              {/* QUICK ACCESS */}
+              <div className="section-title mb-3">Quick Access</div>
+              <div className="row g-3">
+                {quickCards.map((c) => (
+                  <div key={c.name} className="col-12 col-sm-6 col-lg-3">
+                    <Link
+                      to={c.path}
+                      className="quick-card"
+                      style={c.soon ? { opacity: 0.45, pointerEvents: "none" } : {}}
+                    >
+                      <div className="quick-card-icon">{c.icon}</div>
+                      <div style={{ fontSize: 13, fontWeight: "bold", color: "#0d2b55", marginBottom: 3 }}>
+                        {c.name}
+                        {c.soon && <span className="soon-badge ms-1">Soon</span>}
+                      </div>
+                      <div style={{ fontSize: 11, color: "var(--text-muted-custom)" }}>{c.desc}</div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
-        <Footer />
+
+      <Footer />
     </div>
-  
   );
 }
 
