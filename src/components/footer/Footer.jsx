@@ -1,5 +1,5 @@
-import React from "react";
-import "./Footer.css";
+
+import "./footer.css";
 
 const footerCols = {
   "About Us": ["About Our Agency", "About Our Facilities", "Historical Information", "Statistics"],
