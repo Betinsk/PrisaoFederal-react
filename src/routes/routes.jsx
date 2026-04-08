@@ -13,7 +13,7 @@ import PrivateRoute from "../components/login/PrivateRoute";
 import PageNotFound from "../validations/PageNotFound";
 import InmateRegister from "../components/imate/InmateRegister";
 import Layout from "../components/layout/Layout.jsx";
-import AdminPanel from "../components/administration/AdminPanel.jsx";
+import AdminPanel from "../components/administration/adminPanel.jsx";
 
 
 const Routess = () => {
