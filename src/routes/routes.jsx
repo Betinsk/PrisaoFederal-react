@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../components/home/Home.jsx";
 import WorkInside from "../components/home/hiring/workInside";
 import PersonRegister from "../components/person/personRegister";
-import AdminPanel from "../components/administration/AdminPanel.jsx";
 import Prison from "../components/institution/prision";
 import { PrisonProvider } from "../components/institution/prisionContext";
 import PersonList from "../components/person/personList";
@@ -14,6 +13,8 @@ import PrivateRoute from "../components/login/PrivateRoute";
 import PageNotFound from "../validations/PageNotFound";
 import InmateRegister from "../components/imate/InmateRegister";
 import Layout from "../components/layout/Layout.jsx";
+import AdminPanel from "../components/administration/AdminPanel.jsx";
+
 
 const Routess = () => {
   return (
