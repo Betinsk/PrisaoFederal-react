@@ -1,41 +1,59 @@
 import { AddressForm } from "../address/AddressForm";
-import { DataAddressTable } from "./DataAddressTab";
+import { DataFields } from "./DataFields";
+
+const fields = [
+  { name: "street",            label: "Street",     col: "col-12" },
+  { name: "addressComplement", label: "Complement", col: "col-md-6" },
+  { name: "city",              label: "City",       col: "col-md-6" },
+  { name: "state",             label: "State",      col: "col-md-4" },
+  { name: "country",           label: "Country",    col: "col-md-4" },
+];
+
+function AddressDivider({ index }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, marginTop: index > 0 ? 28 : 0 }}>
+      <span style={{ fontSize: 10, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--bs-secondary-color)", whiteSpace: "nowrap" }}>
+        Address {index + 1}
+      </span>
+      <div style={{ flex: 1, height: "0.5px", background: "var(--bs-border-color)" }} />
+    </div>
+  );
+}
 
 export function AddressTab({ person, formData, editing, onAddressChange, errors }) {
+  const addresses = editing ? formData.addresses : person.addresses;
 
-  const fields = [
-    { name: "street", label: "street", col: "col-md-4" },
-    { name: "addressComplement", label: "addressComplement", col: "col-md-6" },
-    { name: "state", label: "state Date", col: "col-md-6" },
-    { name: "city", label: "city", col: "col-md-6" },
-    { name: "country", label: "country", col: "col-md-6" }
-  ];
+  if (!addresses?.length) {
+    return (
+      <div className="container-fluid">
+        <p style={{ fontSize: 10, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--bs-secondary-color)", marginBottom: 16, paddingBottom: 8, borderBottom: "0.5px solid var(--bs-border-color)" }}>
+          Addresses
+        </p>
+        <p style={{ fontSize: 13, color: "var(--bs-secondary-color)" }}>No addresses registered.</p>
+      </div>
+    );
+  }
 
-  console.log(person)
   return (
     <div className="container-fluid">
-      <div className="mb-3 border-bottom pb-2">
-        <h6 className="fw-bold text-uppercase mb-0">
-          Addresses
-        </h6>
-      </div>
+      <p style={{ fontSize: 10, letterSpacing: "0.05em", textTransform: "uppercase", color: "var(--bs-secondary-color)", marginBottom: 16, paddingBottom: 8, borderBottom: "0.5px solid var(--bs-border-color)" }}>
+        Addresses
+      </p>
 
-      
-      {editing ? (
-          formData.addresses?.map((address, index) => (
-             <div key={index}>
-             <span>Address {index + 1}</span>
+      {addresses.map((address, index) => (
+        <div key={index}>
+          <AddressDivider index={index} />
+          {editing ? (
             <AddressForm
               attributes={address}
               errors={errors[index] || {}}
               onChange={(e) => onAddressChange(e, index)}
             />
-            </div>
-          ))
-    ) : (
-      <DataAddressTable data={person.addresses} fields={fields} />
-    )}
+          ) : (
+            <DataFields data={address} fields={fields} />
+          )}
+        </div>
+      ))}
     </div>
-      )}
-
-                       
+  );
+}

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPersons } from "../../services/personService";
-import { Link } from "react-router-dom";
-import { DataPersonTable } from "../tabs/DataPersonTable";
-import { AddressTab } from "../tabs/AddressTab";
-import { DataAddressTable } from "../tabs/DataAddressTab";
+import PersonCard from "./PersonCard";
 
 function PersonList() {
   const [persons, setPersons] = useState([]);
@@ -12,54 +9,24 @@ function PersonList() {
 
   useEffect(() => {
     getPersons()
-      .then((data) => {
-        setPersons(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then((data) => { setPersons(data); setLoading(false); })
+      .catch((err) => { setError(err.message); setLoading(false); });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="text-secondary mt-4">Loading...</p>;
+  if (error)   return <p className="text-danger mt-4">Error: {error}</p>;
 
   return (
-    <div className="container mt-4 ">
-      <h2 className="mb-4">Persons</h2>
-
+    <div className="container mt-4">
+      <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+        <h2 className="mb-0 fw-500 fs-5">Persons</h2>
+        <span className="badge rounded-pill bg-secondary bg-opacity-10 text-secondary fw-normal">
+          {persons.length} records
+        </span>
+      </div>
 
       {persons.map((person) => (
-        <div key={person.id} className="card mb-3">
-          <div className="card-body">
-            <span>Person's name: </span>
-            <Link
-              to={`/person/${person.id}`}
-              className="btn btn-sm btn-outline-secondary mb-2 d-inline-block"
-            >
-              {person.name}
-            </Link>
-            <DataPersonTable data={person} fields={[
-              { name: "email", label: "Email" },
-              { name: "birthDate", label: "Birth Date" },
-              { name: "socialSecurity", label: "Social Security" },
-              { name: "gender", label: "Gender" }
-            ]} />
-
-              <h6>{person.name}'s addresses: </h6>
-
-            <DataAddressTable data={person.addresses}
-              fields={[
-                { name: "street", label: "street", col: "col-md-4" },
-                { name: "addressComplement", label: "addressComplement", col: "col-md-6" },
-                { name: "state", label: "state Date", col: "col-md-6" },
-                { name: "city", label: "city", col: "col-md-6" },
-                { name: "country", label: "country", col: "col-md-6" }
-              ]} />
-
-          </div>
-        </div>
+        <PersonCard key={person.id} person={person} />
       ))}
     </div>
   );

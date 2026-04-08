@@ -162,7 +162,7 @@ export default function Home() {
                     border: "1px solid #c8a84b",
                     color: "#c8a84b",
                     fontSize: "12px",
-                    fontFamily: "Arial, sans-serif",
+                    fontFamily: "Raleway",
                     fontWeight: "bold",
                     letterSpacing: "0.5px",
                     textDecoration: "none",

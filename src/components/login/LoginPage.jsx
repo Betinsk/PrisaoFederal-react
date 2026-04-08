@@ -21,7 +21,7 @@ function LoginPage() {
     try {
       const token = await login(form.email, form.password);
       loginContext({ name: form.email }, token);
-      navigate("/adminPanel");
+      navigate("/admin");
     } catch {
       setError("Invalid email or password.");
     }

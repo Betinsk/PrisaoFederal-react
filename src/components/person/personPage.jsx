@@ -60,12 +60,12 @@ function PersonProfile() {
     person?.arrestDate ||
     person?.sentencedYears;
 
-    function onPersonUpdate() {
-  findById(id).then(data => {
-    setPerson(data);
-    setFormData(data);
-  });
-}
+  function onPersonUpdate() {
+    findById(id).then(data => {
+      setPerson(data);
+      setFormData(data);
+    });
+  }
 
   async function handleSave() {
 
@@ -179,9 +179,15 @@ function PersonProfile() {
   }
 
   async function handleAddAddress() {
+    const validationErrors = validateAddress(newAddress);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     try {
       await requestWithToast(
-        addAddress(person.id, newAddress), // 👈 novo método no addressService
+        addAddress(person.id, newAddress),
         "Address added successfully"
       );
       const updated = await findById(person.id);
@@ -189,9 +195,8 @@ function PersonProfile() {
       setFormData(updated);
       setAddingAddress(false);
       setNewAddress({ street: "", addressComplement: "", city: "", state: "", country: "" });
-    } catch {
-      // toast já exibido
-    }
+      setErrors({});
+    } catch { }
   }
 
   if (!person) return <div className="container mt-4">Loading...</div>;
@@ -251,7 +256,15 @@ function PersonProfile() {
                     <button className="btn btn-primary btn-sm" onClick={handleAddAddress}>
                       Save
                     </button>
-                    <button className="btn btn-outline-secondary btn-sm" onClick={() => setAddingAddress(false)}>
+                    <button
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => {
+                        setAddingAddress(false);
+                        setErrors({});
+                        setNewAddress({ street: "", addressComplement: "", city: "", state: "", country: "" });
+
+                      }}
+                    >
                       Cancel
                     </button>
                   </div>
@@ -281,7 +294,7 @@ function PersonProfile() {
           {tab === "pictures" && (
             <MugshotsViewer
               person={person}
-              onPersonUpdate={onPersonUpdate} 
+              onPersonUpdate={onPersonUpdate}
             />
           )}
 
