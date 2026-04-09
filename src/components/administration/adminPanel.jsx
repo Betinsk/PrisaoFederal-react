@@ -73,12 +73,12 @@ const styles = `
   .sidebar .brand-icon { width: 32px; height: 32px; background: var(--accent-dim); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 7px; border: 0.5px solid rgba(200,168,75,0.25); }
   .sidebar .brand-sup { font-size: 9px; color: #4a6070; text-transform: uppercase; letter-spacing: 0.7px; }
   .sidebar .brand-name { font-size: 13px; color: #d8dee8; font-weight: bold; margin-top: 2px; font-family: Georgia, serif; }
-  .sidebar .section-label { font-size: 9px; color: #4a6070; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; padding: 12px 14px 4px; }
+  .sidebar .section-label { font-size: 9px; color: #4a6070; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; padding: 18px 16px 6px; }
 
-  .nav-item-link { display: flex; align-items: center; gap: 9px; padding: 7px 14px; font-size: 12px; color: #8aaac8; text-decoration: none; border-left: 3px solid transparent; transition: background 0.15s; }
+  .nav-item-link { display: flex; align-items: center; gap: 9px; padding: 9px 16px; font-size: 12px; color: #8aaac8; text-decoration: none; border-left: 3px solid transparent; transition: background 0.15s; }
   .nav-item-link:hover { background: rgba(255,255,255,0.04); color: #d8dee8; }
   .nav-item-link.active { border-left-color: var(--accent); background: var(--accent-dim); color: #f0e0a0; }
-  .nav-item-disabled { display: flex; align-items: center; gap: 9px; padding: 7px 14px; font-size: 12px; color: #3a4e68; cursor: not-allowed; }
+  .nav-item-disabled { display: flex; align-items: center; gap: 9px; padding: 9px 16px; font-size: 12px; color: #3a4e68; cursor: not-allowed; }
   .soon-badge { font-size: 9px; background: var(--accent-dim); color: var(--accent); padding: 1px 5px; border-radius: 3px; margin-left: auto; border: 0.5px solid rgba(200,168,75,0.2); }
 
   .topbar { background: var(--topbar-bg); border-bottom: 2px solid var(--accent); height: 50px; padding: 0 20px; }
@@ -107,8 +107,8 @@ const styles = `
 function SidebarContent({ location }) {
   return (
     <>
-      {navItems.map((group) => (
-        <div key={group.section}>
+      {navItems.map((group, i) => (
+        <div key={group.section} style={i > 0 ? { borderTop: "0.5px solid rgba(255,255,255,0.06)", marginTop: 4 } : {}}>
           <div className="section-label">{group.section}</div>
           {group.items.map((item) =>
             item.soon ? (
